@@ -11,7 +11,6 @@ function route(app){
     app.use('/add_product',AddProductRouter)
     app.use('/edit_product',EditProductRouter)
     app.use('/analytics',AnalyticsRouter)
-
     app.use('/',siteRouter)
 }
 module.exports=route

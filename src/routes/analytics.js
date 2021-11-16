@@ -3,5 +3,5 @@ const route=express.Router()
 
 const AnalyticsController=require('../conttrollers/AnalyticsController.js')
 
-route.get('/',AddProductController.index)
+route.get('/',AnalyticsController.index)
 module.exports=route
