@@ -1,16 +1,20 @@
+const DashboardRouter=require('./dashboard')
 const UserRouter=require('./user_management')
-const AllProductRouter=require('./all_products')
+const ProductPaginationRouter=require('./product_pagination')
+const ProductListsRouter=require('./product_list')
 const AddProductRouter=require('./add_product')
 const EditProductRouter=require('./edit_product')
 const AnalyticsRouter=require('./analytics')
-const siteRouter=require('./site')
+const LoginRouter=require('./login')
 
 function route(app){
+    app.use('/dashboard',DashboardRouter)
     app.use('/user_management',UserRouter)
-    app.use('/all_products',AllProductRouter)
+    app.use('/product_pagination',ProductPaginationRouter)
+    app.use('/product_list',ProductListsRouter)
     app.use('/add_product',AddProductRouter)
     app.use('/edit_product',EditProductRouter)
     app.use('/analytics',AnalyticsRouter)
-    app.use('/',siteRouter)
+    app.use('/',LoginRouter)
 }
 module.exports=route
