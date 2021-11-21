@@ -1,6 +1,6 @@
 const Product =require('../database/models/Product')
 const caterology=require('../ultil/caterology')
-const {MongooseToObject}=require('../ultil/mongoose')
+const {MultipleMongooseToObject}=require('../ultil/mongoose')
 class ProductController{
     async addProduct(req,res){   // get
         console.log('da vo day')
@@ -38,7 +38,6 @@ class ProductController{
         catch (err){
             res.render('404')
         }
-        
     }
     async editProduct(req,res){
         res.render('edit_product')
@@ -46,7 +45,7 @@ class ProductController{
     async viewProduct(req,res){ // get
         try{
             const allProduct=await Product.find({})
-            res.render('product_list',{allProduct,caterology})
+            res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
         }
         catch(e){
             res.render('404')
