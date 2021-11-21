@@ -24,6 +24,24 @@
 		  e.preventDefault()
 		  $(this).tab('show')
 		});
+		$('#btn-next').on('click',(e)=>{
+			e.preventDefault()
+			const element =document.querySelectorAll('#myTabedu1 li')
+			const tab =document.querySelectorAll('.product-tab-list')
+			for(let i=0;i<element.length;i++)
+			{
+				if(element[i].className.includes('active')){
+					element[i].classList.remove('active')
+					tab[i].classList.remove('active')
+					tab[i].classList.remove('in')
+				}
+				else{
+					element[i].classList.add('active')
+					tab[i].classList.add('active')
+					tab[i].classList.add('in')
+				}
+			}
+		})
 
 	  $('#single-product-tab a').on('click', function (e) {
 		  e.preventDefault()

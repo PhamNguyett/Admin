@@ -4,6 +4,7 @@ const route=express.Router()
 const ProductController=require('../conttrollers/ProductController')
 
 route.get('/all',ProductController.viewProduct)
+route.post('/add',ProductController.creaProduct)
 route.get('/edit',ProductController.editProduct)
 route.get('/add',ProductController.addProduct)
 module.exports=route
