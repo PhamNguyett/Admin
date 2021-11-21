@@ -189,6 +189,15 @@ body {}
 .sidebar-header {
     text-align: center;
 }
+
+
+#bread-product-menu{
+    margin-top:50px;
+}
+
+#margin-top{
+    margin-top:30px;
+}
 .sidebar-header h3 {
     font-size: 20px;
     color: #fff;
@@ -297,8 +306,9 @@ body {}
 /*----------------------------------------*/
 /*  5. Header Top
 /*----------------------------------------*/
+
 .header-top-menu .navbar-nav>li>a{
-	padding: 20px 20px;
+	padding: 30px 30px;
 	color: #fff;
 	font-size:14px;
 }
@@ -862,15 +872,16 @@ ul.setting-panel-list li{
     box-shadow: none;
     border-radius: 30px;
     width: 200px;
+    margin-top:50px;
 }
 .breadcome-heading .form-control:focus {
     border: 1px solid #006DF0;
 }
-ul.breadcome-menu {
-    padding-top: 8px;
-}
-ul.breadcome-menu {
+
+.breadcome-menu {
     text-align: right;
+    margin-top:50px;
+    padding-top: 8px;
 }
 ul.breadcome-menu li {
     font-size: 14px;
