@@ -59,6 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 a {transition: all 0.3s ease 0s;text-decoration:none;}
 a:hover{
   color: #ec4445;
+  font-size:20px;
   text-decoration: none;
 }
 a:visited, a:link, a:active {
