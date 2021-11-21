@@ -47,36 +47,51 @@
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name">
+                                                                    <label for="name" style="margin-left:10px">Name of Product</label>
+                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name" required="true">
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
-                                                                    <input name="promotionPrice" type="text" class="form-control" placeholder="Promotion Price">
+                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price</label>
+                                                                    
+                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" >
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price">
+                                                                    <label for="price" style="margin-left:10px"> Price</label>
+
+                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="size" type="text" class="form-control" placeholder="Size">
+                                                                    <label for="size" style="margin-left:10px"> Size</label>
+
+                                                                    <input name="size" type="text" class="form-control" placeholder="Size" required="true">
                                                                 </div>
                                                                 <div class="form-group">
+                                                                    <label for="color" style="margin-left:10px"> Color</label>
                                                                     <input name="color" type="text" class="form-control" placeholder="Color">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity">
+                                                                    <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true">
+                                                                </div>
+                                                                <h3 style="color: red">Caterology</h3>
+                                                                <div class="form-group">
+                                                                    <label for="tee" style="margin-left:10px;margin-right: 10px;">Tee </label>
+                                                                    <input name="tee" type="checkbox">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                     <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;">
                                                                         <i class="fa fa-download edudropnone" aria-hidden="true"></i>
                                                                         <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <input name="image" class="hd-pro-img" type="file" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0; cursor: pointer;"/>
+                                                                        <input name="image" class="hd-pro-img" type="file" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0; cursor: pointer;"required="true"/>
                                                                     </div>
                                                                 </div>
                                                                 <img src="" alt="" id="image-product" style="margin-bottom: 20px;">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 
-                                                                <div class="form-group">
+                                                                <div class="form-group"> 
+                                                                    <label for="description" style="margin-left:10px"> Description</label>
                                                                     <textarea name="description" placeholder="Description"></textarea>
                                                                 </div>
                                                             
