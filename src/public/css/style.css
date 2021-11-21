@@ -2980,6 +2980,11 @@ td.text-right.mail-date {
     width: 100%;
     margin-bottom: 0;
 }
+
+#bread-product-menu{
+    float:right;
+    margin-right:20px;
+}
 .form-control {
     background-color: #FFFFFF;
     background-image: none;
