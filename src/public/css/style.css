@@ -2788,6 +2788,11 @@ td.text-right.mail-date {
 .login-social-inner .facebook {
     background-color: #3b5998;
 }
+
+#reset-password{
+    text-align:center;
+    border:none;
+}
 .login-social-inner .twitter, .login-social-inner .twitter:hover, .login-social-inner .twitter:focus, .login-social-inner .facebook, .login-social-inner .facebook:hover, .login-social-inner .facebook:focus, .login-social-inner .googleplus, .login-social-inner .googleplus:hover, .login-social-inner .googleplus:focus, .login-social-inner .linkedin, .login-social-inner .linkedin:hover, .login-social-inner .linkedin:focus {
     color: #fff;
     text-shadow: 0 1px rgba(0, 0, 0, 0.08);
