@@ -47,22 +47,32 @@
                                                         <div class="row">
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <input name="coursename" type="text" class="form-control" placeholder="Product Name">
+                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name">
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
-                                                                    <input name="duration" type="text" class="form-control" placeholder="Promotion Price">
+                                                                    <input name="promotionPrice" type="text" class="form-control" placeholder="Promotion Price">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input name="price" type="text" class="form-control" placeholder="Product Price">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="size" type="text" class="form-control" placeholder="Size">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="color" type="text" class="form-control" placeholder="Color">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity">
                                                                 </div>
                                                                 <div class="form-group alert-up-pd">
                                                                     <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;">
                                                                         <i class="fa fa-download edudropnone" aria-hidden="true"></i>
                                                                         <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <input name="imageico" class="hd-pro-img" type="file" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0; cursor: pointer;"/>
+                                                                        <input name="image" class="hd-pro-img" type="file" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0; cursor: pointer;"/>
                                                                     </div>
                                                                 </div>
+                                                                <img src="" alt="" id="image-product" style="margin-bottom: 20px;">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 
@@ -75,7 +85,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                    <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
+                                                                    <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -93,10 +104,10 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="devit-card-custom">
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Color">
+                                                                <input type="text" class="form-control" placeholder="Color" name="color">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Size">
+                                                                <input type="text" class="form-control" placeholder="Size" name="size">
                                                             </div>
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control" placeholder="Quantity">
@@ -119,13 +130,21 @@
                 </div>
             </div>
         </div>
-
 <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const input=document.querySelectorAll('input[name]');
-        btn-submit.addEventListener('click',()=>{
-            console.log(intput[0].value)
-        })
-});
-    
+    document.addEventListener('DOMContentLoaded',()=>{
+        const element =document.querySelector('input[name="image"]')
+        const imgProduct=document.querySelector('#image-product')
+        
+        loadURL = function (event) {
+            imgProduct.src&&URL.revokeObjectURL(imgProduct.src)
+            if(event.target.files[0].type.split('/')[0]=='image'){
+                element.src = URL.createObjectURL(event.target.files[0]);
+                console.log(event.target.files[0])
+                imgProduct.src=element.src
+            }
+        }
+        element.addEventListener('change',loadURL)
+
+    })
 </script>
+
