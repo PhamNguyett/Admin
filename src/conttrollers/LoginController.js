@@ -1,6 +1,8 @@
+const publicFolder=require('../public/url')
+
 class LoginController{
-    index(req,res){
-        res.render('login')
+    async index(req,res){
+        res.sendFile(publicFolder+'/login.html')
     }
 }
 module.exports=new LoginController
