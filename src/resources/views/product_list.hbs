@@ -47,108 +47,31 @@
                                         <th>Image</th>
                                         <th>Name of product</th>
                                         <th>Status</th>
-                                        <th>Brand</th>
                                         <th>Color</th>
+                                        <th>Slug</th>
+                                        <th style="color: rgb(250, 39, 39);">Promotional price</th>
                                         <th>Price</th>
-                                        <th>Promotional price</th>
                                         <th>Setting</th>
                                     </tr>
+                                    {{#each allProduct}}
                                     <tr>
                                         <td>1</td>
-                                        <td><img src="img/product/book-1.jpg" alt="" /></td>
-                                        <td>Dress</td>
+                                        <td><img src={{imagesUrl}} alt="" /></td>
+                                        <td>{{name}}</td>
                                         <td>
                                             <button class="pd-setting">Active</button>
                                         </td>
                                         <td>Plaza</td>
-                                        <td>CSE</td>
-                                        <td>Book</td>
-                                        <td>$1500</td>
+                                        <td>{{slug}}</td>
+                                        <td>{{pricePromotion}}</td>
+                                        <td>{{price}}$</td>
                                         <td>
                                             <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
                                             <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src="img/product/book-2.jpg" alt="" /></td>
-                                        <td>T-shirt</td>
-                                        <td>
-                                            <button class="ps-setting">Paused</button>
-                                        </td>
-                                        <td>PHP</td>
-                                        <td>CSE</td>
-                                        <td>CD</td>
-                                        <td>$1700</td>
-                                        <td>
-                                           <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><img src="img/product/book-3.jpg" alt="" /></td>
-                                        <td>Box of pendrive</td>
-                                        <td>
-                                            <button class="ds-setting">Disabled</button>
-                                        </td>
-                                        <td>Java</td>
-                                        <td>CSE</td>
-                                        <td>Book</td>
-                                        <td>$1500</td>
-                                        <td>
-                                            <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                        <td>Quality Bol pen</td>
-                                        <td>
-                                            <button class="pd-setting">Active</button>
-                                        </td>
-                                        <td>PHP</td>
-                                        <td>CSE</td>
-                                        <td>CD</td>
-                                        <td>$1200</td>
-                                        <td>
-                                            <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td><img src="img/product/book-1.jpg" alt="" /></td>
-                                        <td>Web Development Book</td>
-                                        <td>
-                                            <button class="pd-setting">Active</button>
-                                        </td>
-                                        <td>Wordpress</td>
-                                        <td>CSE</td>
-                                        <td>Book</td>
-                                        <td>$1800</td>
-                                        <td>
-                                           <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td><img src="img/product/book-2.jpg" alt="" /></td>
-                                        <td>Quality Bol pen</td>
-                                        <td>
-                                            <button class="ps-setting">Paused</button>
-                                        </td>
-                                        <td>Java</td>
-                                        <td>CSE</td>
-                                        <td>CD</td>
-                                        <td>$1000</td>
-                                        <td>
-                                            <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
+                                    {{/each}}
+                                    
                                 </table>
                             </div>
                             <div class="custom-pagination">
