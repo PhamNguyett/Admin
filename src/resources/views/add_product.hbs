@@ -52,19 +52,25 @@
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
-                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price</label>
+                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
                                                                     
-                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" >
+                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="price" style="margin-left:10px"> Price</label>
+                                                                    <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
 
-                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true">
+                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="size" style="margin-left:10px"> Size</label>
+                                                                    <label for="size" style="margin-left:10px"> Chose Size</label>
 
-                                                                    <input name="size" type="text" class="form-control" placeholder="Size" required="true">
+                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="S">S</option>
+                                                                            <option value="M">M</option>
+                                                                            <option value="L">L</option>
+                                                                            <option value="XL">XL</option>
+                                                                        </select>
+                                                                    
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="color" style="margin-left:10px"> Color</label>
@@ -75,10 +81,15 @@
                                                                     <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true">
                                                                 </div>
                                                                 <h3 style="color: red">Caterology</h3>
+                                                                
+                                                                {{#each caterology}}
                                                                 <div class="form-group">
-                                                                    <label for="tee" style="margin-left:10px;margin-right: 10px;">Tee </label>
-                                                                    <input name="tee" type="checkbox">
+                                                                    <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{this}}</label>
+                                                                    <input name="{{this}}" type="checkbox">
                                                                 </div>
+                                                                {{/each}}
+                                                                
+                                                                
                                                                 <div class="form-group alert-up-pd">
                                                                     <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;">
                                                                         <i class="fa fa-download edudropnone" aria-hidden="true"></i>
