@@ -3,7 +3,6 @@ const caterology=require('../ultil/caterology')
 const {MultipleMongooseToObject}=require('../ultil/mongoose')
 class ProductController{
     async addProduct(req,res){   // get
-        console.log('da vo day')
         res.render('add_product',{caterology:caterology})
     }
     async createProduct(req,res){ // post
