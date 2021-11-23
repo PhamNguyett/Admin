@@ -91,13 +91,19 @@
                                                                 
                                                                 
                                                                 <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <input name="image" class="hd-pro-img" type="file" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0; cursor: pointer;"required="true"/>
+                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
+                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;">
+                                                                            <span>Image Main</span>
+                                                                            <input type="file" name="image">
+                                                                            <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <img src="" alt="" id="image-product" style="margin-bottom: 20px;">
+                                                                <div class="col-sm-12">
+                                                                    <div class="preview-images"></div>
+                                                                </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 
@@ -158,19 +164,38 @@
         </div>
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
-        const element =document.querySelector('input[name="image"]')
+        var count=0;
+        var element =document.querySelector('input[name="image"]')
         const imgProduct=document.querySelector('#image-product')
-        
-        loadURL = function (event) {
-            imgProduct.src&&URL.revokeObjectURL(imgProduct.src)
-            if(event.target.files[0].type.split('/')[0]=='image'){
-                element.src = URL.createObjectURL(event.target.files[0]);
-                console.log(event.target.files[0])
-                imgProduct.src=element.src
-            }
-        }
-        element.addEventListener('change',loadURL)
 
+
+            document.querySelector('#area-image input').addEventListener('change',(e)=>{
+                console.log('first')
+                if(e.target.files[0].type.split('/')[0]=='image'){
+                    document.querySelector(`#area-image img`).src= URL.createObjectURL(e.target.files[0]);
+                }
+            })
+            $('#add-image').on('click',()=>{
+                count++;
+                const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}">
+                                <span>Image ${count}</span>
+                                <input type="file" name="image">
+                                <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
+                                <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
+                            </div>`
+                console.log('ne ne')
+                $('#area-image').append(html)
+                document.querySelector(`#image${count} input`).addEventListener('change',(e)=>{
+                    console.log('da vo day')
+                    if(e.target.files[0].type.split('/')[0]=='image'){
+                        document.querySelector(`#image${count} img`).src= URL.createObjectURL(e.target.files[0]);
+                    }
+                })
+                document.querySelector(`#image${count} i`).addEventListener('click',(e)=>{
+                    document.querySelector(`#image${count}`).remove()
+                })
+            })
+        
     })
 </script>
 

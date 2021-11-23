@@ -4,8 +4,10 @@
             <div class="breadcome-list  single-page-breadcome">
                 <div class="row">
                     <ul class="nav navbar-nav" id="margin-top" >
+                        <li class="nav-item"><a href="/product/all" class="nav-link">All product</a>
+                        </li>
                         {{#each caterology}}
-                        <li class="nav-item"><a href="product/caterology/{{this}}" class="nav-link">{{this}}</a>
+                        <li class="nav-item"><a href="/product/caterology/{{this}}" class="nav-link">{{upperCase this}}</a>
                         </li>
                         {{/each}}
                     </ul>
@@ -33,24 +35,24 @@
                                         <th>Image</th>
                                         <th>Name of product</th>
                                         <th>Status</th>
-                                        <th>Color</th>
+                                        <th>Quantity</th>
                                         <th>Slug</th>
-                                        <th style="color: rgb(250, 39, 39);">Promotional price</th>
+                                        <th style="color: rgb(250, 39, 39);">Promotion price</th>
                                         <th>Price</th>
                                         <th>Setting</th>
                                     </tr>
                                     {{#each allProduct}}
                                     <tr>
-                                        <td>1</td>
-                                        <td><img src={{imagesUrl}} alt="" /></td>
+                                        <td>{{increase @index 1}}</td>
+                                        <td><img src={{imagesUrl.[0]}} alt="" /></td>
                                         <td>{{name}}</td>
                                         <td>
                                             <button class="pd-setting">Active</button>
                                         </td>
-                                        <td>Plaza</td>
+                                        <th>{{quantity info}}</th>
                                         <td>{{slug}}</td>
-                                        <td>{{pricePromotion}}</td>
-                                        <td>{{price}}$</td>
+                                        <td style="color: rgb(250, 39, 39);">{{pricePromotion}}</td>
+                                        <td style="text-decoration: line-through;">{{price}}$</td>
                                         <td>
                                             <a href= "/product/edit"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
                                             <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>

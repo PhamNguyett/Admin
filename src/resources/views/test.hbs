@@ -1,8 +1,10 @@
 
 
 
-<div class="card" style="width: 9rem; margin-left: 20px;">
-    <img src={{src}} class="card-img-top" alt="">
+<div  style="margin: 20px;padding: 20px;">
+    {{#each src}}
+    <img src={{this}} class="card-img-top" alt="">
+    {{/each}}
     <div class="card-body">
         <p class="card-text">SuccessFull Add Product</p>
     </div>
