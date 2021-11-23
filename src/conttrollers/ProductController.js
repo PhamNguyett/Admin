@@ -5,7 +5,11 @@ class ProductController{
     async addProduct(req,res){   // get
         res.render('add_product',{caterology:caterology})
     }
-    async createProduct(req,res){ // post
+    async caterology(req,res){
+        const allProduct=await Product.find({type:req.params.slug})
+        res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
+    }
+    async createProduct(req,res){ // post product
         console.log(req.body)
         var type=[]
         caterology.forEach((item)=>{
@@ -13,8 +17,13 @@ class ProductController{
                 type.push(item)
             }
         })
-        const file = req.file
-        const path='/uploads/'+file.filename
+
+        var path=[]
+        console.log(req.files)
+        req.files.forEach(i=>{
+            path.push('/uploads/'+i.filename)
+        })
+        console.log(path)
         const product={
             name:req.body.name,
             price:parseInt(req.body.price),
@@ -28,7 +37,6 @@ class ProductController{
             }],
             type:type,
         }
-        console.log(product)
         const newProduct=new Product({...product})
         try{
             await newProduct.save()
@@ -38,10 +46,12 @@ class ProductController{
             res.render('404')
         }
     }
+
     async editProduct(req,res){
         res.render('edit_product')
     }
-    async viewProduct(req,res){ // get
+
+    async viewProduct(req,res){ // get all product
         try{
             const allProduct=await Product.find({})
             res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})

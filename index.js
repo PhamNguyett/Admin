@@ -10,7 +10,13 @@ const db=require('./src/database/index') // connect database
 
 app.use(express.static(path.join(__dirname,'/src/public'))) // public 
 
-app.engine('hbs', exphbs({extname:'hbs'}));         //set view engine
+app.engine('hbs', exphbs({extname:'hbs',
+    helpers:{
+        upperCase(item) { return item.charAt(0).toUpperCase() + item.slice(1);},
+        increase(a,i){return a+i},
+        quantity(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
+    }
+}));         //set view engine
 app.set('view engine', 'hbs');          //set view engine
 app.set('views',path.join(__dirname,'src/resources/views'))         //set view engine
 
