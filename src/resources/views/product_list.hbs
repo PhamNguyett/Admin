@@ -4,7 +4,7 @@
             <div class="breadcome-list  single-page-breadcome">
                 <div class="row">
                     <ul class="nav navbar-nav" id="margin-top" >
-                        <li class="nav-item"><a href="/product/all" class="nav-link">All product</a>
+                        <li class="nav-item"><a href="/product" class="nav-link">All product</a>
                         </li>
                         {{#each caterology}}
                         <li class="nav-item"><a href="/product/caterology/{{this}}" class="nav-link">{{upperCase this}}</a>
@@ -26,10 +26,15 @@
                         <div class="product-status-wrap" style="position: relative;">
                             <h4>Product List
                             </h4>
-                            <form method="get" >
-                                <input type="text" placeholder="Find product ... ?" name="key" id="find-input">
-                                <button>Find</button>
-                            </form>
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                    <form role="search" class="sr-input-func" >
+                                        <input type="text" placeholder="Search..." class="search-int form-control" name="key">
+                                        <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="add-product">
                                 <a href="/product/add">Add Product</a>
                             </div>
@@ -67,7 +72,7 @@
                                     
                                 </table>
                             </div>
-                            <div class="custom-pagination">
+                            <!--<div class="custom-pagination">
 								<ul class="pagination">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 									<li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -75,7 +80,7 @@
 									<li class="page-item"><a class="page-link" href="#">3</a></li>
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

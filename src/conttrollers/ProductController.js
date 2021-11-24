@@ -4,23 +4,13 @@ const {MultipleMongooseToObject}=require('../ultil/mongoose')
 class ProductController{
     async addProduct(req,res){   // get
         res.render('add_product',{caterology:caterology})
-    }async search(req,res){   // search get product
-        console.log(req.query.key)
-        var allProduct=await Product.find({})
-        allProduct=MultipleMongooseToObject(allProduct)
-        let filterProduct=[]
-        allProduct.forEach(item=>{
-            if (!item.name.toUpperCase().indexOf(req.query.key.toUpperCase())){
-                filterProduct.push(item)
-            }
-        })
-        console.log
-        res.render('product_list',{caterology:caterology,allProduct:filterProduct})
     }
+
     async caterology(req,res){
         const allProduct=await Product.find({type:req.params.slug})
         res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
     }
+
     async createProduct(req,res){ // post product
         console.log(req.body)
         var type=[]
@@ -65,6 +55,18 @@ class ProductController{
 
     async viewProduct(req,res){ // get all product
         try{
+            if(req.query.key){
+                let allProduct=await Product.find({})
+                allProduct=MultipleMongooseToObject(allProduct)
+                let filterProduct=[]
+                allProduct.forEach(item=>{
+                    if (item.name.toLowerCase().indexOf(req.query.key.toLowerCase())>=0){
+                        filterProduct.push(item)
+                    }
+                })
+                res.render('product_list',{caterology:caterology,allProduct:filterProduct})
+                return 
+            }
             const allProduct=await Product.find({})
             res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
         }
