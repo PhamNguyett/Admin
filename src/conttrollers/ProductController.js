@@ -43,7 +43,7 @@ class ProductController{
         const newProduct=new Product({...product})
         try{
             await newProduct.save()
-            res.render('test',{src:path,product})
+            res.render('test',{product})
         }
         catch (err){
             res.render('404')
@@ -54,17 +54,47 @@ class ProductController{
         try{
             console.log(req.params.slug)
             const product=await Product.findOne({slug:req.params.slug})
-            res.render('edit_product',{product:MongooseToObject(product)})
+            res.render('edit_product',{product:MongooseToObject(product),caterology})
         }
         catch(e){
             render('404')
         }
-    }async saveEditProduct(req,res){  // post edit product
-        console.log(req.body)
-        console.log(req.files)
-        console.log('da vo day')
-        res.render(('404'))
     }
+    async saveEditProduct(req,res){  // post edit product
+        console.log(req.body)
+
+        var type=[]
+        caterology.forEach((item)=>{
+            if(req.body[item]){
+                type.push(item)
+            }
+        })
+
+        try{
+            const product=await Product.findOne({slug:req.params.slug})
+            product.type=type
+            product.imagesUrl=req.body.imageUpload
+            req.files.forEach(i=>{
+                product.imagesUrl.push('/uploads/'+i.filename)
+            })
+            product.name=req.body.name,
+            product.price=parseInt(req.body.price),
+            product.pricePromotion=parseInt(req.body.pricePromotion),
+            product.des=req.body.description,
+            product.info=[{
+                color:req.body.color,
+                size:req.body.size,
+                quantity:req.body.quantity
+            }],
+            console.log(product)
+            product.save()
+            res.render(('test'),{caterology,product})
+        }catch(e){
+            res.json({succes:false})
+        }
+        
+    }
+    
     async viewProduct(req,res){ // get all product
         try{
             if(req.query.key){
@@ -86,5 +116,9 @@ class ProductController{
             res.render('404')
         }
     }
+    async deleteProduct(req,res){
+        res.json({succes:true})
+    }
+    
 }
 module.exports=new ProductController
