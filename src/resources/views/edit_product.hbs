@@ -1,22 +1,14 @@
-<div class="breadcome-area">
+ <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list single-page-breadcome">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            <li><a href="/product" style="color: rgb(68, 68, 228);">All Product</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Edit Course</span>
+                                            <li><span class="bread-blod">Edit Product</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -34,9 +26,8 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Product Details</a></li>
-                                <li><a href="#reviews"> Product Information</a></li>
-                                <li><a href="#INFORMATION">Social Information</a></li>
+                                <li class="active"><a href="#description"> Edit Product</a></li>
+                               <!-- <li><a href="#reviews"> Product Information</a></li>-->
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
@@ -44,50 +35,84 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form action="#" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                    <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="get" enctype="multipart/form-data">
                                                         <div class="row">
+    
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
-                                                                    <input name="number" type="text" class="form-control" placeholder="Product Name" value="Apps Development">
+                                                                    <label for="name" style="margin-left:10px">Name of Product</label>
+                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name" required="true" value="{{product.name}}" style="color:red">
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+                                                                    
+                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+" value="{{product.pricePromotion}}" style="color:red">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" placeholder="Origin" value="American">
+                                                                    <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+
+                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+" value="{{product.price}}" style="color:red">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" placeholder="Brand name" value="Plaza">
+                                                                    <label for="size" style="margin-left:10px"> Chose Size</label>
+
+                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="S">S</option>
+                                                                            <option value="M">M</option>
+                                                                            <option value="L">L</option>
+                                                                            <option value="XL">XL</option>
+                                                                        </select>
+                                                                    
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" placeholder="Price" value="$400">
+                                                                    <label for="color" style="margin-left:10px"> Color</label>
+                                                                    <input name="color" type="text" class="form-control" placeholder="Color">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true" value="{{product.info.[0].quantity}}" style="color:red">
+                                                                </div>
+                                                                <h3 style="color: red">Caterology</h3>
+                                                                
+                                                                {{#each caterology}}
+                                                                <div class="form-group">
+                                                                    <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;" >{{this}}</label>
+                                                                    <input name="{{this}}" type="checkbox">
+                                                                </div>
+                                                                {{/each}}
+                                                                
+                                                                
                                                                 <div class="form-group alert-up-pd">
-                                                                    <div class="dz-message needsclick download-custom">
-                                                                        <i class="fa fa-download edudropnone" aria-hidden="true"></i>
-                                                                        <h2 class="edudropnone">Drop image here or click to upload.</h2>
-                                                                        <p class="edudropnone"><span class="note needsclick">(This is just a demo dropzone. Selected image is <strong>not</strong> actually uploaded.)</span>
-                                                                        </p>
-                                                                        <input name="imageico" class="hd-pro-img" type="text" />
+                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
+                                                
+                                                                        {{#each product.imagesUrl}}
+                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image-cc" >
+                                                                            <label>Image has Loaded {{increase @index 1}}</label>
+                                                                            <input type="file" name="image" value="{{this}}">
+                                                                            <img src="{{this}}" alt="" style="width: 120px; height: auto; margin-top:20px" name="image">
+                                                                            <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
+                                                                        </div>
+                                                                        {{/each}}
                                                                     </div>
                                                                 </div>
+                                                        
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group res-mg-t-15">
-                                                                    <input type="text" class="form-control" placeholder="Department" value="CSE">
+                                                                
+                                                                <div class="form-group"> 
+                                                                    <label for="description" style="margin-left:10px"> Description</label>
+                                                                    <textarea name="description" placeholder="Description" style="color: red;" value={{product.des}}></textarea>
                                                                 </div>
-                                                                <div class="form-group edit-ta-resize">
-                                                                    <textarea name="description">Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.</textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control" placeholder="Course Professor" value="Selima sha">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" class="form-control" placeholder="Year" value="1 Year">
-                                                                </div>
+                                                            
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                    <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
+                                                                    <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -105,18 +130,18 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="devit-card-custom">
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Material"  value="Wool">
+                                                                <input type="text" class="form-control" placeholder="Color" name="color">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="number" class="form-control" placeholder="Size"  value="32">
+                                                                <input type="text" class="form-control" placeholder="Size" name="size">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="password" class="form-control" placeholder="Long"  value="59 cm">
+                                                                <input type="text" class="form-control" placeholder="Quantity">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="password" class="form-control" placeholder="Color"  value="White">
+                                                                <input type="text" class="form-control" placeholder="Caterology">
                                                             </div>
-                                                            <a href="#!" class="btn btn-primary waves-effect waves-light">Submit</a>
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn-submit">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,36 +149,51 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-tab-list tab-pane fade" id="INFORMATION">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="devit-card-custom">
-															<div class="form-group">
-																<input type="url" class="form-control" placeholder="Facebook URL">
-															</div>
-															<div class="form-group">
-																<input type="url" class="form-control" placeholder="Twitter URL">
-															</div>
-															<div class="form-group">
-																<input type="url" class="form-control" placeholder="Google Plus">
-															</div>
-															<div class="form-group">
-																<input type="url" class="form-control" placeholder="Linkedin URL">
-															</div>
-															<button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-														</div>
-													</div>
-												</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        var count=0;
+        var element =document.querySelector('input[name="image"]')
+        const imgProduct=document.querySelector('#image-product')
+
+        const closeEle=document.querySelectorAll('.bi-x-lg')
+        for(let i=0;i<closeEle.length;i++){
+            closeEle[i].addEventListener('click',()=>{
+                closeEle[i].parentElement.remove()
+            })
+        }
+        document.querySelector('#area-image input').addEventListener('change',(e)=>{
+            console.log('first')
+            if(e.target.files[0].type.split('/')[0]=='image'){
+                document.querySelector(`#area-image img`).src= URL.createObjectURL(e.target.files[0]);
+            }
+        })
+        $('#add-image').on('click',()=>{
+            count++;
+            const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}" class"dmm">
+                            <label>New Image ${count}</label>
+                            <input type="file" name="image">
+                            <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
+                            <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
+                        </div>`
+            console.log('ne ne')
+            $('#area-image').append(html)
+            document.querySelector(`#image${count} input`).addEventListener('change',(e)=>{
+                if(e.target.files[0].type.split('/')[0]=='image'){
+                    e.target.nextElementSibling.src= URL.createObjectURL(e.target.files[0]);
+                }
+            })
+            document.querySelector(`#image${count} i`).addEventListener('click',(e)=>{
+                e.target.parentElement.remove()
+            })
+        })
+        
+    })
+</script>
+
