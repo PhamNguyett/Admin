@@ -5,14 +5,6 @@
                             <div class="breadcome-list single-page-breadcome">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
@@ -34,7 +26,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Product Details</a></li>
+                                <li class="active"><a href="#description">Add New Product</a></li>
                                <!-- <li><a href="#reviews"> Product Information</a></li>-->
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
@@ -94,7 +86,7 @@
                                                                     <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
                                                                     <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
                                                                         <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;">
-                                                                            <span>Image Main</span>
+                                                                            <label>Image Main</label>
                                                                             <input type="file" name="image">
                                                                             <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
                                                                         </div>
@@ -177,22 +169,21 @@
             })
             $('#add-image').on('click',()=>{
                 count++;
-                const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}">
-                                <span>Image ${count}</span>
+                const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}" class"dmm">
+                                <label>Image ${count}</label>
                                 <input type="file" name="image">
-                                <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
                                 <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
+                                <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
                             </div>`
                 console.log('ne ne')
                 $('#area-image').append(html)
                 document.querySelector(`#image${count} input`).addEventListener('change',(e)=>{
-                    console.log('da vo day')
                     if(e.target.files[0].type.split('/')[0]=='image'){
-                        document.querySelector(`#image${count} img`).src= URL.createObjectURL(e.target.files[0]);
+                        e.target.nextElementSibling.src= URL.createObjectURL(e.target.files[0]);
                     }
                 })
                 document.querySelector(`#image${count} i`).addEventListener('click',(e)=>{
-                    document.querySelector(`#image${count}`).remove()
+                    e.target.parentElement.remove()
                 })
             })
         

@@ -1,0 +1,16 @@
+#find-input{
+    padding: 5px 10px;
+    outline: none;
+    margin-right: 0px;
+
+}
+#btn-findd{
+    padding: 6px 10px;
+    margin-left: 0px;
+    background-color: #0984e3;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 3px;
+}
