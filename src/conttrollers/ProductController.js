@@ -1,6 +1,7 @@
+const { render } = require('node-sass')
 const Product =require('../database/models/Product')
 const caterology=require('../ultil/caterology')
-const {MultipleMongooseToObject}=require('../ultil/mongoose')
+const {MultipleMongooseToObject, MongooseToObject}=require('../ultil/mongoose')
 class ProductController{
     async addProduct(req,res){   // get
         res.render('add_product',{caterology:caterology})
@@ -50,9 +51,20 @@ class ProductController{
     }
 
     async editProduct(req,res){
-        res.render('edit_product')
+        try{
+            console.log(req.params.slug)
+            const product=await Product.findOne({slug:req.params.slug})
+            res.render('edit_product',{product:MongooseToObject(product)})
+        }
+        catch(e){
+            render('404')
+        }
+    }async saveEditProduct(req,res){  // post edit product
+        console.log(req.body)
+        console.log(req.files)
+        console.log('da vo day')
+        res.render(('404'))
     }
-
     async viewProduct(req,res){ // get all product
         try{
             if(req.query.key){
