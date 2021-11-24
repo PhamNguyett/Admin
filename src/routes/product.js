@@ -16,6 +16,7 @@ const route=express.Router()
 
 const ProductController=require('../conttrollers/ProductController')
 
+route.get('/search/',ProductController.search)
 route.get('/caterology/:slug',ProductController.caterology)
 route.get('/all',ProductController.viewProduct)
 route.post('/add',upload.array('image',12),ProductController.createProduct)
