@@ -35,7 +35,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="get" enctype="multipart/form-data">
+                                                    <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="/product/edit/{{product.slug}}">
                                                         <div class="row">
     
                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -57,7 +57,7 @@
                                                                 <div class="form-group">
                                                                     <label for="size" style="margin-left:10px"> Chose Size</label>
 
-                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true" value="{{product.size}}">
                                                                             <option value="S">S</option>
                                                                             <option value="M">M</option>
                                                                             <option value="L">L</option>
@@ -66,8 +66,8 @@
                                                                     
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="color" style="margin-left:10px"> Color</label>
-                                                                    <input name="color" type="text" class="form-control" placeholder="Color">
+                                                                    <label for="color" style="margin-left:10px "> Color</label>
+                                                                    <input name="color" type="text" class="form-control" placeholder="Color" value="{{product.info.[0].color}}" style="color: red;">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="quantity" style="margin-left:10px"> Quantity</label>
@@ -79,18 +79,20 @@
                                                                 <div class="form-group">
                                                                     <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;" >{{this}}</label>
                                                                     <input name="{{this}}" type="checkbox">
+                                                                    <h2>{{product.type}}</h2>
                                                                 </div>
                                                                 {{/each}}
                                                                 
-                                                                
+                                                                <h3 style="visibility: hidden;" id="product-type">{{product.type}}</h3>
                                                                 <div class="form-group alert-up-pd">
                                                                     <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
                                                                     <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
                                                 
                                                                         {{#each product.imagesUrl}}
                                                                         <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image-cc" >
-                                                                            <label>Image has Loaded {{increase @index 1}}</label>
-                                                                            <input type="file" name="image" value="{{this}}">
+                                                                            <label>Image has loaded {{increase @index 1}}</label>
+                                                                            <input type="file" name="image" value="{{this}}" >
+                                                                            <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
                                                                             <img src="{{this}}" alt="" style="width: 120px; height: auto; margin-top:20px" name="image">
                                                                             <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
                                                                         </div>
@@ -103,7 +105,7 @@
                                                                 
                                                                 <div class="form-group"> 
                                                                     <label for="description" style="margin-left:10px"> Description</label>
-                                                                    <textarea name="description" placeholder="Description" style="color: red;" value={{product.des}}></textarea>
+                                                                    <textarea name="description" placeholder="Description" style="color: red;">{{product.des}}</textarea>
                                                                 </div>
                                                             
                                                             </div>
@@ -122,6 +124,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="product-tab-list tab-pane fade" id="reviews">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -157,11 +160,17 @@
             </div>
         </div>
 <script>
+    
     document.addEventListener('DOMContentLoaded',()=>{
         var count=0;
-        var element =document.querySelector('input[name="image"]')
-        const imgProduct=document.querySelector('#image-product')
-
+        const caterology=document.querySelector('#product-type').innerHTML.split(',')
+        const checkElement = document.querySelectorAll('input[type="checkbox"]')
+        checkElement.forEach((item)=>{
+            console.log(item.name)
+            if(caterology.includes(item.name)){
+                item.checked=true
+            }
+        })
         const closeEle=document.querySelectorAll('.bi-x-lg')
         for(let i=0;i<closeEle.length;i++){
             closeEle[i].addEventListener('click',()=>{

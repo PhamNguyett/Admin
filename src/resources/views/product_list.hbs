@@ -19,70 +19,103 @@
         </div>
     </div>
 </div>
-        <div class="product-status mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-status-wrap" style="position: relative;">
-                            <h4>Product List
-                            </h4>
-                            
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="breadcome-heading">
-                                    <form role="search" class="sr-input-func" >
-                                        <input type="text" placeholder="Search..." class="search-int form-control" name="key">
-                                        <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="add-product">
-                                <a href="/product/add">Add Product</a>
-                            </div>
-                            <div class="asset-inner">
-                                <table>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Image</th>
-                                        <th>Name of product</th>
-                                        <th>Status</th>
-                                        <th>Quantity</th>
-                                        <th>Slug</th>
-                                        <th style="color: rgb(250, 39, 39);">Promotion price</th>
-                                        <th>Price</th>
-                                        <th>Setting</th>
-                                    </tr>
-                                    {{#each allProduct}}
-                                    <tr>
-                                        <td>{{increase @index 1}}</td>
-                                        <td><img src={{imagesUrl.[0]}} alt="" /></td>
-                                        <td>{{name}}</td>
-                                        <td>
-                                            <button class="pd-setting">Active</button>
-                                        </td>
-                                        <th>{{quantity info}}</th>
-                                        <td>{{slug}}</td>
-                                        <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
-                                        <td style="text-decoration: line-through;">${{price}}</td>
-                                        <td>
-                                            <a href= "/product/edit/{{slug}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                    
-                                </table>
-                            </div>
-                            <!--<div class="custom-pagination">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a></li>
-								</ul>
-                            </div>-->
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap" style="position: relative;">
+                    <h4>Product List
+                    </h4>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="breadcome-heading" style="margin-top: 20px;">
+                            <form role="search" class="sr-input-func" >
+                                <input type="text" placeholder="Search..." class="search-int form-control" name="key">
+                                <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
+                            </form>
                         </div>
                     </div>
+                    <div class="add-product">
+                        <a href="/product/add">Add Product</a>
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Image</th>
+                                <th>Name of product</th>
+                                <th>Status</th>
+                                <th>Quantity</th>
+                                <th>Slug</th>
+                                <th style="color: rgb(250, 39, 39);">Promotion price</th>
+                                <th>Price</th>
+                                <th>Setting</th>
+                            </tr>
+                            {{#each allProduct}}
+                            <tr>
+                                <td>{{increase @index 1}}</td>
+                                <td><img src={{imagesUrl.[0]}} alt="" /></td>
+                                <td>{{name}}</td>
+                                <td>
+                                    <button class="pd-setting">Active</button>
+                                </td>
+                                <th>{{quantity info}}</th>
+                                <td>{{slug}}</td>
+                                <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
+                                <td style="text-decoration: line-through;">${{price}}</td>
+                                <td>
+                                    <a href= "/product/edit/{{slug}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
+                                    <button data-src={{imagesUrl}} data-name={{name}} class="show-modal"data-bs-target="#staticBackdrop" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            
+                        </table>
+                    </div>
+                    
+                    <!--<div class="custom-pagination">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>-->
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal-dialog ds-none" >
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel" style="color: red;">Delete Product</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+    </div>
+    <div class="modal-body">
+        <img src="" alt="">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Delete</button>
+    </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        const element=document.querySelectorAll('.show-modal')
+        element.forEach(item=>{
+            item.addEventListener('click',()=>{
+                const modal=document.querySelector('.modal-dialog')
+                modal.classList.remove('ds-none')
+                modal.querySelector('img').src=item.dataset.src
+            })
+            document.querySelector('.btn-close').addEventListener('click',()=>{
+                const modal=document.querySelector('.modal-dialog')
+                modal.classList.add('ds-none')
+            })
+        })
+
+    })
+</script>

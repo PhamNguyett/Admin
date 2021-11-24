@@ -1,5 +1,5 @@
- <div class="breadcome-area">
-                <div class="container-fluid">
+<div class="breadcome-area">
+    <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list single-page-breadcome">
@@ -16,144 +16,144 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+    </div>
+</div>
+    
         <!-- Single pro tab review Start-->
-        <div class="single-pro-review-area mt-t-30 mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st">
-                            <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Add New Product</a></li>
-                                <!-- <li><a href="#reviews"> Product Information</a></li>-->
-                            </ul>
-                            <div id="myTabContent" class="tab-content custom-product-edit">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <label for="name" style="margin-left:10px">Name of Product</label>
-                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name" required="true">
-                                                                </div>
-                                                                
-                                                                <div class="form-group">
-                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
-                                                                    
-                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
-
-                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="size" style="margin-left:10px"> Chose Size</label>
-
-                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
-                                                                            <option value="S">S</option>
-                                                                            <option value="M">M</option>
-                                                                            <option value="L">L</option>
-                                                                            <option value="XL">XL</option>
-                                                                        </select>
-                                                                    
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="color" style="margin-left:10px"> Color</label>
-                                                                    <input name="color" type="text" class="form-control" placeholder="Color">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="quantity" style="margin-left:10px"> Quantity</label>
-                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true">
-                                                                </div>
-                                                                <h3 style="color: red">Caterology</h3>
-                                                                
-                                                                {{#each caterology}}
-                                                                <div class="form-group">
-                                                                    <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{this}}</label>
-                                                                    <input name="{{this}}" type="checkbox">
-                                                                </div>
-                                                                {{/each}}
-                                                                
-                                                                
-                                                                <div class="form-group alert-up-pd">
-                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
-                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
-                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;">
-                                                                            <label>Image Main</label>
-                                                                            <input type="file" name="image">
-                                                                            <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <img src="" alt="" id="image-product" style="margin-bottom: 20px;">
-                                                                <div class="col-sm-12">
-                                                                    <div class="preview-images"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                
-                                                                <div class="form-group"> 
-                                                                    <label for="description" style="margin-left:10px"> Description</label>
-                                                                    <textarea name="description" placeholder="Description"></textarea>
-                                                                </div>
-                                                            
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="payment-adress">
-                                                                    <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
-                                                                    <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-tab-list tab-pane fade" id="reviews">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-payment-inner-st">
+                    <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#description">Add New Product</a></li>
+                        <!-- <li><a href="#reviews"> Product Information</a></li>-->
+                    </ul>
+                    <div id="myTabContent" class="tab-content custom-product-edit">
+                        <div class="product-tab-list tab-pane fade active in" id="description">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div id="dropzone1" class="pro-ad addcoursepro">
+                                            <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="">
                                                 <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="devit-card-custom">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Color" name="color">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label for="name" style="margin-left:10px">Name of Product</label>
+                                                            <input name="name" type="text" class="form-control" placeholder="Product Name" required="true">
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+                                                            
+                                                            <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+
+                                                            <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="size" style="margin-left:10px"> Chose Size</label>
+
+                                                                <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                    <option value="S">S</option>
+                                                                    <option value="M">M</option>
+                                                                    <option value="L">L</option>
+                                                                    <option value="XL">XL</option>
+                                                                </select>
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="color" style="margin-left:10px"> Color</label>
+                                                            <input name="color" type="text" class="form-control" placeholder="Color">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                                            <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true">
+                                                        </div>
+                                                        <h3 style="color: red">Caterology</h3>
+                                                        
+                                                        {{#each caterology}}
+                                                        <div class="form-group">
+                                                            <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{this}}</label>
+                                                            <input name="{{this}}" type="checkbox">
+                                                        </div>
+                                                        {{/each}}
+                                                        
+                                                        
+                                                        <div class="form-group alert-up-pd">
+                                                            <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                            <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
+                                                                <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;">
+                                                                    <label>Image Main</label>
+                                                                    <input type="file" name="image">
+                                                                    <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Size" name="size">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Quantity">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Caterology">
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn-submit">Submit</button>
+                                                        </div>
+                                                        <img src="" alt="" id="image-product" style="margin-bottom: 20px;">
+                                                        <div class="col-sm-12">
+                                                            <div class="preview-images"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        
+                                                        <div class="form-group"> 
+                                                            <label for="description" style="margin-left:10px"> Description</label>
+                                                            <textarea name="description" placeholder="Description"></textarea>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="payment-adress">
+                                                            <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
+                                                            <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-tab-list tab-pane fade" id="reviews">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="devit-card-custom">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Color" name="color">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Size" name="size">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Quantity">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Caterology">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn-submit">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
         var count=0;

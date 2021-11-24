@@ -1,6 +1,7 @@
 
 const express = require('express')
 const exphbs  = require('express-handlebars');
+
 const path=require('path')
 const app = express()
 
@@ -10,11 +11,14 @@ const db=require('./src/database/index') // connect database
 
 app.use(express.static(path.join(__dirname,'/src/public'))) // public 
 
+ // ovewrite method
+
 app.engine('hbs', exphbs({extname:'hbs',
     helpers:{
         upperCase(item) { return item.charAt(0).toUpperCase() + item.slice(1);},
         increase(a,i){return a+i},
         quantity(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
+        checkedBox(array,_this){ console.log(array); array.includes(_this)>0?"true":"false" }
     }
 }));         //set view engine
 app.set('view engine', 'hbs');          //set view engine
