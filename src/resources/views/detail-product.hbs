@@ -1,0 +1,53 @@
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list single-page-breadcome">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="/product" style="color: rgb(68, 68, 228);">All Product</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">Detail Product</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <img src={{product.imagesUrl.[0]}} alt="" id="main" style="display: block;width:100%;border: 1px solid #666;padding: 2px;">
+                            <h3 style="margin-top: 10px;">Image sub</h3>
+                            <div style="margin-top: 20px;display: flex;border: 1px solid #555;padding: 10px;flex-wrap: wrap;">
+                                {{#each product.imagesUrl}}
+                                <img src="{{this}}" alt="" id="sub" style="display: block;width:20%;border: 1px solid #666;padding: 2px;">
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top: 30px;">
+                            <h2>{{product.name}}</h2>
+                            <p style="font-size: 24px;color:red">Price Promotion: ${{product.pricePromotion}}</p>
+                            <p style="font-size: 20px;text-decoration: line-through;">Price : ${{product.price}}</p>
+                            <h4>Description</h4>
+                            <p>{{product.des}}</p>
+                            <h4>Available : {{quantity product.info}} items</h4>
+                            <a href="/product/edit/{{product.slug}}"  style="padding: 10px 15px;margin-top: 30px;font-size: 24px;"><i class="bi bi-pencil-square" style="color: rgb(241, 96, 80);"></i> Edit Product</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        const mainImage=document.querySelector('#main')
+        const subImage=document.querySelectorAll('#sub')
+        subImage.forEach(item=>{
+            item.addEventListener('click',()=>{
+                mainImage.src=item.src
+            })
+        })
+
+    })
+</script>
