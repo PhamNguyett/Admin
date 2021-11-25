@@ -8,7 +8,7 @@ class ProductController{
     }
 
     async caterology(req,res){
-        const allProduct=await Product.find({type:req.params.slug})
+        const allProduct=await Product.findWithDeleted({type:req.params.slug})
         res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
     }
 
@@ -53,7 +53,7 @@ class ProductController{
     async editProduct(req,res){
         try{
             console.log(req.params.slug)
-            const product=await Product.findOne({slug:req.params.slug})
+            const product=await Product.findOneWithDeleted({slug:req.params.slug})
             res.render('edit_product',{product:MongooseToObject(product),caterology})
         }
         catch(e){
@@ -71,7 +71,7 @@ class ProductController{
         })
 
         try{
-            const product=await Product.findOne({slug:req.params.slug})
+            const product=await Product.findOneWithDeleted({slug:req.params.slug})
             product.type=type
             product.imagesUrl=req.body.imageUpload
             req.files.forEach(i=>{
@@ -97,9 +97,9 @@ class ProductController{
     
     async viewProduct(req,res){ // get all product
         try{
+            var allProduct=await Product.findWithDeleted({})
+            allProduct=MultipleMongooseToObject(allProduct)
             if(req.query.key){
-                let allProduct=await Product.find({})
-                allProduct=MultipleMongooseToObject(allProduct)
                 let filterProduct=[]
                 allProduct.forEach(item=>{
                     if (item.name.toLowerCase().indexOf(req.query.key.toLowerCase())>=0){
@@ -109,16 +109,44 @@ class ProductController{
                 res.render('product_list',{caterology:caterology,allProduct:filterProduct})
                 return 
             }
-            const allProduct=await Product.find({})
-            res.render('product_list',{allProduct:MultipleMongooseToObject(allProduct),caterology})
+            
+            res.render('product_list',{allProduct:allProduct,caterology})
         }
         catch(e){
             res.render('404')
         }
     }
     async deleteProduct(req,res){
-        res.json({succes:true})
+        console.log(req.params.id)
+        try{
+            const product =await Product.delete({_id:req.params.id})
+            console.log(product)
+            res.json({success:true})
+        }
+        catch(e){
+            res.json({success:false})
+        }
+    }
+    async restore(req,res){
+        console.log(req.params.id)
+        try{
+            const result=await Product.restore({_id:req.params.id})
+            console.log(result)
+            res.json({success:true})
+        }catch(e){
+            res.json({succes:false,message:'thang ne'})
+        }
     }
     
+    async detail(req,res){
+        console.log(req.params.slug)
+        try{
+            const product= await Product.findOneWithDeleted({slug:req.params.slug})
+            console.log(product)
+            res.render('detail-product',{product:MongooseToObject(product)})
+        }catch(e){
+            console.log(e)
+        }
+    }
 }
 module.exports=new ProductController

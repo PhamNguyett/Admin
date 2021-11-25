@@ -15,15 +15,26 @@
     border-radius: 3px;
 }
 .modal-dialog{
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
+    transition: 0.5s;
+}
+.Modal{
+    
+    top: 100px;
+}
+#bg-black-over{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:  rgba(88, 87, 88, 0.5)
 }
 .ds-none{
     display: none;
-    position: absolute;
-    top: -100px;
 }
 .btn-close{
     position: absolute;
@@ -33,4 +44,44 @@
     border: none;
     outline: none;
     font-weight: 550;
+}
+@-webkit-keyframes Modal{
+    0% {
+        top: 0;
+    }
+    100%{
+        top:100px
+    }
+}
+.modal-body{
+    display: flex;
+}
+.modal-body img{
+    flex: 1;
+}
+.modal-body div{
+    margin-top: 15px;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 550;
+}
+.spinner{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 4px solid springgreen;
+    border-right-color: transparent;
+    animation: spinner 1s linear infinite;
+    z-index: 9999999999;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@-webkit-keyframes spinner{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }

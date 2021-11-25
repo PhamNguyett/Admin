@@ -1,18 +1,29 @@
- <div class="breadcome-area">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="breadcome-list  single-page-breadcome">
-                <div class="row">
-                    <ul class="nav navbar-nav" id="margin-top" >
-                        <li class="nav-item"><a href="/product" class="nav-link">All product</a>
-                        </li>
-                        {{#each caterology}}
-                        <li class="nav-item"><a href="/product/caterology/{{this}}" class="nav-link">{{upperCase this}}</a>
-                        </li>
-                        {{/each}}
-                    </ul>
-                    <div id="bread-product-menu">
-                        <p > <a href="/Dashboard" style="color:#000;">Home</a> / Product</p>
+
+
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <div class="breadcome-heading" style="display: flex;">
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/product" class="nav-link">All product</a>
+                                </li>
+                                {{#each caterology}}
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/product/caterology/{{this}}" class="nav-link">{{upperCase this}}</a>
+                                </li>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="/product" style="color: rgb(59, 33, 231);">Product</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">View</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,18 +65,31 @@
                             {{#each allProduct}}
                             <tr>
                                 <td>{{increase @index 1}}</td>
-                                <td><img src={{imagesUrl.[0]}} alt="" /></td>
+                                <td><a href="/product/detail/{{slug}}"><img src={{imagesUrl.[0]}} alt="" /></a> </td>
                                 <td>{{name}}</td>
                                 <td>
-                                    <button class="pd-setting">Active</button>
+                                    {{#if deleted}}
+                                    <button class="ds-setting" id="taolao" style="cursor: not-allowed;">Deleted</button>
+                                    {{else}}
+                                    <button class="pd-setting" id="taolao" style="cursor: not-allowed;">Active </button>
+                                    {{/if}}
+                            
+                    
                                 </td>
                                 <th>{{quantity info}}</th>
                                 <td>{{slug}}</td>
                                 <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
                                 <td style="text-decoration: line-through;">${{price}}</td>
-                                <td>
+                                <td >
+                                    {{#if deleted}}
+                                    <button class="show-modal" data-id={{_id}} data-index={{@index}}>Restore</button>
+                                    {{else}}
                                     <a href= "/product/edit/{{slug}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                    <button data-src={{imagesUrl}} data-name={{name}} class="show-modal"data-bs-target="#staticBackdrop" data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    <button data-index={{@index}} data-src={{imagesUrl.[0]}} data-id={{_id}} class="show-modal"data-bs-target="#staticBackdrop" data-toggle="tooltip" title="Trash" class="pd-setting-ed">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <div  id="name-big"style="display: none;">{{name}}</div>
+                                    </button>
+                                    {{/if}}
                                 </td>
                             </tr>
                             {{/each}}
@@ -87,35 +111,104 @@
         </div>
     </div>
 </div>
+<div id="bg-black-over" class="ds-none"></div>
 <div class="modal-dialog ds-none" >
     <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title" id="staticBackdropLabel" style="color: red;">Delete Product</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
     </div>
-    <div class="modal-body">
-        <img src="" alt="">
+    <div class="modal-body" style="display: flex;">
+        <div style="display: none;" id="_id"></div>
+        <img src="" alt="" width="200px">
+        <div></div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Delete</button>
+    <div class="modal-footer" style="position: relative;">
+        <div class="spinner ds-none">
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-danger" style="margin-right: 20px;margin-left: 10px;position: relative;">
+            Delete
+        </button>
     </div>
     </div>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
         const element=document.querySelectorAll('.show-modal')
+        const modal=document.querySelector('.modal-dialog')
+        const bgBlack=document.querySelector('#bg-black-over')
         element.forEach(item=>{
             item.addEventListener('click',()=>{
-                const modal=document.querySelector('.modal-dialog')
-                modal.classList.remove('ds-none')
-                modal.querySelector('img').src=item.dataset.src
-            })
-            document.querySelector('.btn-close').addEventListener('click',()=>{
-                const modal=document.querySelector('.modal-dialog')
-                modal.classList.add('ds-none')
+                if (item.innerText==='Restore'){
+                    fetch(`http://localhost:5000/product/restore/${item.dataset.id}`,{
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: "GET",
+                    })
+                    .then(res=>res.json())
+                    .then(res=>{
+                        console.log(res)
+                        const index=parseInt(item.dataset.index)
+                        const ele=document.querySelectorAll('tr')[index+1].querySelector('#taolao')
+                        item.remove()
+                        ele.classList.remove('ds-setting')
+                        ele.classList.add('pd-setting')
+                        ele.innerText="Active"
+                    })
+                    
+                }else{
+                    modal.classList.remove('ds-none')
+                    modal.querySelector('img').src=item.dataset.src
+                    modal.querySelector('img').nextElementSibling.textContent=item.lastElementChild.textContent
+                    modal.querySelector('img').previousElementSibling.textContent=item.dataset.id
+                    modal.querySelector('img').previousElementSibling.setAttribute('index',item.dataset.index)
+                    bgBlack.classList.remove('ds-none')
+                    modal.classList.add('Modal')
+                }
             })
         })
+
+        document.querySelector('.btn-close').addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        document.querySelector('.btn-secondary').addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        document.querySelector('.btn-danger').addEventListener('click',()=>{
+            console.log('voday')
+            const _id=document.querySelector('#_id').textContent
+            const _index=parseInt(document.querySelector('#_id').getAttribute('index'))
+            console.log(_index)
+            document.querySelector('.spinner').classList.remove('ds-none')
+            fetch(`http://localhost:5000/product/delete/${_id}`,{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "DELETE",
+            })
+            .then(res=>res.json())
+            .then(res=>{
+                document.querySelector('.spinner').classList.add('ds-none')
+                if(res.success){
+                    modal.classList.add('ds-none')
+                    bgBlack.classList.add('ds-none')
+                    
+                    const ele=document.querySelectorAll('tr')[_index+1].querySelector('#taolao')
+                    console.log(ele)
+                    ele.classList.remove('pd-setting')
+                    ele.classList.add('ds-setting')
+                    ele.innerText="Deleted"
+                }    
+            })
+        })
+
+
 
     })
 </script>
