@@ -80,7 +80,7 @@
                                 <td>{{slug}}</td>
                                 <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
                                 <td style="text-decoration: line-through;">${{price}}</td>
-                                <td >
+                                <td id="quataolao">
                                     {{#if deleted}}
                                     <button class="show-modal" data-id={{_id}} data-index={{@index}}>Restore</button>
                                     {{else}}
@@ -200,10 +200,12 @@
                     bgBlack.classList.add('ds-none')
                     
                     const ele=document.querySelectorAll('tr')[_index+1].querySelector('#taolao')
+                    const eleBtnDeleted=document.querySelectorAll('tr')[_index+1].querySelector('#quataolao')
                     console.log(ele)
                     ele.classList.remove('pd-setting')
                     ele.classList.add('ds-setting')
                     ele.innerText="Deleted"
+                    eleBtnDeleted.innerHTML=''
                 }    
             })
         })

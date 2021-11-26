@@ -20,7 +20,6 @@ class ProductController{
                 type.push(item)
             }
         })
-
         var path=[]
         console.log(req.files)
         req.files.forEach(i=>{
@@ -43,7 +42,7 @@ class ProductController{
         const newProduct=new Product({...product})
         try{
             await newProduct.save()
-            res.render('test',{product})
+            res.render('detail-product',{product:MongooseToObject(newProduct)})
         }
         catch (err){
             res.render('404')
@@ -88,7 +87,7 @@ class ProductController{
             }],
             console.log(product)
             product.save()
-            res.render(('test'),{caterology,product})
+            res.render('detail-product',{product:MongooseToObject(product)})
         }catch(e){
             res.json({succes:false})
         }
