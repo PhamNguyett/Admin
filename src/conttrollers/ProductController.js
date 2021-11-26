@@ -1,4 +1,4 @@
-const { render } = require('node-sass')
+
 const Product =require('../database/models/Product')
 const caterology=require('../ultil/caterology')
 const {MultipleMongooseToObject, MongooseToObject}=require('../ultil/mongoose')
@@ -138,11 +138,14 @@ class ProductController{
     }
     
     async detail(req,res){
-        console.log(req.params.slug)
         try{
             const product= await Product.findOneWithDeleted({slug:req.params.slug})
-            console.log(product)
-            res.render('detail-product',{product:MongooseToObject(product)})
+            if(product){
+                res.render('detail-product',{product:MongooseToObject(product)})
+            }
+            else{
+                res.render('404')
+            }
         }catch(e){
             console.log(e)
         }
