@@ -18,7 +18,8 @@ app.engine('hbs', exphbs({extname:'hbs',
         upperCase(item) { return item.charAt(0).toUpperCase() + item.slice(1);},
         increase(a,i){return a+i},
         quantity(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
-        checkedBox(array,_this){ console.log(array); array.includes(_this)>0?"true":"false" }
+        checkedBox(array,_this){ console.log(array); array.includes(_this)>0?"true":"false" },
+        newLine(a){if(a) return a.replace(/\n/g, "<br />");}
     }
 }));         //set view engine
 app.set('view engine', 'hbs');          //set view engine

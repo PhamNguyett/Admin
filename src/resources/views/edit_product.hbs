@@ -94,8 +94,8 @@
                                                 
                                                                         {{#each product.imagesUrl}}
                                                                         <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image-cc" >
-                                                                            <label>Image has loaded {{increase @index 1}}</label>
-                                                                            <input type="file" name="image" value="{{this}}" >
+                                                                            <label style="display: block;">Image has loaded {{increase @index 1}}</label>
+                                                                            
                                                                             <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
                                                                             <img src="{{this}}" alt="" style="width: 120px; height: auto; margin-top:20px" name="image">
                                                                             <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
