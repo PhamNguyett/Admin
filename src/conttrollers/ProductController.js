@@ -25,7 +25,6 @@ class ProductController{
         req.files.forEach(i=>{
             path.push('/uploads/'+i.filename)
         })
-        console.log(path)
         const product={
             name:req.body.name,
             price:parseInt(req.body.price),
@@ -51,7 +50,6 @@ class ProductController{
 
     async editProduct(req,res){
         try{
-            console.log(req.params.slug)
             const product=await Product.findOneWithDeleted({slug:req.params.slug})
             res.render('edit_product',{product:MongooseToObject(product),caterology})
         }
@@ -60,7 +58,6 @@ class ProductController{
         }
     }
     async saveEditProduct(req,res){  // post edit product
-        console.log(req.body)
 
         var type=[]
         caterology.forEach((item)=>{
@@ -85,7 +82,6 @@ class ProductController{
                 size:req.body.size,
                 quantity:req.body.quantity
             }],
-            console.log(product)
             product.save()
             res.render('detail-product',{product:MongooseToObject(product)})
         }catch(e){
@@ -119,7 +115,6 @@ class ProductController{
         console.log(req.params.id)
         try{
             const product =await Product.delete({_id:req.params.id})
-            console.log(product)
             res.json({success:true})
         }
         catch(e){
@@ -130,7 +125,6 @@ class ProductController{
         console.log(req.params.id)
         try{
             const result=await Product.restore({_id:req.params.id})
-            console.log(result)
             res.json({success:true})
         }catch(e){
             res.json({succes:false,message:'thang ne'})
