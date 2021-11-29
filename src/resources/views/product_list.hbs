@@ -141,7 +141,7 @@
         element.forEach(item=>{
             item.addEventListener('click',()=>{
                 if (item.innerText==='Restore'){
-                    fetch(`https://the-1-beauty-fashion-admin.herokuapp.com/product/restore/${item.dataset.id}`,{
+                    fetch(`http://localhost:5000/product/restore/${item.dataset.id}`,{
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
@@ -185,7 +185,7 @@
             const _index=parseInt(document.querySelector('#_id').getAttribute('index'))
             console.log(_index)
             document.querySelector('.spinner').classList.remove('ds-none')
-            fetch(`https://the-1-beauty-fashion-admin.herokuapp.com/product/delete/${_id}`,{
+            fetch(`http://localhost:5000/product/delete/${_id}`,{
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -209,8 +209,5 @@
                 }    
             })
         })
-
-
-
     })
 </script>
