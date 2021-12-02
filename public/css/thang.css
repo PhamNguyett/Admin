@@ -85,3 +85,18 @@
         transform: rotate(360deg);
     }
 }
+.active-page-item{
+    background-color: rgb(138, 26, 190) !important;
+    color: white !important;
+}
+.page-link{
+    padding: 8px 16px !important    ;
+}
+h4{
+    margin: 10px 0 ;
+}
+.box-shadow-thang{
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(161,245,180,0.2);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(161,245,180,0.2);
+    box-shadow: 0px 0px 5px 3px rgba(161,245,180,0.2);
+}

@@ -42,7 +42,7 @@
                                                     <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="/product/edit/{{product.slug}}">
                                                         <div class="row">
     
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                                                 <div class="form-group">
                                                                     <label for="name" style="margin-left:10px">Name of Product</label>
                                                                     <input name="name" type="text" class="form-control" placeholder="Product Name" required="true" value="{{product.name}}" style="color:red">
@@ -88,30 +88,30 @@
                                                                 {{/each}}
                                                                 
                                                                 <h3 style="visibility: hidden;" id="product-type">{{product.type}}</h3>
-                                                                <div class="form-group alert-up-pd">
-                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
-                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
-                                                
-                                                                        {{#each product.imagesUrl}}
-                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image-cc" >
-                                                                            <label style="display: block;">Image has loaded {{increase @index 1}}</label>
-                                                                            
-                                                                            <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
-                                                                            <img src="{{this}}" alt="" style="width: 120px; height: auto; margin-top:20px" name="image">
-                                                                            <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
-                                                                        </div>
-                                                                        {{/each}}
-                                                                    </div>
-                                                                </div>
+                                                                
                                                         
                                                             </div>
-                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                            <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30px;">
                                                                 
                                                                 <div class="form-group"> 
                                                                     <label for="description" style="margin-left:10px"> Description</label>
                                                                     <textarea name="description" placeholder="Description" style="color: red;">{{product.des}}</textarea>
                                                                 </div>
-                                                            
+                                                                <div class="form-group alert-up-pd">
+                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
+                                                
+                                                                        {{#each product.imagesUrl}}
+                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative; border-radius: 10px;" id="image-cc" class="box-shadow-thang" >
+                                                                            <label style="display: block;">Image has loaded {{increase @index 1}}</label>
+                                                                            
+                                                                            <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
+                                                                            <img src="{{this}}" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
+                                                                            <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
+                                                                        </div>
+                                                                        {{/each}}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -190,7 +190,7 @@
         
         $('#add-image').on('click',()=>{
             count++;
-            const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}" class"dmm">
+            const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative ;border-radius: 10px" id="image${count}" class"dmm box-shadow-thang">
                             <label>New Image ${count}</label>
                             <input type="file" name="image">
                             <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
