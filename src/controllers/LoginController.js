@@ -1,4 +1,4 @@
-const publicFolder=require('../public/url')
+const publicFolder=require('../../public/url')
 
 class LoginController{
     async Login(req,res){

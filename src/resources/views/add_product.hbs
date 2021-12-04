@@ -6,9 +6,9 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="/product" style="color: rgb(68, 68, 228);">All Product</a> <span class="bread-slash">/</span>
+                                            <li style="font-size: 18px;"><a href="/product" style="color: rgb(68, 68, 228);">All Product</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Add Product</span>
+                                            <li style="font-size: 18px;"><span class="bread-blod">Add Product</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -37,7 +37,7 @@
                                         <div id="dropzone1" class="pro-ad addcoursepro">
                                             <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="">
                                                 <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="name" style="margin-left:10px">Name of Product</label>
                                                             <input name="name" type="text" class="form-control" placeholder="Product Name" required="true">
@@ -75,17 +75,24 @@
                                                         <h3 style="color: red">Caterology</h3>
                                                         
                                                         {{#each caterology}}
-                                                        <div class="form-group">
+                                                        <div class="form-group" style="margin:0;">
                                                             <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{this}}</label>
                                                             <input name="{{this}}" type="checkbox">
                                                         </div>
                                                         {{/each}}
                                                         
                                                         
-                                                        <div class="form-group alert-up-pd">
-                                                            <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                        
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30px;">
+                                                        <div class="form-group"> 
+                                                            <label for="description" style="margin-left:10px"> Description</label>
+                                                            <textarea name="description" placeholder="Description"></textarea>
+                                                        </div>
+                                                        <div class="form-group alert-up-pd" style="margin-top: 100px;">
+                                                            <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 15px 25px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer;"> <i class="bi bi-plus-square" style="margin-right: 5px;color:rgb(16, 231, 27)"></i>Add image</h6>
                                                             <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
-                                                                <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;">
+                                                                <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;border-radius:10px">
                                                                     <label>Image Main</label>
                                                                     <input type="file" name="image">
                                                                     <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
@@ -97,20 +104,12 @@
                                                             <div class="preview-images"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                        
-                                                        <div class="form-group"> 
-                                                            <label for="description" style="margin-left:10px"> Description</label>
-                                                            <textarea name="description" placeholder="Description"></textarea>
-                                                        </div>
-                                                    
-                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="payment-adress">
                                                             <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
-                                                            <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
+                                                            <button type="submit" class="btn-primary" style="padding: 15px 25px; border: none;border-radius: 10px;">SUBMIT</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,7 +168,7 @@
             })
             $('#add-image').on('click',()=>{
                 count++;
-                const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative" id="image${count}" class"dmm">
+                const html=`<div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative;border-radius:10px" id="image${count}" class"dmm">
                                 <label>Image ${count}</label>
                                 <input type="file" name="image">
                                 <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
