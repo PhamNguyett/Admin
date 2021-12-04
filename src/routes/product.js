@@ -1,4 +1,4 @@
-const publicURL=require('../public/url')
+const publicURL=require('../../public/url')
 const multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -14,7 +14,7 @@ var upload = multer({ storage: storage })
 const express=require('express')
 const route=express.Router()
 
-const ProductController=require('../conttrollers/ProductController')
+const ProductController=require('../controllers/ProductController')
 
 route.get('/caterology/:slug',ProductController.caterology)
 route.get('/detail/:slug',ProductController.detail)
