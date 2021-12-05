@@ -1,10 +1,10 @@
 const express=require('express')
 const route=express.Router()
-
+const upload=require('../middlewares/multer')
 const AdminController=require('../controllers/AdminController')
 
 route.get('/add',AdminController.add)
-route.post('/list',AdminController.list)
+route.post('/add',upload.single('image'),AdminController.save)
 route.get('/:slug',AdminController.detail)
 route.get('/',AdminController.show)
 
