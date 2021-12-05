@@ -41,7 +41,7 @@ app.use((req,res,next)=>{
         }
     }
     else{
-        res.locals.user=req.user
+        res.locals.user=req.user 
     }
     next()
 })
