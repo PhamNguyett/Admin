@@ -10,7 +10,6 @@ passport.use(new LocalStrategy(
         console.log(username,password);
         try{
             const user=await Admin.findOne({ username: username })
-            console.log(user);
             if (!user) { return done(null, false,{message:'Username does not exist ! '}); }
             let isSuccess=await argon2.verify(user.password,password)
             if(!isSuccess) { return done(null, false,{message:'Password is wrong ! '});}

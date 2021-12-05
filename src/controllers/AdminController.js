@@ -1,6 +1,7 @@
 const Admin = require("../database/models/Admin")
 const {MultipleMongooseToObject,MongooseToObject} = require("../ultil/mongoose")
-
+const publicURL=require('../../public/url')
+const multer = require('multer');
 class AdminController{
     async show(req,res){
         const admins = await Admin.find({ })
@@ -30,7 +31,13 @@ class AdminController{
     }
 
     //[POST] admin/add
-    async list(req, res, next){}
+    async save(req, res){
+        const formData =req.body
+        formData.avatarUrl='/uploads/'+req.file.filename
+        const admin =new Admin(formData)
+        admin.save();
+        console.log(req.body)
+    }
 
 }
 module.exports=new AdminController
