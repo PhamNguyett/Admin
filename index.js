@@ -4,6 +4,7 @@ const exphbs  = require('express-handlebars');
 const moment =require('moment')
 const path=require('path')
 const app = express()
+const passport=require('passport')
 
 require('dotenv').config()
 
@@ -13,6 +14,9 @@ const db=require('./src/database/index') // connect database
 
 app.use(express.static(path.join(__dirname,'/public'))) // public 
 
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
  // ovewrite method
 
 app.engine('hbs', exphbs({extname:'hbs',
@@ -28,6 +32,19 @@ app.engine('hbs', exphbs({extname:'hbs',
 }));         //set view engine
 app.set('view engine', 'hbs');          //set view engine
 app.set('views',path.join(__dirname,'src/resources/views'))         //set view engine
+
+app.use((req,res,next)=>{
+    if(!req.isAuthenticated()){
+        if(req.path!=='/login'){
+            res.redirect('/login')
+            return
+        }
+    }
+    else{
+        res.locals.user=req.user
+    }
+    next()
+})
 
 app.use(express.urlencoded({ 
     extended:true
