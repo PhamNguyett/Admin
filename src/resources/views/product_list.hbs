@@ -138,13 +138,15 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
+        const URL=window.location.origin
+        console.log(URL)
         const element=document.querySelectorAll('.show-modal')
         const modal=document.querySelector('.modal-dialog')
         const bgBlack=document.querySelector('#bg-black-over')
         element.forEach(item=>{
             item.addEventListener('click',()=>{
                 if (item.innerText==='Restore'){
-                    fetch(`http://localhost:5000/product/restore/${item.dataset.id}`,{
+                    fetch(`${URL}/product/restore/${item.dataset.id}`,{
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
@@ -188,7 +190,7 @@
             const _index=parseInt(document.querySelector('#_id').getAttribute('index'))
             console.log(_index)
             document.querySelector('.spinner').classList.remove('ds-none')
-            fetch(`http://localhost:5000/product/delete/${_id}`,{
+            fetch(`${URL}/product/delete/${_id}`,{
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
