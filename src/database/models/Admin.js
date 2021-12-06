@@ -7,7 +7,7 @@ const Admin=new Schema({
     username:{required:true,type:String,unique:true},
     password:{required:true,type:String},
     gmail:{type:String,required:true},
-    phone:{type:String ,require:true},
+    phone:{type:String },
     name:{type:String ,require:true},
     avatarUrl:{type:String, default:'/img/avatar.png'}
 },{timestamps:true})
