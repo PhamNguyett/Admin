@@ -39,6 +39,7 @@ class AdminController{
             username:req.body.username,
             password:newPassword,
             gmail:req.body.gmail,
+            phone:req.body.phone,
             name:req.body.name,
             avatarUrl:avatarUrl,
         })
