@@ -7,7 +7,6 @@ const LocalStrategy=require('passport-local')
 
 passport.use(new LocalStrategy( 
     async function (username, password, done) {
-        console.log(username,password);
         try{
             const user=await Admin.findOne({ username: username })
             if (!user) { return done(null, false,{message:'Username does not exist ! '}); }
