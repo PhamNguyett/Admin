@@ -1,7 +1,6 @@
-const Admin = require("../database/models/Admin")
+const Admin = require('../database/models/Admin')
 const {MultipleMongooseToObject,MongooseToObject} = require("../ultil/mongoose")
-const publicURL=require('../../public/url')
-const multer = require('multer');
+const argon2=require('argon2')
 class AdminController{
     async show(req,res){
         const admins = await Admin.find({ })
@@ -32,11 +31,23 @@ class AdminController{
 
     //[POST] admin/add
     async save(req, res){
-        const formData =req.body
-        formData.avatarUrl='/uploads/'+req.file.filename
-        const admin =new Admin(formData)
-        admin.save();
+        let avatarUrl='/uploads/'+req.file.filename
+        console.log(req.file)
         console.log(req.body)
+        const newPassword=await argon2.hash(req.body.password)
+        const newAdmin = new Admin({ 
+            username:req.body.username,
+            password:newPassword,
+            gmail:req.body.gmail,
+            name:req.body.name,
+            avatarUrl:avatarUrl,
+            adminname:'sdfsdf'
+        })
+        console.log(newAdmin)
+        const err=await newAdmin.save()
+        console.log(err)
+        res.render('admin')
+        
     }
 
 }
