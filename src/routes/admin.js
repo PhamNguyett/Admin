@@ -5,7 +5,7 @@ const AdminController=require('../controllers/AdminController')
 
 route.get('/add',AdminController.add)
 route.post('/add',upload.single('image'),AdminController.save)
-route.get('/:slug',AdminController.detail)
+route.get('/:id',AdminController.detail)
 route.get('/',AdminController.show)
 
 module.exports=route
