@@ -39,28 +39,38 @@
                                                 <div class="row">
                                                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="form-group">
-                                                            <input name="username" type="text" class="form-control" placeholder="User Name" required="true">
+                                                            <label for="username">Username</label>
+                                                            <input name="username" type="text" class="form-control" placeholder="User Name" required="true" value="{{username}}"> 
+                                                            <span class="info-err-username" style="color: red;">{{message}}</span>
                                                         </div>
                                                         
                                                         <div class="form-group">
-                                                            <input name="name" type="text" class="form-control" placeholder="Name" required>
+                                                            <label for="name">Full name</label>
+                                                            <input name="name" type="text" class="form-control" placeholder="Name" required="true" value="{{fullname}}">
+                                                        </div>
+                                    
+                                                        <div class="form-group">
+                                                            <label for="gmail">Gmail</label>
+                                                            <input name="gmail" type="text" class="form-control" placeholder="Gmail" required="true">
                                                         </div>
                                                         <div class="form-group">
-                                                          
-                                                            <input name="password" type="text" class="form-control" placeholder="Password" required="true" >
+                                                            <label for="phone">Phone</label>
+                                                            <input name="phone" type="text" class="form-control" placeholder="Phone" required="true">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input name="gmail" type="text" class="form-control" placeholder="Gmail">
+                                                            <label for="password">Passwword </label>
+                                                            <input name="password" type="password" class="form-control" placeholder="Password" required="true" >
                                                         </div>
-                                                       
-                                                        <div class="form-group" style="margin:0;">
-                                                            <label for="" style="margin-left:10px;margin-right: 10px; width: 100px;"></label>
+                                                        <div class="form-group">
+                                                            <label for="retypPassword">Retype Passwword </label>
+                                                            <input name="retypePassword" type="password" id="retype" class="form-control" placeholder="Password" required="true" >
+                                                            <span class="info-err" style="color: red;"></span>
                                                         </div>
+                                                        
                                                     </div>
                                                     <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30px;">
 
                                                         <div class="form-group alert-up-pd" style="margin-top: 100px;">
-                                                           
                                                             <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
                                                                 <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px;border-radius:10px">
                                                                     <label>Avatar Image</label>
@@ -79,7 +89,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="payment-adress">
                                                             <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
-                                                            <button type="submit" class="btn-primary" style="padding: 15px 25px; border: none;border-radius: 10px;">SUBMIT</button>
+                                                            <button type="submit" id="type-pass" class="btn-primary" style="padding: 15px 25px; border: none;border-radius: 10px;">SUBMIT</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,19 +108,60 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
+        let validaUsername=/^[a-z0-9_-]{3,16}$/
+        let isValid=false
         var count=0;
         var element =document.querySelector('input[name="image"]')
         const avatarImage=document.querySelector('#avatar-image')
-
-
-            document.querySelector('#area-image input').addEventListener('change',(e)=>{
-                console.log('first')
-                if(e.target.files[0].type.split('/')[0]=='image'){
-                    document.querySelector(`#area-image img`).src= URL.createObjectURL(e.target.files[0]);
-                }
-            })
-
+        document.querySelector('#area-image input').addEventListener('change',(e)=>{
+            console.log('first')
+            if(e.target.files[0].type.split('/')[0]=='image'){
+                document.querySelector(`#area-image img`).src= URL.createObjectURL(e.target.files[0]);
+            }
+        })
         
+
+
+        const retype=document.querySelector('#retype')
+        retype.addEventListener('input',(e)=>{
+            let password=document.querySelector('input[name="password"]').value
+            if(e.target.value!==password){
+                document.querySelector('.info-err').innerText="Don't match with new password"
+                document.querySelector('#type-pass').addEventListener('click',preventSubmit)
+            }
+            else{
+                document.querySelector('.info-err').innerText=''
+                document.querySelector('#type-pass').removeEventListener('click',preventSubmit)
+            }
+        })
+        function preventSubmit(e){
+            e.preventDefault()
+            return
+        }
+        
+        const inputUsername=document.querySelector('input[name="username"]')
+        inputUsername.addEventListener('blur',(e)=>{
+            if(!validaUsername.test(e.target.value)){
+                document.querySelector('.info-err-username').innerText='username is invalid'
+                isValid=false
+            }
+            else{
+                document.querySelector('.info-err-username').innerText=''
+                isValid=true
+            }
+
+        })
+        const form=document.querySelector('#demo1-upload')
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            let resultCompare=document.querySelector('input[name="password"]').value===document.querySelector('input[name="retypePassword"]').value
+            console.log(isValid,resultCompare)
+            if(isValid&&resultCompare){
+                console.log('vo da23y')
+                form.submit()
+            }
+            console.log('vo day')
+        })
     })
 </script>
 

@@ -1,48 +1,47 @@
 <div class="breadcome-area">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="breadcome-list">
-<div class="row">
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<div class="breadcome-heading">
-</div>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<ul class="breadcome-menu">
-<li><a href="#">Admin</a> <span class="bread-slash">/</span>
-</li>
-<li><span class="bread-blod">All Admins</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="contacts-area mg-b-15">
-<div class="container-fluid">
-<div class="row">
-        {{#each admins}}
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-<div class="student-inner-std res-mg-b-30">
-    <a href="/admin/{{this._id}}">
-    <div class="student-img">
-    <img src={{this.avatarUrl}} alt="" />
-</div></a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="#">Admin</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">All Admins</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contacts-area mg-b-15" >
+        <div class="container-fluid">
+            <div class="row">
+                {{#each admins}}
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="width:25%;padding:5p;margin-bottom:20px; ">
+                    <div class="student-inner-std res-mg-b-30" style="background:rgb(236, 235, 235); border-radius:10px;display:flex;flex-direction: column;">
+                        <a href="/admin/{{this._id}}" style="display: block;padding: 30px;">
+                            <div class="student-img " style="border-radius: 50%;overflow: hidden;">
+                                <img class="img-circle m-b" style="width: 100%; height: auto;" src={{this.avatarUrl}} alt="" />
+                            </div>
+                        </a>
 
-<div class="student-dtl">
-<h2>{{this.name}}</h2>
-<p><i class="bi bi-telephone-fill"></i >Phone : <a href="tel:+00 151515">{{this.phone}}</a></p>
-<p><i class="bi bi-envelope-fill"></i> Email: <a href="mailto:mail@mail.com">{{this.gmail}}</a></p>
-</div>
-</div>
-</div>
-{{/each}}
-</div>
-</div>
-</div>
+                        <div class="student-dtl">
+                            <h2>{{this.name}}</h2>
+                            <p><i class="bi bi-telephone-fill"></i >Phone : <a href="tel:+00 151515">{{this.phone}}</a></p>
+                            <p><i class="bi bi-envelope-fill"></i> Email: <br><a href="mailto:mail@mail.com">{{this.gmail}}</a></p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
 </div>

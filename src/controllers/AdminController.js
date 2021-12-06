@@ -32,19 +32,31 @@ class AdminController{
 
     //[POST] admin/add
     async save(req, res){
-        let avatarUrl='/uploads/'+req.file.filename
+        const findAdmin=await Admin.findOne({username:req.body.username})
+        if(findAdmin){
+            res.render('add_admin',{message:'username is existed, please choose another username',username:req.body.username,fullname:req.body.name})
+            return
+        }
+        let avatarUrl=''
+        if(req.file){
+            avatarUrl='/uploads/'+req.file.filename
+        }
 
         const newPassword=await argon2.hash(req.body.password)
         const newAdmin = new Admin({ 
             username:req.body.username,
             password:newPassword,
             gmail:req.body.gmail,
+            phone:req.body.phone,
             name:req.body.name,
-            avatarUrl:avatarUrl,
         })
+        if(avatarUrl){
+            newAdmin['avatarUrl']=avatarUrl
+        }
         await newAdmin.save()
+        const admins=await Admin.find({})
 
-        res.render('admin')
+        res.render('admin',{admins:MultipleMongooseToObject(admins)})
         
     }
 
