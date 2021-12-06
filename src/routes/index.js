@@ -6,7 +6,7 @@ const AdminRouter=require('./admin')
 const ProductRouter=require('./product')
 function route(app){
     app.use('/product',ProductRouter)
-    app.use('/dashboard',DashboardRouter)
+    app.use('/',DashboardRouter)
     app.use('/user',UserRouter)
     app.use('/analytics',AnalyticsRouter)
     app.use('/admin',AdminRouter)
