@@ -53,31 +53,46 @@
 
                                                             <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="size" style="margin-left:10px"> Chose Size</label>
-
-                                                                <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
-                                                                    <option value="S">S</option>
-                                                                    <option value="M">M</option>
-                                                                    <option value="L">L</option>
-                                                                    <option value="XL">XL</option>
-                                                                </select>
-                                                            
+                                                        <h4>Size and Color</h4>
+                                                        <h6 id="add-info" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:180px; margin:10px auto; cursor:pointer;"> 
+                                                            <i class="bi bi-plus-square" style="margin-right: 5px;color:rgb(16, 231, 27)"></i>
+                                                            Add Size and Color
+                                                        </h6>
+                                                        <div class="form-group xamxi">
+                                                                <div style="display: flex;align-items: center;justify-content: center; padding: 20px 5px;border: 1px solid royalblue;border-radius: 10px;">
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="size" style="margin-left:10px"> Chose Size</label>
+                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="S">S</option>
+                                                                            <option value="M">M</option>
+                                                                            <option value="L">L</option>
+                                                                            <option value="XL">XL</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="color" style="margin-left:10px"> Chose Color</label>
+                                                                        <select name="color" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="Đen">Đen</option>
+                                                                            <option value="Trắng">Trắng</option>
+                                                                            <option value="Vàng">Vàng</option>
+                                                                            <option value="Xanh">Xanh</option>
+                                                                            <option value="Đỏ">Đỏ</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                                                        <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true" pattern="[0-9]+" style="height: 25px;margin: 0;margin-left: 15px;width: 90%;">
+                                                                    </div>
+                                                                </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="color" style="margin-left:10px"> Color</label>
-                                                            <input name="color" type="text" class="form-control" placeholder="Color">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="quantity" style="margin-left:10px"> Quantity</label>
-                                                            <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true">
-                                                        </div>
-                                                        <h3 style="color: red">Caterology</h3>
                                                         
-                                                        {{#each caterology}}
-                                                        <div class="form-group" style="margin:0;">
-                                                            <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{this}}</label>
-                                                            <input name="{{this}}" type="checkbox">
+                                                        
+                                                        <h3 style="color: red">Category</h3>
+                                                        
+                                                        {{#each category}}
+                                                        <div class="form-group" style="margin-left:10px;">
+                                                            <label for="{{_id}}" style="margin-left:10px;margin-right: 10px; width: 100px;">{{tittle}}</label>
+                                                            <input name="category" type="checkbox" value="{{_id}}">
                                                         </div>
                                                         {{/each}}
                                                         
@@ -156,6 +171,7 @@
 <script>
     document.addEventListener('DOMContentLoaded',()=>{
         var count=0;
+        let info=0
         var element =document.querySelector('input[name="image"]')
         const imgProduct=document.querySelector('#image-product')
 
@@ -174,7 +190,6 @@
                                 <img src="" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
                                 <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
                             </div>`
-                console.log('ne ne')
                 $('#area-image').append(html)
                 document.querySelector(`#image${count} input`).addEventListener('change',(e)=>{
                     if(e.target.files[0].type.split('/')[0]=='image'){
@@ -182,10 +197,45 @@
                     }
                 })
                 document.querySelector(`#image${count} i`).addEventListener('click',(e)=>{
+                    count--;
                     e.target.parentElement.remove()
                 })
             })
-        
+            
+            document.querySelector('#add-info').addEventListener('click',(e)=>{
+                const infoSize=`<div id="inforr-${info}" style="display: flex;align-items: center;justify-content: center; padding: 20px 5px;border: 1px solid royalblue;margin-bottom:15px;margin-top:15px;border-radius: 10px;position:relative">
+                                <i class="bi bi-x" style="position:absolute;top:5px;right:5px;cursor:pointer;color:royalblue;font-size:18px"></i>
+                                <div style="display: flex;flex-direction: column;">
+                                    <label for="size" style="margin-left:10px"> Chose Size</label>
+                                    <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex;flex-direction: column;">
+                                    <label for="color" style="margin-left:10px"> Chose Color</label>
+                                    <select name="color" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                        <option value="Đen">Đen</option>
+                                        <option value="Trắng">Trắng</option>
+                                        <option value="Vàng">Vàng</option>
+                                        <option value="Xanh">Xanh</option>
+                                        <option value="Đỏ">Đỏ</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex;flex-direction: column;">
+                                    <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true" pattern="[0-9]+" style="height: 25px;margin: 0;margin-left: 15px;width: 90%;">
+                                </div>
+                            </div>`
+                $('.xamxi').append(infoSize)
+                console.log(document.querySelector(`#inforr-${info}`))
+                document.querySelector(`#inforr-${info} i`).addEventListener('click',(e)=>{
+                    e.target.parentElement.remove()
+                })
+                info++
+            })
     })
 </script>
 

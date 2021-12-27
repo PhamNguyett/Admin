@@ -1,109 +1,82 @@
 
 const Product =require('../database/models/Product')
-const caterology=require('../ultil/caterology')
+const Category=require('../database/models/Category')
 const {MultipleMongooseToObject, MongooseToObject}=require('../ultil/mongoose')
-const {quantityPageProducts,findProduct,addKeyObject}=require('./services/product')
+const {findProductList,createInfoProduct}=require('./services/product')
 
 class ProductController{
-    async addProduct(req,res){   // get
-        res.render('add_product',{caterology:caterology})
-    }
-
-    async caterology(req,res){
-        try{
-            if(req.query.key){
-                let quantityPageProduct= await quantityPageProducts(req.query.key,req.params.slug)
-                if(!req.query.page){
-                    let filterProduct =await findProduct(req.query.key,req.params.slug)
-                    addKeyObject(filterProduct,'currentPage',1)
-                    res.render('product_list',{caterology,allProduct:filterProduct,quantityPageProduct})
-                    return 
-                }
-                let page=parseInt(req.query.page)
-                let pageProduct=await findProduct(req.query.key,req.params.slug,page)
-                addKeyObject(pageProduct,'currentPage',page)
-                res.render('product_list',{caterology,allProduct:pageProduct,quantityPageProduct})
-                return
-            }
-
-            let quantityPageProduct= await quantityPageProducts(null,req.params.slug)
-            if(req.query.page){
-                let page=parseInt(req.query.page)
-                let pageProduct=await Product.findWithDeleted({type:req.params.slug}).limit(10).skip(page*10-10)
-                pageProduct=MultipleMongooseToObject(pageProduct)
-                addKeyObject(pageProduct,'currentPage',page)
-                res.render('product_list',{caterology,allProduct:pageProduct,quantityPageProduct})
-                return
-            }
-
-            let pageProduct=await Product.findWithDeleted({type:req.params.slug}).limit(10)
-            pageProduct=MultipleMongooseToObject(pageProduct)
-            addKeyObject(pageProduct,'currentPage',1)
-            res.render('product_list',{allProduct:pageProduct,caterology,quantityPageProduct})
-        }
-        catch(e){
-            console.log(e)
-            res.render('404')
-        }
-    }
-
-    async createProduct(req,res){ // post product
-
-        var type=[]
-        caterology.forEach((item)=>{
-            if(req.body[item]){
-                type.push(item)
-            }
+    async addProduct(req,res){ 
+        const category=await Category.find({})  
+        res.render('add_product',{
+            category:MultipleMongooseToObject(category)
         })
+    }
+    async caterology(req,res){
+        let category=await Category.find({})
+        let {page,key}=req.query
+        let {slug}=req.params
+        if(!page){
+            page=1
+        }
+        else{
+            page=parseInt(page)
+        }
+        if(!key){
+            key=' '
+        }
+        const result=await findProductList(page,key,slug)
+        return res.render('product_list',{
+            category:MultipleMongooseToObject(category),
+            allProduct:MultipleMongooseToObject(result.filterProduct),
+            quantityPageProduct:(result.quantity-1)/10+1,
+            nameProduct:slug.toUpperCase(),
+            currentPage:page
+        })
+    }
+    async createProduct(req,res){ // post product
+        let result=createInfoProduct(req.body)
         var path=[]
-
         req.files.forEach(i=>{
             path.push('/uploads/'+i.filename)
         })
-        const product={
+        
+        const newProduct= new Product({
             name:req.body.name,
             price:parseInt(req.body.price),
             pricePromotion:parseInt(req.body.pricePromotion),
             des:req.body.description,
             imagesUrl:path,
-            info:[{
-                color:req.body.color,
-                size:req.body.size,
-                quantity:req.body.quantity
-            }],
-            type:type,
-        }
-        const newProduct=new Product({...product})
+            info:result.info,
+            categoryId:result.categoryId,
+        })
         try{
             await newProduct.save()
-            res.render('detail-product',{product:MongooseToObject(newProduct)})
+            res.render('detail-product',{
+                product:MongooseToObject(newProduct)
+            })
         }
         catch (err){
             res.render('404')
         }
     }
-
     async editProduct(req,res){
         try{
             const product=await Product.findOneWithDeleted({slug:req.params.slug})
-            res.render('edit_product',{product:MongooseToObject(product),caterology})
+            const category=await Category.find({})
+            console.log(product)
+            res.render('edit_product',{
+                product:MongooseToObject(product),
+                category:MultipleMongooseToObject(category)})
         }
         catch(e){
             render('404')
         }
     }
     async saveEditProduct(req,res){  // post edit product
-
-        var type=[]
-        caterology.forEach((item)=>{
-            if(req.body[item]){
-                type.push(item)
-            }
-        })
-
+        let result=createInfoProduct(req.body)
         try{
             const product=await Product.findOneWithDeleted({slug:req.params.slug})
-            product.type=type
+            product.categoryId=result.categoryId
             product.imagesUrl=req.body.imageUpload
             req.files.forEach(i=>{
                 product.imagesUrl.push('/uploads/'+i.filename)
@@ -112,55 +85,37 @@ class ProductController{
             product.price=parseInt(req.body.price),
             product.pricePromotion=parseInt(req.body.pricePromotion),
             product.des=req.body.description,
-            product.info=[{
-                color:req.body.color,
-                size:req.body.size,
-                quantity:req.body.quantity
-            }],
+            product.info=result.info,
+
             product.save()
-            res.render('detail-product',{product:MongooseToObject(product)})
+            res.render('detail-product',{
+                product:MongooseToObject(product)
+            })
         }catch(e){
-            res.json({succes:false})
+            res.render('404')
         }
         
     }
-    
-    async viewProduct(req,res){ // get all product       
-        try{
-
-            if(req.query.key){
-                let quantityPageProduct= await quantityPageProducts(req.query.key)
-                if(!req.query.page){
-                    let filterProduct =await findProduct(req.query.key)
-                    addKeyObject(filterProduct,'currentPage',1)
-                    res.render('product_list',{caterology,allProduct:filterProduct,quantityPageProduct})
-                    return 
-                }
-                let page=parseInt(req.query.page)
-                let pageProduct=await findProduct(req.query.key,null,page)
-                addKeyObject(pageProduct,'currentPage',page)
-                res.render('product_list',{caterology,allProduct:pageProduct,quantityPageProduct})
-                return
-            }
-
-            let quantityPageProduct= await quantityPageProducts()
-            if(req.query.page){
-                let page=parseInt(req.query.page)
-                let pageProduct=await Product.findWithDeleted({}).limit(10).skip(page*10-10)
-                pageProduct=MultipleMongooseToObject(pageProduct)
-                addKeyObject(pageProduct,'currentPage',page)
-                res.render('product_list',{caterology,allProduct:pageProduct,quantityPageProduct})
-                return
-            }
-
-            let pageProduct=await Product.findWithDeleted({}).limit(10)
-            pageProduct=MultipleMongooseToObject(pageProduct)
-            addKeyObject(pageProduct,'currentPage',1)
-            res.render('product_list',{allProduct:pageProduct,caterology,quantityPageProduct})
+    async viewProduct(req,res){ // get all product    
+        let category=await Category.find({})
+        let {page,key}=req.query
+        if(!page){
+            page=1
         }
-        catch(e){
-            res.render('404')
+        else{
+            page=parseInt(page)
         }
+        if(!key){
+            key=' '
+        }
+        const result=await findProductList(page,key,'')
+        return res.render('product_list',{
+            category:MultipleMongooseToObject(category),
+            allProduct:MultipleMongooseToObject(result.filterProduct),
+            quantityPageProduct:(result.quantity-1)/10+1,
+            currentPage:page,
+            nameProduct:'ALL PRODUCT'
+        })
     }
     async deleteProduct(req,res){
         try{
@@ -176,19 +131,19 @@ class ProductController{
             const result=await Product.restore({_id:req.params.id})
             res.json({success:true})
         }catch(e){
-            res.json({succes:false,message:'thang ne'})
+            res.json({succes:false,message:'fail'})
         }
     }
-    
     async detail(req,res){
         try{
             const product= await Product.findOneWithDeleted({slug:req.params.slug})
+            console.log(product)
             if(product){
-                res.render('detail-product',{product:MongooseToObject(product)})
-                return
+                return res.render('detail-product',{
+                    product:MongooseToObject(product)
+                })
             }           
             res.render('404')
-
         }catch(e){
             console.log(e)
             

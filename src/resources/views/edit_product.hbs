@@ -24,154 +24,178 @@
     </div>
 </div>
         <!-- Single pro tab review Start-->
-        <div class="single-pro-review-area mt-t-30 mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-payment-inner-st">
-                            <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description"> Edit Product</a></li>
-                               <!-- <li><a href="#reviews"> Product Information</a></li>-->
-                            </ul>
-                            <div id="myTabContent" class="tab-content custom-product-edit">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="/product/edit/{{product.slug}}">
-                                                        <div class="row">
-    
-                                                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <label for="name" style="margin-left:10px">Name of Product</label>
-                                                                    <input name="name" type="text" class="form-control" placeholder="Product Name" required="true" value="{{product.name}}" style="color:red">
-                                                                </div>
-                                                                
-                                                                <div class="form-group">
-                                                                    <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
-                                                                    
-                                                                    <input name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+" value="{{product.pricePromotion}}" style="color:red">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-payment-inner-st">
+                    <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#description"> Edit Product</a></li>
+                        <!-- <li><a href="#reviews"> Product Information</a></li>-->
+                    </ul>
+                    <div id="myTabContent" class="tab-content custom-product-edit">
+                        <div class="product-tab-list tab-pane fade active in" id="description">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div id="dropzone1" class="pro-ad addcoursepro">
+                                            <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" action="/product/edit/{{product.slug}}">
+                                                <div class="row">
 
-                                                                    <input name="price" type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+" value="{{product.price}}" style="color:red">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="size" style="margin-left:10px"> Chose Size</label>
-
-                                                                        <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true" value="{{product.size}}">
-                                                                            <option value="S">S</option>
-                                                                            <option value="M">M</option>
-                                                                            <option value="L">L</option>
-                                                                            <option value="XL">XL</option>
-                                                                        </select>
-                                                                    
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="color" style="margin-left:10px "> Color</label>
-                                                                    <input name="color" type="text" class="form-control" placeholder="Color" value="{{product.info.[0].color}}" style="color: red;">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="quantity" style="margin-left:10px"> Quantity</label>
-                                                                    <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true" value="{{product.info.[0].quantity}}" style="color:red">
-                                                                </div>
-                                                                <h3 style="color: red">Caterology</h3>
-                                                                
-                                                                {{#each caterology}}
-                                                                <div class="form-group">
-                                                                    <label for="{{this}}" style="margin-left:10px;margin-right: 10px; width: 100px;" >{{this}}</label>
-                                                                    <input name="{{this}}" type="checkbox">
-                                                                    <h2>{{product.type}}</h2>
-                                                                </div>
-                                                                {{/each}}
-                                                                
-                                                                <h3 style="visibility: hidden;" id="product-type">{{product.type}}</h3>
-                                                                
+                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group" style="position: relative;">
+                                                            <label for="name" style="margin-left:10px">Name of Product</label>
+                                                            <input name="name" type="text" class="form-control" placeholder="Product Name" required="true" value="{{product.name}}" style="color:red" >
+                                                            {{!-- <i class="bi bi-pencil-square" style="cursor: pointer;color:blue;font-size:16px;position: absolute;top: 2px;right:5px;"></i> --}}
+                                                        </div>
                                                         
-                                                            </div>
-                                                            <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30px;">
-                                                                
-                                                                <div class="form-group"> 
-                                                                    <label for="description" style="margin-left:10px"> Description</label>
-                                                                    <textarea name="description" placeholder="Description" style="color: red;">{{product.des}}</textarea>
-                                                                </div>
-                                                                <div class="form-group alert-up-pd">
-                                                                    <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
-                                                                    <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
-                                                
-                                                                        {{#each product.imagesUrl}}
-                                                                        <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative; border-radius: 10px;" id="image-cc" class="box-shadow-thang" >
-                                                                            <label style="display: block;">Image has loaded {{increase @index 1}}</label>
-                                                                            
-                                                                            <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
-                                                                            <img src="{{this}}" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
-                                                                            <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
-                                                                        </div>
-                                                                        {{/each}}
+                                                        <div class="form-group" style="position: relative;">
+                                                            <label for="pricePromotion" style="margin-left:10px">Promotion Price  <span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+                                                            
+                                                            <input   name="pricePromotion" type="text" class="form-control" placeholder="Promotion Price" pattern="[0-9]+" value="{{product.pricePromotion}}" style="color:red">
+                                                            {{!-- <i class="bi bi-pencil-square" style="cursor: pointer;color:blue;font-size:16px;position: absolute;top: 2px;right:5px;"></i> --}}
+                                                        </div>
+                                                        <div class="form-group" style="position: relative;"> 
+                                                            <label for="price" style="margin-left:10px"> Price<span style="color: #555; font-weight:500;margin-left:10px">(Number)</span></label>
+                                                            <input name="price"   type="text" class="form-control" placeholder="Product Price" required="true" pattern="[0-9]+" value="{{product.price}}" style="color:red">
+                                                            {{!-- <i class="bi bi-pencil-square" style="cursor: pointer;color:blue;font-size:16px;position: absolute;top: 2px;right:5px;"></i> --}}
+                                                            
+                                                        </div>
+                                                        <h4>Size and Color</h4>
+                                                        <h6 id="add-info" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:180px; margin:10px auto; cursor:pointer;"> 
+                                                            <i class="bi bi-plus-square" style="margin-right: 5px;color:rgb(16, 231, 27)"></i>
+                                                            Add Size and Color
+                                                        </h6>
+                                                        <div class="form-group xamxi">
+                                                            {{#each product.info}}
+                                                                <div style="display: flex;align-items: center;justify-content: center; padding: 20px 5px;border: 1px solid royalblue;border-radius: 10px;margin-top: 15px;margin-bottom: 15px;">
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="size" style="margin-left:10px"> Chose Size</label>
+                                                                        <select  name="size" id="size" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="S" {{selectDefault size 'S'}} >S</option>
+                                                                            <option value="M" {{selectDefault size 'M'}} >M</option>
+                                                                            <option value="L" {{selectDefault size 'L'}} >L</option>
+                                                                            <option value="XL" {{selectDefault size 'XL'}} >XL</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="color" style="margin-left:10px"> Chose Color</label>
+                                                                        <select name="color" id="color" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                                                            <option value="Đen"  {{selectDefault color 'Đen'}} >Đen</option>
+                                                                            <option value="Trắng" {{selectDefault color  'Trắng'}} >Trắng</option>
+                                                                            <option value="Vàng" {{selectDefault color  'Vàng'}} >Vàng</option>
+                                                                            <option value="Xanh" {{selectDefault color  'Xanh'}} >Xanh</option>
+                                                                            <option value="Đỏ" {{selectDefault color  'Đỏ'}} >Đỏ</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div style="display: flex;flex-direction: column;">
+                                                                        <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                                                        <input name="quantity" value="{{quantity}}" type="text" class="form-control" placeholder="Quantity" required="true" pattern="[0-9]+" style="height: 25px;margin: 0;margin-left: 15px;width: 90%;">
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            {{/each}}
+                                                            
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="payment-adress">
-                                                                    <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
-                                                                    <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
+                                                        
+                                                        <h3 style="color: red">Category</h3>
+                                                        
+                                                        {{#each category as |cate category|}}
+                                                        <div class="form-group">
+                                                            <label for="" style="margin-left:10px;margin-right: 10px; width: 100px;" >{{tittle}}</label>
+                                                            <input name="category" type="checkbox" value="{{_id}}"
+                                                            {{!-- {{checkedBox product.categoryId category}} --}}
+                                                            >
+                                                            
+                                                        </div>
+                                                        {{/each}}
+                                                        
+                                                        <h3 style="visibility: hidden;" id="product-type">{{product.categoryId}}</h3>
+                                                        
+                                                
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-6 col-sm-6 col-xs-12" style="margin-left: 30px;">
+                                                        
+                                                        <div class="form-group" style="position: relative;"> 
+                                                            <label for="description" style="margin-left:10px"> Description</label>
+                                                            <textarea name="description"   placeholder="Description" style="color: red;">{{product.des}}</textarea>
+                                                            {{!-- <i class="bi bi-pencil-square" style="cursor: pointer;color:blue;font-size:16px;position: absolute;top: 2px;right:5px;"></i> --}}
+                                                            
+                                                        </div>
+                                                        <div class="form-group alert-up-pd">
+                                                            <h6 id="add-image" style="text-align: center; background-color: royalblue; padding: 10px 20px; border-radius: 5px;color:white;width:150px; margin:10px auto; cursor:pointer"> <i class="bi bi-plus-square"></i>Thêm hình ảnh</h6>
+                                                            <div class="dz-message needsclick download-custom" style="position: relative; cursor: pointer;" id="area-image">
+                                        
+                                                                {{#each product.imagesUrl}}
+                                                                <div style="border:1px solid #666;padding: 10px;margin-bottom: 10px; position:relative; border-radius: 10px;" id="image-cc" class="box-shadow-thang" >
+                                                                    <label style="display: block;">Image has loaded {{increase @index 1}}</label>
+                                                                    
+                                                                    <input type="text" name="imageUpload" style="display: none;" value="{{this}}">
+                                                                    <img src="{{this}}" alt="" style="width: 100px; height: auto; margin-top:20px" name="image">
+                                                                    <i class="bi bi-x-lg" style="position:absolute;top:15px;right:10px"></i>
                                                                 </div>
+                                                                {{/each}}
                                                             </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="product-tab-list tab-pane fade" id="reviews">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="devit-card-custom">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Color" name="color">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Size" name="size">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Quantity">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" placeholder="Caterology">
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn-submit">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="payment-adress">
+                                                            <!--<a href="#reviews" id="btn-next" class="btn-primary" style="padding: 10px 15px ;margin-left: 20px;"> Next</a>-->
+                                                            <button type="submit" class="btn-primary" style="padding: 10px 15px; border: none;">SUBMIT</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-tab-list tab-pane fade" id="reviews">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="devit-card-custom">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Color" name="color">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Size" name="size">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Quantity">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Caterology">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn-submit">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 <script>
     
     document.addEventListener('DOMContentLoaded',()=>{
         var count=0;
-        const caterology=document.querySelector('#product-type').innerHTML.split(',')
+        let info=0
+        const category=document.querySelector('#product-type').innerHTML.split(',')
         const checkElement = document.querySelectorAll('input[type="checkbox"]')
         checkElement.forEach((item)=>{
-            console.log(item.name)
-            if(caterology.includes(item.name)){
+            if(category.includes(item.value)){
                 item.checked=true
             }
         })
@@ -207,6 +231,57 @@
                 e.target.parentElement.remove()
             })
         })
+        document.querySelector('#add-info').addEventListener('click',(e)=>{
+            const infoSize=`<div id="inforr-${info}" style="display: flex;align-items: center;justify-content: center; padding: 20px 5px;border: 1px solid royalblue;margin-bottom:15px;margin-top:15px;border-radius: 10px;position:relative">
+                            <i class="bi bi-x" style="position:absolute;top:5px;right:5px;cursor:pointer;color:royalblue;font-size:18px"></i>
+                            <div style="display: flex;flex-direction: column;">
+                                <label for="size" style="margin-left:10px"> Chose Size</label>
+                                <select name="size" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;">
+                                <label for="color" style="margin-left:10px"> Chose Color</label>
+                                <select name="color" id="cars" style="margin-left:10px; width: 100px; font-size:18px; outline:none" required="true">
+                                    <option value="Đen">Đen</option>
+                                    <option value="Trắng">Trắng</option>
+                                    <option value="Vàng">Vàng</option>
+                                    <option value="Xanh">Xanh</option>
+                                    <option value="Đỏ">Đỏ</option>
+                                </select>
+                            </div>
+                            <div style="display: flex;flex-direction: column;">
+                                <label for="quantity" style="margin-left:10px"> Quantity</label>
+                                <input name="quantity" type="text" class="form-control" placeholder="Quantity" required="true" pattern="[0-9]+" style="height: 25px;margin: 0;margin-left: 15px;width: 90%;">
+                            </div>
+                        </div>`
+            $('.xamxi').append(infoSize)
+            console.log(document.querySelector(`#inforr-${info}`))
+            document.querySelector(`#inforr-${info} i`).addEventListener('click',(e)=>{
+                e.target.parentElement.remove()
+            })
+            info++
+        })
+        {{!-- const editEl=document.querySelectorAll('.bi-pencil-square')
+        editEl.forEach(item=>{
+            item.addEventListener('click',(e)=>{
+                console.log('vo day')
+                let element= e.target.parentElement.querySelector('input')
+                if(element){
+                    element.removeAttribute('')
+                    element.focus()
+                }
+                else{
+                    let element= e.target.parentElement.querySelector('textarea')
+                    element.removeAttribute('')
+                    element.focus()
+                }
+                
+            })
+        }) --}}
         
     })
 </script>

@@ -22,12 +22,13 @@ app.use(passport.session());
 app.engine('hbs', exphbs({extname:'hbs',
     helpers:{
         upperCase(item) { return item.charAt(0).toUpperCase() + item.slice(1);},
-        increase(a,i){ return a+(i-1)*10+1},
-        quantity(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
+        increase(a,i){ return a+i},
+        quantityy(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
         newLine(a){if(a) return a.replace(/\n/g, "<br />");},
-        checkedBox(array,_this){ console.log(array); array.includes(_this)>0?"true":"false" },
+        checkedBox(array,_this){ array.includes(_this)>=0?"true":"false" },
         momentFormatL (date){return moment(date).format('L'); },
         momentFormatAgo (date){return moment(date).startOf('day').fromNow();  },
+        selectDefault(a,b){ if(a===b) {return 'selected'}}
     }
 }));         //set view engine
 app.set('view engine', 'hbs');          //set view engine
