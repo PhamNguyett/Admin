@@ -1,54 +1,69 @@
+const Category = require('../../database/models/Category')
 const Product=require('../../database/models/Product')
 const {MultipleMongooseToObject, MongooseToObject}=require('../../ultil/mongoose')
 
-const quantityPageProducts=async (key,category)=>{
-    if (key){
-        if(category){
-            var quantity = await findProduct(key,category)
-            quantity=quantity.length
-        }
-        else{
-            var quantity=await await findProduct(key)
-            quantity=quantity.length
-        }
-    }
-    else{
-        if(category){
-            var quantity = await Product.count({type:category})
-        }
-        else{
 
-            var quantity = await Product.count({})
-        }
-    }
-    return parseInt(quantity/10)+1
-}
-
-const findProduct=async (key,category,page=1)=>{
-    let allProduct
-    if(category){
-        allProduct=await Product.findWithDeleted({type:category}).limit(10).skip(page*10-10)
-    }
-    else{
-        allProduct=await Product.findWithDeleted({}).limit(10).skip(page*10-10)
-    }
-    allProduct=MultipleMongooseToObject(allProduct)
+const findProductList=async(page,key,cateId)=>{
+    let allProduct;
     let filterProduct=[]
+    let result={
+        currentPage:page,
+        quantity:0,
+        filterProduct:[]
+    }
+    if(cateId){
+        const categoryItem=await Category.findOne({tittle:cateId})
+        allProduct=await Product.findWithDeleted({categoryId:categoryItem._id})
+    }
+    else{
+        allProduct=await Product.findWithDeleted({})
+    }
     allProduct.forEach(item=>{
-        if (item.name.toLowerCase().indexOf(key.toLowerCase())>=0){
-            filterProduct.push(item)
+        if(item.name.toLowerCase().indexOf(key.toLowerCase())>=0|| 
+        item.des.toLowerCase().indexOf(key.toLowerCase())>=0 ) {
+            filterProduct.push(item) 
         }
     })
-    return filterProduct
+    result.quantity=filterProduct.length
+    for(let i=(page-1)*10;i<filterProduct.length&&i<page*10;i++){
+        result.filterProduct.push(filterProduct[i])
+    }
+    return result
 }
+const createInfoProduct=(data)=>{
+    var categoryId=[]
+    if(Array.isArray(data.category)){
+        data.category.forEach((item)=>{
+            categoryId.push(item)
+        })
+    }
+    else{
+        categoryId.push(data.category)
+    }
 
-const addKeyObject=(object,key,value)=>{
-    object.forEach(item=>{
-        item[key]=value
-    })
+    let info=[]
+    if(Array.isArray(data.quantity)){
+        for(let i=0;i<data.quantity.length;i++){
+            info.push({
+                color:data.color[i],
+                size:data.size[i],
+                quantity:data.quantity[i]
+            })
+        }
+    }
+    else{
+        info.push({
+            color:data.color,
+            size:data.size,
+            quantity:data.quantity
+        })
+    }
+    return {
+        categoryId,
+        info
+    }
 }
 module.exports={
-    quantityPageProducts,
-    findProduct,
-    addKeyObject,
+    findProductList,
+    createInfoProduct
 }

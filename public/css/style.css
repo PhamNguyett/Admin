@@ -3032,7 +3032,7 @@ td.text-right.mail-date {
     background-color: #FFFFFF;
     background-image: none;
     border: 1px solid #566d9b;
-    border-radius: 1px;
+    border-radius: 5px;
     color: inherit;
     display: block;
     padding: 6px 12px;
