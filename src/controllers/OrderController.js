@@ -5,7 +5,7 @@ class OrderController{
         try{
             const order = await Order.find({})
             res.render('order',{
-                order:MultipleMongooseToObject(order)),
+                order:MultipleMongooseToObject(order),
             })
         }
         catch(e){
