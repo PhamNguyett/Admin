@@ -1,0 +1,253 @@
+
+
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <div class="breadcome-heading" style="display: flex;">
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/product" class="nav-link">All product</a>
+                                </li>
+                                {{#each category}}
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/product/caterology/{{tittle}}" class="nav-link">{{upperCase tittle}}</a>
+                                </li>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="/product" style="color: rgb(59, 33, 231);">Product</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">View</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap" style="position: relative;">
+                    <h4 style="color: royalblue;">{{nameProduct}}
+                    </h4>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="breadcome-heading" style="margin-top: 20px;">
+                            <form role="search" class="sr-input-func" >
+                                <input type="text" placeholder="Search..." class="search-int form-control" name="key" id="input-stupid">
+                                <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="add-product" >
+                        <a href="/product/add">Add Product</a>
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Image</th>
+                                <th>Name of product</th>
+                                <th>Status</th>
+                                <th>Quantity</th>
+                                <th>Create DateTime</th>
+                                <th style="color: rgb(250, 39, 39);">Promotion</th>
+                                <th>Price</th>
+                                <th>Setting</th>
+                            </tr>
+                            {{#each allProduct }}
+                            <tr>
+                                <td class="stt">{{increase @index 1}}</td>
+                                <td><a href="/product/detail/{{slug}}"><img src={{imagesUrl.[0]}} alt="" /></a> </td>
+                                <td><a href="/product/detail/{{slug}}">{{name}}</a></td>
+                                <td>
+                                    {{#if deleted}}
+                                    <button class="ds-setting" id="taolao" style="cursor: not-allowed;">Deleted</button>
+                                    {{else}}
+                                    <button class="pd-setting" id="taolao" style="cursor: not-allowed;">Active </button>
+                                    {{/if}}
+                            
+                    
+                                </td>
+                                <th>{{quantityy info}}</th>
+                                <td>{{momentFormatL createdAt}}</td>
+                                <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
+                                <td style="text-decoration: line-through;">${{price}}</td>
+                                <td id="quataolao">
+                                    {{#if deleted}}
+                                    <button class="show-modal" data-id={{_id}} data-index={{@index}}>Restore</button>
+                                    {{else}}
+                                    <a href= "/product/edit/{{slug}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
+                                    <button data-index={{@index}} data-src={{imagesUrl.[0]}} data-id={{_id}} class="show-modal"data-bs-target="#staticBackdrop" data-toggle="tooltip" title="Trash" class="pd-setting-ed">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <div  id="name-big"style="display: none;">{{name}}</div>
+                                    </button>
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            {{else}}
+                            <tr style="margin-top: 20px;">
+                                <td colspan="9" style="text-align: center; font-size: 18px;padding: 20px;">Not find available Product. 
+                                    <a href="/product"> View all Products</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            
+                        </table>
+                    </div>
+                    
+                    <div class="custom-pagination">
+                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
+                        <ul class="pagination">
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bg-black-over" class="ds-none"></div>
+<div class="modal-dialog ds-none" >
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel" style="color: red;">Delete Product</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+    </div>
+    <div class="modal-body" style="display: flex;">
+        <div style="display: none;" id="_id"></div>
+        <img src="" alt="" width="200px">
+        <div></div>
+    </div>
+    <div class="modal-footer" style="position: relative;">
+        <div class="spinner ds-none">
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-danger" style="margin-right: 20px;margin-left: 10px;position: relative;">
+            Delete
+        </button>
+    </div>
+    </div>
+    <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        const URL=window.location.origin
+        console.log(URL)
+        const element=document.querySelectorAll('.show-modal')
+        const modal=document.querySelector('.modal-dialog')
+        const bgBlack=document.querySelector('#bg-black-over')
+        element.forEach(item=>{
+            item.addEventListener('click',()=>{
+                if (item.innerText==='Restore'){
+                    fetch(`${URL}/product/restore/${item.dataset.id}`,{
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        method: "GET",
+                    })
+                    .then(res=>res.json())
+                    .then(res=>{
+                        console.log(res)
+                        const index=parseInt(item.dataset.index)
+                        const ele=document.querySelectorAll('tr')[index+1].querySelector('#taolao')
+                        item.remove()
+                        ele.classList.remove('ds-setting')
+                        ele.classList.add('pd-setting')
+                        ele.innerText="Active"
+                    })
+                    
+                }else{
+                    modal.classList.remove('ds-none')
+                    modal.querySelector('img').src=item.dataset.src
+                    modal.querySelector('img').nextElementSibling.textContent=item.lastElementChild.textContent
+                    modal.querySelector('img').previousElementSibling.textContent=item.dataset.id
+                    modal.querySelector('img').previousElementSibling.setAttribute('index',item.dataset.index)
+                    bgBlack.classList.remove('ds-none')
+                    modal.classList.add('Modal')
+                }
+            })
+        })
+
+        document.querySelector('.btn-close').addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        document.querySelector('.btn-secondary').addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        document.querySelector('.btn-danger').addEventListener('click',()=>{
+            console.log('voday')
+            const _id=document.querySelector('#_id').textContent
+            const _index=parseInt(document.querySelector('#_id').getAttribute('index'))
+            console.log(_index)
+            document.querySelector('.spinner').classList.remove('ds-none')
+            fetch(`${URL}/product/delete/${_id}`,{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "DELETE",
+            })
+            .then(res=>res.json())
+            .then(res=>{
+                document.querySelector('.spinner').classList.add('ds-none')
+                if(res.success){
+                    modal.classList.add('ds-none')
+                    bgBlack.classList.add('ds-none')
+                    
+                    const ele=document.querySelectorAll('tr')[_index+1].querySelector('#taolao')
+                    const eleBtnDeleted=document.querySelectorAll('tr')[_index+1].querySelector('#quataolao')
+                    console.log(ele)
+                    ele.classList.remove('pd-setting')
+                    ele.classList.add('ds-setting')
+                    ele.innerText="Deleted"
+                    eleBtnDeleted.innerHTML=''
+                }    
+            })
+        })
+        let quantity=document.querySelector('#quantityy').innerText
+        let currentPage=document.querySelector('#currentPage-hb').innerText
+        console.log(currentPage)
+        let htmlA=''
+        var url=''
+        if(window.location.search){
+            if(window.location.search.indexOf('key')>=0){
+                url=window.location.search.split('&')[0]+'&'
+            }
+            else{
+                url='?'
+            }
+        }
+        else{
+            url='?'
+        }
+        for(let i=0;i<parseInt(quantity);i++){
+            htmlA+=`<li class="page-item"><a class="page-link" href="${url}page=${i+1}">${i+1}</a></li>`
+        }
+        document.querySelector('.pagination').innerHTML=htmlA
+        let pageNumber=parseInt(window.location.search.split('=')[1])
+        if(!pageNumber){
+            document.querySelectorAll('.page-item a')[0].classList.add('active-page-item')
+        }
+        else{
+            document.querySelectorAll('.page-item a')[pageNumber-1].classList.add('active-page-item')
+
+        }
+        document.querySelector('input[name="key"]').value=window.location.search.indexOf('key')>=0 ? window.location.search.split('&')[0].split('=')[1] : ''
+        const sttEl=document.querySelectorAll('.stt')
+        console.log(sttEl)
+        for(let i=0;i<sttEl.length;i++){
+            sttEl[i].innerHTML=(parseInt(currentPage)-1)*10+i+1
+        }
+    })
+</script>
