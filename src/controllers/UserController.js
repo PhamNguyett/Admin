@@ -3,10 +3,9 @@ const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 class UserController{
     async index(req,res){
         try{
-            const user = await User.find({})
-            console.log(user)
+            const allUser = await User.find({})
             res.render('user_management',{
-                user:MultipleMongooseToObject(user),
+                allUser:MultipleMongooseToObject(allUser),
             })
         }
         catch(e){

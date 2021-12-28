@@ -31,34 +31,17 @@
 <div class="contacts-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-                    {{#each user}}
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    {{#each allUser}}
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="flex-wrap: wrap;">
                         <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
                             <div class="panel-body custom-panel-jw">
-                                <div class="social-media-in">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                     <p><i class="bi bi-envelope-fill"></i> Email: <br><a href="mailto:mail@mail.com">{{this.gmail}}</a></p>
-                                </div>
-                                <img alt="logo" class="img-circle m-b" style="width: 50%; text-align:30px;" src="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}">
-                                <h3><a href="">John Alva</a></h3>
-                                <p class="all-pro-ad">London, LA</p>
+                                <img alt="logo" class="img-circle m-b" style="width: 70%; text-align:30px;" src="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}">
+                                <h3>{{this.name}}</h3>
+                                <br>
                                 <p>
-                                    Lorem ipsum dolor sit amet of, consectetur adipiscing elitable. Vestibulum tincidunt est vitae ultrices accumsan.
+                                    <i class="bi bi-envelope-fill"></i> Email: <a href="mailto:mail@mail.com">{{this.gmail}}</a><br>
+                                    <i class="bi bi-house-fill"></i>Address: {{this.address}}
                                 </p>
-                            </div>
-                            <div class="panel-footer contact-footer">
-                                <div class="professor-stds-int">
-                                    <div class="professor-stds">
-                                        <div class="contact-stat"><span>Likes: </span> <strong>956</strong></div>
-                                    </div>
-                                    <div class="professor-stds">
-                                        <div class="contact-stat"><span>Comments: </span> <strong>350</strong></div>
-                                    </div>
-                                    <div class="professor-stds">
-                                        <div class="contact-stat"><span>Views: </span> <strong>450</strong></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
