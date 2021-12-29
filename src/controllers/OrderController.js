@@ -3,9 +3,9 @@ const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 class OrderController{
     async index(req,res){
         try{
-            const order = await Order.find({})
+            const allOrder = await Order.find({})
             res.render('order',{
-                order:MultipleMongooseToObject(order),
+                allOrder:MultipleMongooseToObject(allOrder),
             })
         }
         catch(e){
