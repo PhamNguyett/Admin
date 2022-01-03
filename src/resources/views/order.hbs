@@ -1,5 +1,4 @@
 
-
 <div class="breadcome-area">
     <div class="container-fluid">
         <div class="row">
@@ -8,19 +7,18 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                             <div class="breadcome-heading" style="display: flex;">
-                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/order" class="nav-link">All orders</a>
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/order" class="nav-link">All order</a>
                                 </li>
-                                {{#each allOrder}}
-                                {{#if status}}
-                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/order/{{_id}}" class="nav-link">{{_id}}</a>
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/order/waiting" class="nav-link">Waiting for progressing</a>
                                 </li>
-                                {{/if}}
-                                {{/each}}
+                                <li class="nav-item" style="list-style-type: none; padding: 12px;font-size: 16px;"><a href="/order/processed" class="nav-link">Processed</a>
+                                </li>
+                                
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <ul class="breadcome-menu">
-                                <li><a href="/order" style="color: rgb(59, 33, 231);">Order</a> <span class="bread-slash">/</span>
+                                <li><a href="/product" style="color: rgb(59, 33, 231);">Order</a> <span class="bread-slash">/</span>
                                 </li>
                                 <li><span class="bread-blod">View</span>
                                 </li>
@@ -32,4 +30,118 @@
         </div>
     </div>
 </div>
+<div class="product-status mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap" style="position: relative;">
+                    <h4 style="color: royalblue;">{{nameProduct}}
+                    </h4>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="breadcome-heading" style="margin-top: 20px;">
+                            <form role="search" class="sr-input-func" >
+                                <input type="text" placeholder="Search..." class="search-int form-control" name="key" id="input-stupid">
+                                <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="add-product" >
+                        <a href="/product/add">Add Product</a>
+                    </div>
+                    <div class="asset-inner">
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Code order</th>
+                                <th>Status</th>
+                                <th>Quantily</th>
+                                <th>Total</th>
+                                <th>Sent date</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Process</th>
+                            </tr>
+                            {{#each allOrder}}
+                            <tr>
+                                <td>{{increase @index 1}}</td>
+                                <td>{{_id}}<i id="print-detail" class="bi bi-caret-down" style="cursor: pointer;"></i></td>
+                                {{#if status}}
+                                <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
+                                {{else}}
+                                <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waiting for progressing</button></td>
+                                {{/if}}
+                                <td>{{quantily}}</td>
+                                <td>${{sum}}</td>
+                                <td>{{momentFormatL createdAt}}</td>
+                                <td>{{tel}}</td>
+                                <td>{{location}}</td>
+                                {{#if status}}
+                                <td></td>
+                                {{else}}
+                                <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
+                                {{/if}}
+                                <!-- <td colspan="6">be </td> -->
+                            </tr>
 
+                            {{/each}}
+                           </table>
+                    </div>
+                    
+                    <div class="custom-pagination">
+                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
+                        <ul class="pagination">
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bg-black-over" class="ds-none"></div>
+<div class="modal-dialog ds-none" >
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel" style="color: red;">Delete Product</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+    </div>
+    <div class="modal-body" style="display: flex;">
+        <div style="display: none;" id="_id"></div>
+        <img src="" alt="" width="200px">
+        <div></div>
+    </div>
+    <div class="modal-footer" style="position: relative;">
+        <div class="spinner ds-none">
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-danger" style="margin-right: 20px;margin-left: 10px;position: relative;">
+            Delete
+        </button>
+    </div>
+    </div>
+    <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script> 
+    let btnAccept=document.querySelectorAll('.btnAccept')
+    btnAccept.forEach((item,index)=>{
+        item.addEventListener('click',(e)=>{
+            console.log(index)
+            fetch(`http://localhost:5000/order/accept/${item.dataset.id}`)
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res)
+                if(res.success)
+                {
+                    e.target.remove()
+                    document.querySelectorAll('.uncomplete')[index].style.backgroundColor ="#006DF0";
+                    document.querySelectorAll('.uncomplete')[index].innerText="Processed"
+                }
+            })
+        })
+    })
+</script>
