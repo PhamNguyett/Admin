@@ -8,7 +8,7 @@ const OrderRouter=require('./order')
 function route(app){
     app.use('/product',ProductRouter)
     app.use('/',DashboardRouter)
-    app.use('/',OrderRouter)
+    app.use('/order',OrderRouter)
     app.use('/user',UserRouter)
     app.use('/analytics',AnalyticsRouter)
     app.use('/admin',AdminRouter)
