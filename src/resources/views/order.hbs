@@ -35,19 +35,17 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap" style="position: relative;">
-                    <h4 style="color: royalblue;">{{nameProduct}}
+                    <h4 style="color: royalblue;">
                     </h4>
                     
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="breadcome-heading" style="margin-top: 20px;">
                             <form role="search" class="sr-input-func" >
-                                <input type="text" placeholder="Search..." class="search-int form-control" name="key" id="input-stupid">
-                                <button style="background-color: transparent;border: none; outline: none;"><i class="fa fa-search"></i></button>
+                                
                             </form>
                         </div>
                     </div>
                     <div class="add-product" >
-                        <a href="/product/add">Add Product</a>
                     </div>
                     <div class="asset-inner">
                         <table>
@@ -55,7 +53,7 @@
                                 <th>No</th>
                                 <th>Code order</th>
                                 <th>Status</th>
-                                <th>Quantily</th>
+                                <th>Discount</th>
                                 <th>Total</th>
                                 <th>Sent date</th>
                                 <th>Phone</th>
@@ -71,7 +69,7 @@
                                 {{else}}
                                 <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waiting for progressing</button></td>
                                 {{/if}}
-                                <td>{{quantily}}</td>
+                                <td>{{discount}}</td>
                                 <td>${{sum}}</td>
                                 <td>{{momentFormatL createdAt}}</td>
                                 <td>{{tel}}</td>
@@ -81,19 +79,30 @@
                                 {{else}}
                                 <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
                                 {{/if}}
-                                <!-- <td colspan="6">be </td> -->
                             </tr>
-
+                           
+                            <td colspan="8" class ="detail-order" style=" display:none;">
+                                <br/><p>DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
+                                {{#each this.products}}
+                                    <p style="color:red;font-weight:600;">
+                                        Order {{increase @index 1}}:</p>
+                                <p>Size      : {{size}}</p>
+                                <p>Color     : {{color}}</p>
+                                <p>Quantily  : {{quantity}}</p>
+                                <p>Price: ${{unitPrice}}</p>
+                                <p>Total: ${{total}}</p>
+                                {{/each}}
+                                <p>Order date: {{momentFormatL createdAt}}</p>
+                                <p>Name      : {{user.name}}</p>
+                                <p>Address   : {{location}}</p>
+                                <p>Phone     : {{tel}}</p>
+                            </td>
+                            
                             {{/each}}
+                            
                            </table>
                     </div>
                     
-                    <div class="custom-pagination">
-                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
-                        <ul class="pagination">
-                            
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +137,23 @@
 </div>
 <script> 
     let btnAccept=document.querySelectorAll('.btnAccept')
+    let printDetail=document.querySelectorAll('#print-detail')
+    let detailOrder=document.querySelectorAll('.detail-order')
+    let closeDetail=document.querySelectorAll('.close-detail')
+    console.log(detailOrder)
+    printDetail.forEach((item,index)=>{
+        item.addEventListener('click',(e)=>{
+            detailOrder[index].style.display="block"
+        })
+    })
+
+    closeDetail.forEach((item,index)=>{
+        item.addEventListener('click',(e)=>{
+            detailOrder[index].style.display="none"
+        })
+    })
+
+    
     btnAccept.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             console.log(index)
