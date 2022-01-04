@@ -82,7 +82,7 @@
                                 <p>{{products.name}}</p>
                             </tr>
                            
-                            <td colspan="8" class ="detail-order" style="padding-left:18%; display:none;">
+                            <td class ="detail-order" style="padding-left:18%; display:none;">
                                 <br/><p>DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
                                 {{#each this.products}}
                                     <p style="color:red;font-weight:600;">
@@ -103,7 +103,12 @@
                             
                            </table>
                     </div>
-                    
+                    <div class="custom-pagination">
+                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
+                        <ul class="pagination" style="margin-top:15px">
+                            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,17 +136,13 @@
     </div>
     </div>
     <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script> 
+    
     let btnAccept=document.querySelectorAll('.btnAccept')
     let printDetail=document.querySelectorAll('#print-detail')
     let detailOrder=document.querySelectorAll('.detail-order')
     let closeDetail=document.querySelectorAll('.close-detail')
-    console.log(detailOrder)
     printDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             detailOrder[index].style.display="block"
@@ -172,4 +173,16 @@
             })
         })
     })
+
+    const paginaEl=document.querySelector('.pagination')
+    const currentPage=parseInt(document.querySelector('#currentPage-hb').innerText)
+    const quantityy=parseInt(document.querySelector('#quantityy').innerText)
+    console.log(quantityy)
+    let htmlPagi=`<li class="page-item"><a class="page-link" href="?page=${currentPage===1?1:currentPage-1}"> < </a></li>`
+    
+    for(let i=1;i<=quantityy;i++){
+        htmlPagi+=`<li class="page-item"><a class="page-link ${i==currentPage?'active-page-item':''}" href="?page=${i}">${i}</a></li>`
+    }
+    htmlPagi+=`<li class="page-item"><a class="page-link" href="?page=${currentPage===quantityy?quantityy:currentPage+1}"> > </a></li>`
+    paginaEl.innerHTML=htmlPagi
 </script>
