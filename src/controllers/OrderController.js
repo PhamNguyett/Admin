@@ -4,9 +4,22 @@ const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 class OrderController{
     async index(req,res){
         try{
+            let {page}=req.query
+            if(!page){
+                page=1
+            }
+            else{
+                page=parseInt(page)
+            }
             const allOrder = await Order.find({}).populate('user')
+            let filterOrder=[]
+            for(let i=(page-1)*10;i<allOrder.length&&i<page*10;i++){
+                filterOrder.push(allOrder[i])
+            }
             res.render('order',{
-                allOrder:MultipleMongooseToObject(allOrder),
+                allOrder:MultipleMongooseToObject(filterOrder),
+                quantityPageProduct:(allOrder.length-1)/10 +1,
+                currentPage:page
             })
         }
         catch(e){
