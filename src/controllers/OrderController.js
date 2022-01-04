@@ -5,7 +5,6 @@ class OrderController{
     async index(req,res){
         try{
             const allOrder = await Order.find({}).populate('user')
-            console.log(allOrder)
             res.render('order',{
                 allOrder:MultipleMongooseToObject(allOrder),
             })
