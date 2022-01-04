@@ -63,7 +63,7 @@
                             {{#each allOrder}}
                             <tr>
                                 <td>{{increase @index 1}}</td>
-                                <td>{{_id}}<i id="print-detail" class="bi bi-caret-down" style="cursor: pointer;"></i></td>
+                                <td style="color:blue;">{{_id}}<i id="print-detail" class="bi bi-caret-down" style="cursor: pointer;"></i></td>
                                 {{#if status}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
                                 {{else}}
@@ -79,9 +79,10 @@
                                 {{else}}
                                 <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
                                 {{/if}}
+                                <p>{{products.name}}</p>
                             </tr>
                            
-                            <td colspan="8" class ="detail-order" style=" display:none;">
+                            <td colspan="8" class ="detail-order" style="padding-left:18%; display:none;">
                                 <br/><p>DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
                                 {{#each this.products}}
                                     <p style="color:red;font-weight:600;">
@@ -144,6 +145,7 @@
     printDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             detailOrder[index].style.display="block"
+
         })
     })
 

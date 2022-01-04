@@ -10,7 +10,7 @@ const Order = new Schema({
     shippingFee:{type:Number,default:2},
     status:{type:Boolean,default:false},
     code:{type:String},
-    sumQuantily:{type:Number,default:1},
+    quantity:{type:Number,default:0},
     sum:{type:Number,required:true},
     tel:{type:String,required:true},
     location:{type:String,required:true},
