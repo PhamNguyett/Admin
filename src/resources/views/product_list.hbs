@@ -217,8 +217,8 @@
         })
         let quantity=document.querySelector('#quantityy').innerText
         let currentPage=document.querySelector('#currentPage-hb').innerText
-        console.log(currentPage)
-        let htmlA=''
+        
+        
         var url=''
         if(window.location.search){
             if(window.location.search.indexOf('key')>=0){
@@ -231,16 +231,20 @@
         else{
             url='?'
         }
+
+        let htmlA=`<li class="page-item"><a class="page-link" href="${url}page=${parseInt(currentPage)===1?parseInt(quantity):parseInt(currentPage)-1}"> <i class="bi bi-caret-left-fill"></i> </a></li>`
+        
         for(let i=0;i<parseInt(quantity);i++){
             htmlA+=`<li class="page-item"><a class="page-link" href="${url}page=${i+1}">${i+1}</a></li>`
         }
+        htmlA+=`<li class="page-item"><a class="page-link" href="${url}page=${parseInt(currentPage)===parseInt(quantity)?1:parseInt(currentPage)+1}"> <i class="bi bi-caret-right-fill"></i> </a></li>`
         document.querySelector('.pagination').innerHTML=htmlA
         let pageNumber=parseInt(window.location.search.split('=')[1])
         if(!pageNumber){
-            document.querySelectorAll('.page-item a')[0].classList.add('active-page-item')
+            document.querySelectorAll('.page-item a')[1].classList.add('active-page-item')
         }
         else{
-            document.querySelectorAll('.page-item a')[pageNumber-1].classList.add('active-page-item')
+            document.querySelectorAll('.page-item a')[pageNumber].classList.add('active-page-item')
 
         }
         document.querySelector('input[name="key"]').value=window.location.search.indexOf('key')>=0 ? window.location.search.split('&')[0].split('=')[1] : ''
