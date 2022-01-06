@@ -12,7 +12,7 @@ class AdminController{
         try{
             const admin= await Admin.findById(req.params.id)
             if(admin){
-                res.render('detail-admin',{admin:MongooseToObject(admin)})
+                res.render('detailAdmin',{admin:MongooseToObject(admin)})
                 return
             }           
             res.render('404')
@@ -26,7 +26,7 @@ class AdminController{
 
     // [GET] admin/add
     async add(req,res){
-        res.render('add_admin')
+        res.render('addAdmin')
 
     }
 
@@ -34,7 +34,7 @@ class AdminController{
     async save(req, res){
         const findAdmin=await Admin.findOne({username:req.body.username})
         if(findAdmin){
-            res.render('add_admin',{message:'username is existed, please choose another username',username:req.body.username,fullname:req.body.name})
+            res.render('addAdmin',{message:'username is existed, please choose another username',username:req.body.username,fullname:req.body.name})
             return
         }
         let avatarUrl=''
