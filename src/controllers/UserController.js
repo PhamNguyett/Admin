@@ -4,7 +4,7 @@ class UserController{
     async index(req,res){
         try{
             const allUser = await User.find({})
-            res.render('user_management',{
+            res.render('userManagement',{
                 allUser:MultipleMongooseToObject(allUser),
             })
         }
