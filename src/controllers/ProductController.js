@@ -7,7 +7,7 @@ const {findProductList,createInfoProduct}=require('./services/product')
 class ProductController{
     async addProduct(req,res){ 
         const category=await Category.find({})  
-        res.render('add_product',{
+        res.render('addProduct',{
             category:MultipleMongooseToObject(category)
         })
     }
@@ -25,7 +25,7 @@ class ProductController{
             key=' '
         }
         const result=await findProductList(page,key,slug)
-        return res.render('product_list',{
+        return res.render('productList',{
             category:MultipleMongooseToObject(category),
             allProduct:MultipleMongooseToObject(result.filterProduct),
             quantityPageProduct:(result.quantity-1)/10+1,
@@ -51,7 +51,7 @@ class ProductController{
         })
         try{
             await newProduct.save()
-            res.render('detail-product',{
+            res.render('detailProduct',{
                 product:MongooseToObject(newProduct)
             })
         }
@@ -64,7 +64,7 @@ class ProductController{
             const product=await Product.findOneWithDeleted({slug:req.params.slug})
             const category=await Category.find({})
             console.log(product)
-            res.render('edit_product',{
+            res.render('editProduct',{
                 product:MongooseToObject(product),
                 category:MultipleMongooseToObject(category)})
         }
@@ -88,7 +88,7 @@ class ProductController{
             product.info=result.info,
 
             product.save()
-            res.render('detail-product',{
+            res.render('detailProduct',{
                 product:MongooseToObject(product)
             })
         }catch(e){
@@ -109,7 +109,7 @@ class ProductController{
             key=' '
         }
         const result=await findProductList(page,key,'')
-        return res.render('product_list',{
+        return res.render('productList',{
             category:MultipleMongooseToObject(category),
             allProduct:MultipleMongooseToObject(result.filterProduct),
             quantityPageProduct:(result.quantity-1)/10+1,
@@ -139,7 +139,7 @@ class ProductController{
             const product= await Product.findOneWithDeleted({slug:req.params.slug})
             console.log(product)
             if(product){
-                return res.render('detail-product',{
+                return res.render('detailProduct',{
                     product:MongooseToObject(product)
                 })
             }           
