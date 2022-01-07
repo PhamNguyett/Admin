@@ -16,7 +16,6 @@ const index=async(req,res)=>{
         for(let i=(page-1)*10;i<allOrder.length&&i<page*10;i++){
             filterOrder.push(allOrder[i])
         }
-        console.log(filterOrder)
         res.render('order',{
             allOrder:MultipleMongooseToObject(filterOrder),
             quantityPageProduct:(allOrder.length-1)/10 +1,
