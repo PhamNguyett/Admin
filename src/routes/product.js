@@ -6,7 +6,7 @@ const route=express.Router()
 
 const ProductController=require('../controllers/ProductController')
 
-route.get('/caterology/:slug',ProductController.caterology)
+route.get('/category/:slug',ProductController.category)
 route.get('/detail/:slug',ProductController.detail)
 route.delete('/delete/:id',ProductController.deleteProduct)
 route.get('/restore/:id',ProductController.restore)

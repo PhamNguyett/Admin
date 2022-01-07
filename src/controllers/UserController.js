@@ -1,17 +1,19 @@
-const User=require('../database/models/User')
+const {User}=require('../database')
 const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
-class UserController{
-    async index(req,res){
-        try{
-            const allUser = await User.find({})
-            res.render('userManagement',{
-                allUser:MultipleMongooseToObject(allUser),
-            })
-        }
-        catch(e){
-            console.log(e)
-            res.render('404')
-        }
+
+const index=async (req,res)=>{
+    try{
+        const allUser = await User.find({})
+        res.render('userManagement',{
+            allUser:MultipleMongooseToObject(allUser),
+        })
+    }
+    catch(e){
+        console.log(e)
+        res.render('404')
     }
 }
-module.exports=new UserController
+
+module.exports={
+    index
+}

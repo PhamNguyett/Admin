@@ -10,4 +10,23 @@ connect=async()=>{
     }
 
 }
-module.exports={connect}
+const Admin=require('./models/Admin')
+const Category=require('./models/Category')
+const CodeDiscount=require('./models/CodeDiscount')
+const Comment=require('./models/Comment')
+const Order=require('./models/Order')
+const Product=require('./models/Product')
+const Ratting=require('./models/Ratting')
+const User=require('./models/User')
+module.exports={
+    connect,
+    Admin,
+    Category,
+    CodeDiscount,
+    Comment,
+    Order,
+    Product,
+    Ratting,
+    User
+}
+

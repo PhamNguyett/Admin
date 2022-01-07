@@ -1,7 +1,7 @@
 const express=require('express')
 const route=express.Router()
 const upload=require('../middlewares/multer')
-const AdminController=require('../controllers/AdminController')
+const {AdminController}=require('../controllers')
 
 route.get('/add',AdminController.add)
 route.post('/add',upload.single('image'),AdminController.save)
