@@ -4,9 +4,38 @@
         <div class="row">
             <div class="product-payment-inner-st">
                 <div id="myTabContent" class="tab-content custom-product-edit">
+                <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12" style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);   margin-top:16px;" >
+                    <div class="product-status-wrap" style="position: relative;">
+                        <table>
+                            <tr>
+                                <th>No</th>
+                                <th>Image</th>
+                                <th>Name of category</th>
+                                <th>Sum of product</th>
+
+                            </tr>
+                            {{#each allCategory }}
+                            <tr>
+                                <td class="stt">{{increase @index 1}}</td>
+                               <td> <img src="{{imageUrl}}" alt=""></td>
+                               <td style="text-transform:capitalize; color: royalblue;">{{tittle}}</td>
+                               <td>{{name}}</td>
+
+                            {{/each}}
+                            
+                        </table>
+                    </div>
+                    
+                    <div class="custom-pagination">
+                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
+                        <ul class="pagination">
+                            
+                        </ul>
+                    </div>
+                </div>
                 <div class="product-tab-list tab-pane fade active in" id="description">
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="review-content-section"  style="background-color:   rgb(243, 240, 240); padding:10px 25px;">
+                        <div class="review-content-section"  style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%); padding:10px 25px;">
                             <div id="dropzone1" class="pro-ad addcoursepro">    
                                 <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" >
                                     <div class="row" >
@@ -37,64 +66,6 @@
                                                  <button type="submit" id="type-pass" class="btn-submit">SUBMIT</button>
                                             </form>
                                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12" >
-                    <div class="product-status-wrap" style="position: relative;">
-                        <table>
-                            <tr>
-                                <th>No</th>
-                                <th>Image</th>
-                                <th>Name of product</th>
-                                <th>Status</th>
-                                <th>Quantity</th>
-                                <th>Create DateTime</th>
-                                <th style="color: rgb(250, 39, 39);">Promotion</th>
-                                <th>Price</th>
-                                <th>Setting</th>
-                            </tr>
-                            {{#each allProduct }}
-                            <tr>
-                                <td class="stt">{{increase @index 1}}</td>
-                                <td><a href="/product/detail/{{slug}}"><img src={{imagesUrl.[0]}} alt="" /></a> </td>
-                                <td><a href="/product/detail/{{slug}}">{{name}}</a></td>
-                                <td>
-                                    {{#if deleted}}
-                                    <button class="ds-setting" id="taolao" style="cursor: not-allowed;">Deleted</button>
-                                    {{else}}
-                                    <button class="pd-setting" id="taolao" style="cursor: not-allowed;">Active </button>
-                                    {{/if}}
-                            
-                    
-                                </td>
-                                <th>{{quantityy info}}</th>
-                                <td>{{momentFormatL createdAt}}</td>
-                                <td style="color: rgb(250, 39, 39);">${{pricePromotion}}</td>
-                                <td style="text-decoration: line-through;">${{price}}</td>
-                                <td id="quataolao">
-                                    {{#if deleted}}
-                                    <button class="show-modal" data-id={{_id}} data-index={{@index}}>Restore</button>
-                                    {{else}}
-                                    <a href= "/product/edit/{{slug}}"><button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" ></i></button></a>
-                                    <button data-index={{@index}} data-src={{imagesUrl.[0]}} data-id={{_id}} class="show-modal"data-bs-target="#staticBackdrop" data-toggle="tooltip" title="Trash" class="pd-setting-ed">
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        <div  id="name-big"style="display: none;">{{name}}</div>
-                                    </button>
-                                    {{/if}}
-                                </td>
-                            </tr>
-                            {{else}}
-
-                            {{/each}}
-                            
-                        </table>
-                    </div>
-                    
-                    <div class="custom-pagination">
-                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
-                        <ul class="pagination">
-                            
-                        </ul>
                     </div>
                 </div>
             </div>
