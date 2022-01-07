@@ -1,15 +1,16 @@
 const publicFolder=require('../../public/url')
-const Admin=require('../database/models/Admin')
 const argon2=require('argon2')
+const{Admin}=require('../database')
 
-class LoginController{
-    
-    async login(req,res){
-        res.sendFile(publicFolder+'/login.html')
-    }
-    async reset(req,res){
-        res.sendFile(publicFolder+'/resetpassword.html')
-    }
-    
+const login= async(req,res)=>{
+    res.sendFile(publicFolder+'/login.html')
 }
-module.exports=new LoginController
+
+const reset = async(req,res)=>{
+    res.sendFile(publicFolder+'/resetpassword.html')
+}
+
+module.exports={
+    login,
+    reset
+}
