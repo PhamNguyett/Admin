@@ -1,4 +1,4 @@
-const Admin = require('../database/models/Admin')
+const Admin = require('../database')
 const {MultipleMongooseToObject,MongooseToObject} = require("../ultil/mongoose")
 const argon2=require('argon2')
 
