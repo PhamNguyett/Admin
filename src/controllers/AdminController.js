@@ -26,7 +26,6 @@ const detail=async(req,res)=>{
  // [GET] admin/add
  const add =async (req,res)=>{
     res.render('addAdmin')
-
 }
 
 //[POST] admin/add
