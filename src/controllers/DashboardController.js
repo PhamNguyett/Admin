@@ -1,5 +1,4 @@
-const Category=require('../database/models/Category')
-const Product=require('../database/models/Product')
+const {Category, Product}=require('../database')
 
 class DashboardController{
     async index(req,res){
