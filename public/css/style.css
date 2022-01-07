@@ -4774,3 +4774,10 @@ div#sparklinehome canvas {
 	color:#fff;
 	text-decoration:none;
 }
+
+.btn-submit{
+    padding: 10px 20px;
+    border: none;
+    background-color:#EF7D01;
+    border-radius:3px;color:#fff;
+}
