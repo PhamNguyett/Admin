@@ -10,12 +10,12 @@ const index=async(req,res)=>{
         else{
             page=parseInt(page)
         }
-    const allCategory = await Category.find({})
+    const allCategory = await Category.find({}).populate('_id')
+    console.log(allCategory)
     let filterCategory=[]
     for(let i=(page-1)*10; i<allCategory.length&&page*10;i++){
         filterCategory.push(allCategory[i])
     }
-    console.log(filterCategory)
     res.render('category',{
         allCategory:MultipleMongooseToObject(filterCategory),
         quantityPageCategory:(allCategory.length-1)/10+1,

@@ -4,7 +4,7 @@ const upload=require('../middlewares/multer')
 const express=require('express')
 const route=express.Router()
 
-const ProductController=require('../controllers/ProductController')
+const {ProductController}=require('../controllers')
 
 route.get('/category/:slug',ProductController.category)
 route.get('/detail/:slug',ProductController.detail)

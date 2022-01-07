@@ -64,7 +64,6 @@ const editProduct=async(req,res)=>{
     try{
         const product=await Product.findOneWithDeleted({slug:req.params.slug})
         const category=await Category.find({})
-        console.log(product)
         res.render('editProduct',{
             product:MongooseToObject(product),
             category:MultipleMongooseToObject(category)})
