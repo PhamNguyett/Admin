@@ -1,7 +1,7 @@
 const express=require('express')
 const route=express.Router()
 
-const productController=require('../controllers/UserController')
+const {UserController}=require('../controllers')
 
-route.get('/',productController.index)
+route.get('/',UserController.index)
 module.exports=route

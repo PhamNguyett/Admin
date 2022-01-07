@@ -1,4 +1,3 @@
-const { accessSync } = require('fs')
 const {Order}=require('../database')
 const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 
@@ -13,9 +12,11 @@ const index=async(req,res)=>{
         }
         const allOrder = await Order.find({}).populate('user')
         let filterOrder=[]
+
         for(let i=(page-1)*10;i<allOrder.length&&i<page*10;i++){
             filterOrder.push(allOrder[i])
         }
+        console.log(filterOrder)
         res.render('order',{
             allOrder:MultipleMongooseToObject(filterOrder),
             quantityPageProduct:(allOrder.length-1)/10 +1,
