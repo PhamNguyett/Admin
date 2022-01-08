@@ -1,24 +1,32 @@
-const {Category}= require('../database')
+const {Category,Product}= require('../database')
 const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 
 const index=async(req,res)=>{
     try{
-        let {page}=req.query
-        if(!page){
-            page=1
+    const allCategory = await Category.find({})
+    const allProduct = await Product.find({})
+    let num =[]
+    for(let i=0; i<allCategory.length ; i++){
+        num[i]=0;
+    }
+
+    for(let i=0; i<allCategory.length; i++){
+        for (let j=0; j<allProduct.length ; j++){
+            for(let k=0; k<(allProduct[j].categoryId).length; k++){
+                if(`${allProduct[j].categoryId[k]}`==`${allCategory[i]._id}`)
+                {   
+                    num[i]++
+                    console.log(allProduct[j].name)
+
+                }
+            }
         }
-        else{
-            page=parseInt(page)
-        }
-    const allCategory = await Category.find({}).populate('_id')
-    let filterCategory=[]
-    for(let i=(page-1)*10; i<allCategory.length&&page*10;i++){
-        filterCategory.push(allCategory[i])
+        console.log(allCategory[i].tittle)
+        console.log(num[i])
     }
     res.render('category',{
-        allCategory:MultipleMongooseToObject(filterCategory),
-        quantityPageCategory:(allCategory.length-1)/10+1,
-        currentPage:page
+        allCategory:MultipleMongooseToObject(allCategory),
+        numOfCategory:JSON.stringify(num)
     })
     }
     catch(e){
