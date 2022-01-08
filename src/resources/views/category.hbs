@@ -12,7 +12,7 @@
                                         <th>No</th>
                                         <th>Image</th>
                                         <th>Name of category</th>
-
+                                        <th>Sum of category</th>
                                     </tr>
                                 </thead>
 
@@ -22,6 +22,7 @@
                                         <td class="stt">{{increase @index 1}}</td>
                                         <td id="image"> <img src="{{imageUrl}}" alt=""></td>
                                         <td id="nameOfCategory"style="text-transform:capitalize; color: royalblue;">{{tittle}}</td>
+                                        <td id="numOfCategory"></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>                                   
@@ -66,6 +67,7 @@
             </div>
         </div>
     </div>
+    <div style="display: none;" id="currentNum">{{numOfCategory}}</div>
 </div>
 <script>
     let nameCategory=document.querySelector('input[name="name"]')
@@ -75,11 +77,16 @@
     let tbody=document.querySelector('tbody')
     let num=document.querySelectorAll('.stt')
     let loading=document.querySelector('.spinner-border')
+    let numCategory= document.querySelectorAll('#numOfCategory')
     let index=num.length
     let urlImage;
     let result=document.querySelector('#result')
+    const numOfCategory=JSON.parse(document.querySelector('#currentNum').innerText)
+    numCategory.forEach((item,index)=>{
+        console.log(item)
+            item.innerHTML=numOfCategory[index]           
+    })
 
-    
     imageUrl.addEventListener('change',(e)=>{
         if(urlImage){
             URL.revokeObjectURL(urlImage)   
@@ -93,6 +100,7 @@
         imageUrl.value='';
         result.innerHTML='';
         imageEl.src='';
+        loading.style.display="none";
     }
     btnSubmit.addEventListener('click',()=>{
         console.log('vo day')
@@ -117,9 +125,10 @@
                                 <td class="stt">${index}</td>
                                 <td id="image"> <img src="${res.newCategory.imageUrl}" alt=""></td>
                                 <td id="nameOfCategory"style="text-transform:capitalize; color: royalblue;">${res.newCategory.tittle}</td>
+                                <td>0</td>
                             </tr>`
                 tbody.innerHTML =tbody.innerHTML + html
-                 setTimeout(()=>{resetForm()},3000)
+                 setTimeout(()=>{resetForm()},1000)
             }
             else{
                 result.innerHTML='Category already exists!'
