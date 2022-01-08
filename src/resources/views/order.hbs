@@ -160,7 +160,7 @@
     btnAccept.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             console.log(index)
-            fetch(`http://localhost:5000/order/accept/${item.dataset.id}`)
+            fetch(`${window.location.origin}/order/accept/${item.dataset.id}`)
             .then(res=>res.json())
             .then(res=>{
                 console.log(res)
