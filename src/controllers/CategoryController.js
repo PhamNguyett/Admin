@@ -11,7 +11,6 @@ const index=async(req,res)=>{
             page=parseInt(page)
         }
     const allCategory = await Category.find({}).populate('_id')
-    console.log(allCategory)
     let filterCategory=[]
     for(let i=(page-1)*10; i<allCategory.length&&page*10;i++){
         filterCategory.push(allCategory[i])
@@ -28,6 +27,29 @@ const index=async(req,res)=>{
     }
 }
 
+const add=async(req,res)=>{
+
+    console.log(req.body.tittle)
+    console.log(req.file)
+    const category=await Category.findOne({tittle:req.body.tittle})
+    console.log(category)
+    if(category){
+        res.status(400).json({success:false})
+    }
+    else{
+        const newCategory=new Category({
+            tittle: req.body.tittle,
+            imageUrl: '/uploads/'+req.file.filename
+        })
+        await newCategory.save()   
+        res.status(200).json({success:true,newCategory})
+    }
+    
+}
+
+
+
 module.exports={
-    index
+    index,
+    add
 }

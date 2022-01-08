@@ -5,6 +5,7 @@ const moment =require('moment')
 const path=require('path')
 const app = express()
 const passport=require('passport')
+var morgan = require('morgan')
 
 require('dotenv').config()
 
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname,'/public'))) // public
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(morgan('dev'))
  // ovewrite method
 
 app.engine('hbs', exphbs({extname:'hbs',
