@@ -4,78 +4,130 @@
         <div class="row">
             <div class="product-payment-inner-st">
                 <div id="myTabContent" class="tab-content custom-product-edit">
-                <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12" style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);   margin-top:16px;" >
-                    <div class="product-status-wrap" style="position: relative;">
-                        <table>
-                            <tr>
-                                <th>No</th>
-                                <th>Image</th>
-                                <th>Name of category</th>
-                                <th>Sum of product</th>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);   margin-top:16px; margin-right:100px;" >
+                        <div class="product-status-wrap" style="position: relative;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Image</th>
+                                        <th>Name of category</th>
 
-                            </tr>
-                            {{#each allCategory }}
-                            <tr>
-                                <td class="stt">{{increase @index 1}}</td>
-                               <td> <img src="{{imageUrl}}" alt=""></td>
-                               <td style="text-transform:capitalize; color: royalblue;">{{tittle}}</td>
-                               <td>{{name}}</td>
+                                    </tr>
+                                </thead>
 
-                            {{/each}}
-                            
-                        </table>
+                                <tbody>
+                                    {{#each allCategory }}
+                                    <tr>
+                                        <td class="stt">{{increase @index 1}}</td>
+                                        <td id="image"> <img src="{{imageUrl}}" alt=""></td>
+                                        <td id="nameOfCategory"style="text-transform:capitalize; color: royalblue;">{{tittle}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>                                   
+                            </table>
+                        </div>
                     </div>
-                    
-                    <div class="custom-pagination">
-                        <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
-                        <ul class="pagination">
-                            
-                        </ul>
-                    </div>
-                </div>
-                <div class="product-tab-list tab-pane fade active in" id="description">
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="review-content-section"  style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%); padding:10px 25px;">
-                            <div id="dropzone1" class="pro-ad addcoursepro">    
-                                <form class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" method="post" enctype="multipart/form-data" >
-                                    <div class="row" >
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <h4>ADD CATEGORY</h4>
-                                            <div class="form-group">
-                                                <label for="username">Code</label>
-                                                <input name="username" type="text" class="form-control" placeholder="User Name" required="true" value=""> 
-                                                <span class="info-err-username" style="color: red;">{{message}}</span>
-                                            </div>
-                                                        
-                                            <div class="form-group">
-                                                <label for="name">Tittle</label>
-                                                <input name="name" type="text" class="form-control" placeholder="Name" required="true" value="">
-                                                        </div>                              
+                    <div class="product-tab-list tab-pane fade active in" id="description">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <div class="review-content-section"  style="box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%); padding:10px 25px;">
+                                <div id="dropzone1" class="pro-ad addcoursepro">    
+                                    <br class="dropzone dropzone-custom needsclick addcourse" id="demo-upload" enctype="multipart/form-data" >
+                                        <div class="row" >
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <h4>ADD CATEGORY</h4>
+                                                            
+                                                <div class="form-group">
+                                                    <label for="name">Name of category</label>
+                                                    <input name="name" type="text" class="form-control" placeholder="Name" required="true" value="">
+                                                </div>                              
 
-                                                         <div class="form-group"></div>
-                                                                <label>Image</label>
-                                                                <input type="file" name="image">
-                                                                <img src="" alt="" style="width: 100px; height: auto; margin-top:20px">
-                                                        </div>
-                                                        <img src="" alt="" id="avatar-image" style="margin-bottom: 20px;">
-                                                        <div class="col-sm-12">
-                                                            <div class="preview-images"></div>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label>Image</label>
+                                                    <input type="file" name="image">
                                                 </div>
-                                                 <button type="submit" id="type-pass" class="btn-submit">SUBMIT</button>
-                                            </form>
+                                            </div>
                                         </div>
+                                            <div class="preview-images" style="width:100%;" >
+                                                <img src="" alt="" id="print-image" style="margin-bottom: 20px;">
+                                            </div>
+                                            <div class="spinner-border" role="status" style="margin-left:10%; margin-bottom:20px;display:none;">
+                                                <span class="visually-hidden" >Loading...</span>
+                                            </div>
+                                            <div id="result"></div>
+                                            </br>
+                                        <div id="type-pass" class="btn-submit" style="display:inline-block;">SUBMIT</div>                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-                    </div>
-                    
-            </div>
-        </div>
-    </div>
-</div>
-   
+<script>
+    let nameCategory=document.querySelector('input[name="name"]')
+    let imageUrl=document.querySelector('input[name="image"]')
+    let btnSubmit=document.querySelector('#type-pass')
+    let imageEl=document.querySelector('#print-image')
+    let tbody=document.querySelector('tbody')
+    let num=document.querySelectorAll('.stt')
+    let loading=document.querySelector('.spinner-border')
+    let index=num.length
+    let urlImage;
+    let result=document.querySelector('#result')
+
+    
+    imageUrl.addEventListener('change',(e)=>{
+        if(urlImage){
+            URL.revokeObjectURL(urlImage)   
+        }
+        urlImage=URL.createObjectURL(e.target.files[0])
+        imageEl.src=urlImage
+        })
+            
+    function resetForm(){
+        nameCategory.value='';
+        imageUrl.value='';
+        result.innerHTML='';
+        imageEl.src='';
+    }
+    btnSubmit.addEventListener('click',()=>{
+        console.log('vo day')
+        console.log(index)
+        loading.style.display="block";
+        var data=new FormData()
+        data.append('image',imageUrl.files[0])
+        data.append('tittle',nameCategory.value)
+        console.log(data)
+        fetch(`${window.location.origin}/category/add`,
+        {
+            method: "POST",
+            body: data
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            if(res.success) {
+                loading.style.display="none";
+                index=index+1
+                result.innerHTML='SUCCESSFUL!!'
+                var html=`  <tr>
+                                <td class="stt">${index}</td>
+                                <td id="image"> <img src="${res.newCategory.imageUrl}" alt=""></td>
+                                <td id="nameOfCategory"style="text-transform:capitalize; color: royalblue;">${res.newCategory.tittle}</td>
+                            </tr>`
+                tbody.innerHTML =tbody.innerHTML + html
+                 setTimeout(()=>{resetForm()},3000)
+            }
+            else{
+                result.innerHTML='Category already exists!'
+                setTimeout(()=>{resetForm()},3000)
+            }
+        })
+
+    })
+    
+
+</script>
