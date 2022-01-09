@@ -21,8 +21,6 @@ const index=async(req,res)=>{
                 }
             }
         }
-        console.log(allCategory[i].tittle)
-        console.log(num[i])
     }
     res.render('category',{
         allCategory:MultipleMongooseToObject(allCategory),

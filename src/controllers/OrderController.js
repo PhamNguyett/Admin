@@ -1,4 +1,4 @@
-const {Order}=require('../database')
+const {Order,Order_Detail}=require('../database')
 const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 
 const index=async(req,res)=>{
@@ -10,14 +10,20 @@ const index=async(req,res)=>{
         else{
             page=parseInt(page)
         }
+        let nameProduct=[]
         const allOrder = await Order.find({}).populate('user')
+        const allOrderDetail = await Order_Detail.find({}).populate('productId').populate('orderId')
+        for(let i=0; i<allOrderDetail.length;i++){
+            nameProduct.push(allOrderDetail[i].productId.name)
+        }
         let filterOrder=[]
-
+        console.log(allOrderDetail)
         for(let i=(page-1)*10;i<allOrder.length&&i<page*10;i++){
             filterOrder.push(allOrder[i])
         }
         res.render('order',{
             allOrder:MultipleMongooseToObject(filterOrder),
+            allOrderDetail:JSON.stringify(nameProduct),
             quantityPageProduct:(allOrder.length-1)/10 +1,
             currentPage:page
         })
