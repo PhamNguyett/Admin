@@ -18,6 +18,7 @@ const Order=require('./models/Order')
 const Product=require('./models/Product')
 const Ratting=require('./models/Ratting')
 const User=require('./models/User')
+const Order_Detail=require('./models/Order_Detail')
 module.exports={
     connect,
     Admin,
@@ -27,6 +28,7 @@ module.exports={
     Order,
     Product,
     Ratting,
-    User
+    User,
+    Order_Detail
 }
 
