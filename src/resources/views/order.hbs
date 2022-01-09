@@ -56,13 +56,14 @@
                                 <th>Discount</th>
                                 <th>Total</th>
                                 <th>Sent date</th>
+                                <th>Name</th>
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Process</th>
                             </tr>
                             {{#each allOrder}}
-                            <tr>
-                                <td>{{increase @index 1}}</td>
+                            <tr style="background:rgb(223, 221, 221)">
+                                <td style="font-weight:540;">{{increase @index 1}}</td>
                                 <td style="color:blue;">{{_id}}<i id="print-detail" class="bi bi-caret-down" style="cursor: pointer;"></i></td>
                                 {{#if status}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
@@ -72,6 +73,7 @@
                                 <td>{{discount}}</td>
                                 <td>${{sum}}</td>
                                 <td>{{momentFormatL createdAt}}</td>
+                                <td>{{user.name}}</td>
                                 <td>{{tel}}</td>
                                 <td>{{location}}</td>
                                 {{#if status}}
@@ -83,24 +85,40 @@
                             </tr>
                            
                             <td colspan="8">
-                                <ul class ="detail-order" style="padding-left:18%; display:none;">
-                                    <br/><p>DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
-                                    {{#each this.products}}
-                                        <p style="color:red;font-weight:600;">
-                                    Order {{increase @index 1}}:</p>
-                                    <p class="nameProduct"></p>
-                                    <p>Size      : {{size}}</p>
-                                    <p>Color     : {{color}}</p>
-                                    <p>Quantily  : {{quantity}}</p>
-                                    <p>Price: ${{unitPrice}}</p>
-                                    <p>Total: ${{total}}</p>
-                                    {{/each}}
-                                    <p>Order date: {{momentFormatL createdAt}}</p>
-                                    <p>Name      : {{user.name}}</p>
-                                    <p>Address   : {{location}}</p>
-                                    <p>Phone     : {{tel}}</p>
+                                <div class ="detail-order" style=" padding-left:5%;display:none;">
+                                    <p style="color:red;font-weight:600;">DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
+                                    <table style="margin-left:10%;">
+                                        <thead>
+                                            <tr>
+                                            <th>No</th>
+                                            <th>Product name</th>
+                                            <th>Size</th>
+                                            <th>Color</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                            </tr>
+                                            
+
+                                        </thead>
+                                        <tbody>
+                                            {{#each this.products}}
+                                            <tr>
+                                                <td>{{increase @index 1}}</td>
+                                                <td class="nameProduct"></td>
+                                                <td>{{size}}</td>
+                                                <td>{{color}}</td>
+                                                <td>{{quantity}}</td>
+                                                <td>${{unitPrice}}</td>
+                                                <td>${{total}}</td>
+                                            </tr>
+                                            {{/each}}
+                                           
+                                        </tbody>
                                     
-                                </ul>
+                                </div>
+                                    </table>
+                                    
                             </td>
                             {{/each}}
                             
@@ -110,7 +128,7 @@
                     <div class="custom-pagination">
                         <span style="display: none;" id="quantityy">{{quantityPageProduct}}</span>
                         <ul class="pagination" style="margin-top:15px">
-                            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+                            <li class="page-item"><a class="page-link" href="?page=2"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -119,8 +137,8 @@
     </div>
 </div>
 <div id="bg-black-over" class="ds-none"></div>
-
-    <div style="display: none;" id="nameProduct">{{allOrderDetail}}</div>
+    <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
+<div style="display: none;" id="nameProduct">{{allOrderDetail}}</div>
 </div>
 <script> 
     
@@ -132,7 +150,7 @@
     const nameOfProduct=JSON.parse(document.querySelector('#nameProduct').innerText)
     nameProduct.forEach((item,index)=>{
             console.log(item)
-                item.innerHTML= `Product name:${nameOfProduct[index]}`
+                item.innerHTML= nameOfProduct[index]
         })
 
     printDetail.forEach((item,index)=>{
