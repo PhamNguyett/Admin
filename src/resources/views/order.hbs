@@ -64,7 +64,7 @@
                             {{#each allOrder}}
                             <tr style="background:rgb(223, 221, 221)">
                                 <td style="font-weight:540;">{{increase @index 1}}</td>
-                                <td style="color:blue;" id="print-detail">{{_id}}<i  class="bi bi-caret-down" style="cursor: pointer;"></i></td>
+                                <td style="color:blue; cursor: pointer;" id="print-detail" >{{_id}}<i  class="bi bi-caret-down"></i></td>
                                 {{#if status}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
                                 {{else}}
