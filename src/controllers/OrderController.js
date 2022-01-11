@@ -17,7 +17,6 @@ const index=async(req,res)=>{
             nameProduct.push(allOrderDetail[i].productId.name)
         }
         let filterOrder=[]
-        console.log(allOrderDetail)
         for(let i=(page-1)*10;i<allOrder.length&&i<page*10;i++){
             filterOrder.push(allOrder[i])
         }
