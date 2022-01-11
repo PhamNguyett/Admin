@@ -64,7 +64,7 @@
                             {{#each allOrder}}
                             <tr style="background:rgb(223, 221, 221)">
                                 <td style="font-weight:540;">{{increase @index 1}}</td>
-                                <td style="color:blue;">{{_id}}<i id="print-detail" class="bi bi-caret-down" style="cursor: pointer;"></i></td>
+                                <td style="color:blue;" id="print-detail">{{_id}}<i  class="bi bi-caret-down" style="cursor: pointer;"></i></td>
                                 {{#if status}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
                                 {{else}}
@@ -85,7 +85,7 @@
                             </tr>
                            
                             <td colspan="8">
-                                <div class ="detail-order" style=" padding-left:5%;display:none;">
+                                <div class ="detail-order menu-detail " style=" padding-left:5%;">
                                     <p style="color:red;font-weight:600;">DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
                                     <table style="margin-left:10%;">
                                         <thead>
@@ -149,13 +149,12 @@
     let nameProduct=document.querySelectorAll('.nameProduct')
     const nameOfProduct=JSON.parse(document.querySelector('#nameProduct').innerText)
     nameProduct.forEach((item,index)=>{
-            console.log(item)
                 item.innerHTML= nameOfProduct[index]
         })
 
     printDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
-            detailOrder[index].style.display="block"
+            detailOrder[index].classList.toggle('menu-detail')
 
         })
     })

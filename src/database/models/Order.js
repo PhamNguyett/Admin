@@ -12,6 +12,7 @@ const Order = new Schema({
     quantity:{type:Number,default:0},
     sum:{type:Number,required:true},
     tel:{type:String,required:true},
-    address:{type:String,required:true},
+    location:{type:String,required:true},
+    email:{type:String},
 },{timestamps:true});
 module.exports=mongoose.model('Order',Order)
