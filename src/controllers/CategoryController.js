@@ -16,8 +16,6 @@ const index=async(req,res)=>{
                 if(`${allProduct[j].categoryId[k]}`==`${allCategory[i]._id}`)
                 {   
                     num[i]++
-                    console.log(allProduct[j].name)
-
                 }
             }
         }
