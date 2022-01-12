@@ -53,35 +53,38 @@
                                 <th>No</th>
                                 <th>Code order</th>
                                 <th>Status</th>
-                                <th>Discount</th>
+                                {{!-- <th>Discount</th> --}}
                                 <th>Total</th>
                                 <th>Sent date</th>
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Process</th>
+                                <th>OrderTotal</th>
                             </tr>
                             {{#each allOrder}}
-                            <tr style="background:rgb(223, 221, 221)">
+                            <tr style="background:rgb(245, 241, 241)">
                                 <td style="font-weight:540;">{{increase @index 1}}</td>
-                                <td style="color:blue; cursor: pointer;" id="print-detail" >{{_id}}<i  class="bi bi-caret-down"></i></td>
-                                {{#if status}}
+                                <td style="color:blue; cursor: pointer;" id="print-detail" >{{_id }}<i style="color:red; font-size:20px; margin: 5px;" class="bi bi-caret-down"></i></td>
+                                {{#if (compareValue status 1)}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
                                 {{else}}
                                 <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waiting for progressing</button></td>
                                 {{/if}}
-                                <td>{{discount}}</td>
+                                {{!-- <td>{{discount}}</td> --}}
                                 <td>${{sum}}</td>
                                 <td>{{momentFormatL createdAt}}</td>
-                                <td>{{user.name}}</td>
+                                <td>{{name}}</td>
                                 <td>{{tel}}</td>
-                                <td>{{location}}</td>
-                                {{#if status}}
+                                <td>{{address}}</td>
+                                {{#if (compareValue status 1)}}
                                 <td></td>
                                 {{else}}
                                 <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
                                 {{/if}}
                                 <p>{{products.name}}</p>
+                                <td><p id="numOfOrder"></p></td>
+                                
                             </tr>
                            
                             <td colspan="8">
@@ -102,18 +105,15 @@
 
                                         </thead>
                                         <tbody>
-                                            {{#each this.products}}
                                             <tr>
-                                                <td>{{increase @index 1}}</td>
-                                                <td class="nameProduct"></td>
-                                                <td>{{size}}</td>
-                                                <td>{{color}}</td>
-                                                <td>{{quantity}}</td>
-                                                <td>${{unitPrice}}</td>
-                                                <td>${{total}}</td>
+                                                <td class="no"></td>
+                                                <td class="nameProduct">{{ name}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
-                                            {{/each}}
-                                           
                                         </tbody>
                                     
                                 </div>
@@ -137,8 +137,9 @@
     </div>
 </div>
 <div id="bg-black-over" class="ds-none"></div>
-    <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
-<div style="display: none;" id="nameProduct">{{allOrderDetail}}</div>
+<div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
+<div style="display: none;" id="detailProduct">{{DetailProduct}}</div>
+<div style="display: none;" id="numOrder">{{num}}</div>
 </div>
 <script> 
     
@@ -147,11 +148,26 @@
     let detailOrder=document.querySelectorAll('.detail-order')
     let closeDetail=document.querySelectorAll('.close-detail')
     let nameProduct=document.querySelectorAll('.nameProduct')
-    const nameOfProduct=JSON.parse(document.querySelector('#nameProduct').innerText)
-    nameProduct.forEach((item,index)=>{
-                item.innerHTML= nameOfProduct[index]
-        })
+    let stt=document.querySelectorAll('.no')
+    let numOfOrder=document.querySelectorAll('#numOfOrder')
+    let i=0;
+    const nameOfProduct=JSON.parse(document.querySelector('#detailProduct').innerText)
+    const numDetail=JSON.parse(document.querySelector('#numOrder').innerText)
+    console.log(nameProduct)
 
+    numOfOrder.forEach((item,index)=>{
+        item.innerHTML= numDetail[index]
+    })
+    for(let k=0; k<numDetail.length; k++){
+        for(let j=0; j<numDetail[k];j++)
+        {
+            nameProduct[j].innerHTML=nameOfProduct[j]
+        }
+    }
+    {{!-- stt.forEach((item,index)=>{
+        
+         item.innerHTML= i+1;
+    }) --}}
     printDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             detailOrder[index].classList.toggle('menu-detail')
@@ -161,7 +177,7 @@
 
     closeDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
-            detailOrder[index].style.display="none"
+            detailOrder[index].classList.toggle('menu-detail')
         })
     })
 

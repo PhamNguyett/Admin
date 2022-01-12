@@ -4,15 +4,16 @@ const ObjectId = Schema.ObjectId;
 
 const Order = new Schema({
     user:{type:Schema.Types.ObjectId,ref:'User'},
+    name:{type:String},
     paymentType:{type:String,default:'COD'},
     paymentInfor:{type:String},
     shippingFee:{type:Number,default:2},
-    status:{type:Boolean,default:false},
+    status:{type:Number,default:-1},
     code:{type:String},
     quantity:{type:Number,default:0},
     sum:{type:Number,required:true},
     tel:{type:String,required:true},
-    location:{type:String,required:true},
+    address:{type:String,required:true},
     email:{type:String},
 },{timestamps:true});
 module.exports=mongoose.model('Order',Order)
