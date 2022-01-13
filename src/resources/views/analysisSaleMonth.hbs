@@ -1,0 +1,45 @@
+<div class="charts-area mg-b-15" >
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="charts-single-pro responsive-mg-b-30">
+                    <div class="alert-title">
+                        <h1>Statistis Sale Month</h1>
+                        <p>The chart below shows product sales by month</p>
+                    </div>
+                    <div id="basic-chart">
+                        <canvas id="basiclinechart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="data">{{data}}</div>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        let data=JSON.parse(document.querySelector('#data').innerText)
+        console.log(data)
+        let date=[]
+        for(let i=1;i<=31;i++){
+            date.push(i)
+        }
+        console.log(date)
+        var ctx = document.getElementById("basiclinechart");
+        var basiclinechart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: date,
+                datasets: [{
+                    label: "currency: $ ",
+                    fill: false,
+                    backgroundColor: '#006DF0',
+                    borderColor: '#006DF0',
+                    data: data
+                }, 
+                ]
+            },
+        });
+    })
+    
+</script>

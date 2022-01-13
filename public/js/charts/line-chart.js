@@ -4,70 +4,7 @@
 	 /*----------------------------------------*/
 	/*  1.  Basic Line Chart
 	/*----------------------------------------*/
-	var ctx = document.getElementById("basiclinechart");
-	var basiclinechart = new Chart(ctx, {
-		type: 'line',
-		data: {
-			labels: ["January", "February", "March", "April", "May", "June", "July"],
-			datasets: [{
-				label: "My First dataset",
-				fill: false,
-                backgroundColor: '#006DF0',
-				borderColor: '#006DF0',
-				data: [3, -5, -2, 3, 9, 12, 19]
-            }, {
-                label: "My Second dataset",
-				fill: false,
-                backgroundColor: '#933EC5',
-				borderColor: '#933EC5',
-				data: [-12, -3, -4, 6, 3, 7, 10]
-				
-		}]
-		},
-		options: {
-			responsive: true,
-			title:{
-				display:true,
-				text:'Basic Line Chart'
-			},
-			tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-				xAxes: [{
-					ticks: {
-						autoSkip: false,
-						maxRotation: 0
-					},
-					ticks: {
-					  fontColor: "#fff", // this here
-					},
-					scaleLabel: {
-						display: true,
-						labelString: 'Month'
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						autoSkip: false,
-						maxRotation: 0
-					},
-					ticks: {
-					  fontColor: "#fff", // this here
-					},
-					scaleLabel: {
-						display: true,
-						labelString: 'Value'
-					}
-				}]
-			}
-		}
-	});
+
 	
 	 /*----------------------------------------*/
 	/*  2.  Line Chart Multi axis
