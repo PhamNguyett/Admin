@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
-const session = require('express-session')
+const Admin=require('./models/Admin')
+const Category=require('./models/Category')
+const CodeDiscount=require('./models/CodeDiscount')
+const Comment=require('./models/Comment')
+const Order=require('./models/Order')
+const Product=require('./models/Product')
+const Ratting=require('./models/Ratting')
+const User=require('./models/User')
+const Order_Detail=require('./models/Order_Detail')
 
 
 connect=async()=>{
@@ -13,15 +21,6 @@ connect=async()=>{
     }
 
 }
-const Admin=require('./models/Admin')
-const Category=require('./models/Category')
-const CodeDiscount=require('./models/CodeDiscount')
-const Comment=require('./models/Comment')
-const Order=require('./models/Order')
-const Product=require('./models/Product')
-const Ratting=require('./models/Ratting')
-const User=require('./models/User')
-const Order_Detail=require('./models/Order_Detail')
 module.exports={
     connect,
     Admin,

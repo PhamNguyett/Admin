@@ -3,8 +3,8 @@ const route=express.Router()
 
 const {OrderController}=require('../controllers')
 
-route.get('/',OrderController.index)
-route.get('/waiting',OrderController.waiting)
-route.get('/processed',OrderController.processed)
 route.get('/accept/:id',OrderController.accept)
+route.get('/waiting',OrderController.waiting)
+route.get('/delivery',OrderController.delivery)
+route.get('/',OrderController.index)
 module.exports=route

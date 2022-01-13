@@ -1,6 +1,6 @@
 const DashboardRouter=require('./dashboard')
 const UserRouter=require('./user')
-const AnalyticsRouter=require('./analytics')
+const AnalyticsRouter=require('./analysis')
 const LoginRouter=require('./login')
 const AdminRouter=require('./admin')
 const ProductRouter=require('./product')
@@ -12,7 +12,7 @@ function route(app){
     app.use('/',DashboardRouter)
     app.use('/order',OrderRouter)
     app.use('/user',UserRouter)
-    app.use('/analytics',AnalyticsRouter)
+    app.use('/analysic',AnalyticsRouter)
     app.use('/admin',AdminRouter)
     app.use('/login',LoginRouter)
     app.get('/logout', function(req, res){

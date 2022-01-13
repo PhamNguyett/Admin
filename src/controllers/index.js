@@ -1,5 +1,5 @@
 const AdminController = require("./AdminController")
-const AnalyticsController=require("./AnalyticsController")
+const AnalysisController=require("./AnalysisController")
 const DashboardController=require("./DashboardController")
 const LoginController=require("./LoginController")
 const OrderController=require("./OrderController")
@@ -8,7 +8,7 @@ const UserController=require("./UserController")
 const CategoryController=require("./CategoryController")
 module.exports ={
     AdminController,
-    AnalyticsController,
+    AnalysisController,
     DashboardController,
     LoginController,
     OrderController,

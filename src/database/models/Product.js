@@ -11,6 +11,7 @@ const Product=new Schema({
     des:{type:String},
     info:[{color:{type:String},size:{type:String},quantity:{type:Number},_id:false}],
     gender:[{type:String}],
+    quantitySold:{type:Number,default:0},
     imagesUrl:[{type:String}],
     rating:{point:Number,quantity:Number},
     categoryId:[{type:Schema.Types.ObjectId,ref:'Category'}],
