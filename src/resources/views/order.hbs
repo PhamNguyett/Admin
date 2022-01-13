@@ -60,7 +60,6 @@
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Process</th>
-                                <th>OrderTotal</th>
                             </tr>
                             {{#each allOrder}}
                             <tr style="background:rgb(245, 241, 241)">
@@ -68,22 +67,23 @@
                                 <td style="color:blue; cursor: pointer;" id="print-detail" >{{_id }}<i style="color:red; font-size:20px; margin: 5px;" class="bi bi-caret-down"></i></td>
                                 {{#if (compareValue status 1)}}
                                 <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
-                                {{else}}
+                                {{else if (compareValue status 0)}}
+                                 <td><button class="pd-setting" id="taolao" style="cursor: not-allowed;background:rgb(207, 207, 12);">On delivery </button></td>
+                                 {{else}}
                                 <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waiting for progressing</button></td>
                                 {{/if}}
                                 {{!-- <td>{{discount}}</td> --}}
-                                <td>${{sum}}</td>
+                                <td style="color:red;">${{sum}}</td>
                                 <td>{{momentFormatL createdAt}}</td>
                                 <td>{{name}}</td>
                                 <td>{{tel}}</td>
                                 <td>{{address}}</td>
-                                {{#if (compareValue status 1)}}
-                                <td></td>
-                                {{else}}
+                                {{#if (compareValue status -1)}}
                                 <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
+                                {{else}}
+                                <td></td>
                                 {{/if}}
                                 <p>{{products.name}}</p>
-                                <td><p id="numOfOrder"></p></td>
                                 
                             </tr>
                            
@@ -95,26 +95,28 @@
                                             <tr>
                                             <th>No</th>
                                             <th>Product name</th>
+                                            <th>Image</th>
                                             <th>Size</th>
-                                            <th>Color</th>
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th>Total</th>
-                                            </tr>
                                             
 
                                         </thead>
+                                        {{#each this.orderId}}
                                         <tbody>
                                             <tr>
-                                                <td class="no"></td>
-                                                <td class="nameProduct">{{ name}}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td class="no">{{increase @index 1}}</td>
+                                                <td class="nameProduct">{{product.name}}</td>
+                                                <td><img src="{{product.imagesUrl.[0]}}" alt="" style="width:40px; height:auto;"></td>
+                                                <td>{{infor.size}}</td>
+                                                <td>{{infor.quantity}}</td>
+                                                <td>{{product.pricePromotion}}</td>
+                                                <td>{{multipAB infor.quantity product.pricePromotion}}</td>
                                                 <td></td>
                                             </tr>
                                         </tbody>
+                                        {{/each }}
                                     
                                 </div>
                                     </table>
@@ -138,8 +140,7 @@
 </div>
 <div id="bg-black-over" class="ds-none"></div>
 <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
-<div style="display: none;" id="detailProduct">{{DetailProduct}}</div>
-<div style="display: none;" id="numOrder">{{num}}</div>
+
 </div>
 <script> 
     
@@ -147,27 +148,7 @@
     let printDetail=document.querySelectorAll('#print-detail')
     let detailOrder=document.querySelectorAll('.detail-order')
     let closeDetail=document.querySelectorAll('.close-detail')
-    let nameProduct=document.querySelectorAll('.nameProduct')
-    let stt=document.querySelectorAll('.no')
-    let numOfOrder=document.querySelectorAll('#numOfOrder')
-    let i=0;
-    const nameOfProduct=JSON.parse(document.querySelector('#detailProduct').innerText)
-    const numDetail=JSON.parse(document.querySelector('#numOrder').innerText)
-    console.log(nameProduct)
-
-    numOfOrder.forEach((item,index)=>{
-        item.innerHTML= numDetail[index]
-    })
-    for(let k=0; k<numDetail.length; k++){
-        for(let j=0; j<numDetail[k];j++)
-        {
-            nameProduct[j].innerHTML=nameOfProduct[j]
-        }
-    }
-    {{!-- stt.forEach((item,index)=>{
-        
-         item.innerHTML= i+1;
-    }) --}}
+    
     printDetail.forEach((item,index)=>{
         item.addEventListener('click',(e)=>{
             detailOrder[index].classList.toggle('menu-detail')
@@ -192,8 +173,8 @@
                 if(res.success)
                 {
                     e.target.remove()
-                    document.querySelectorAll('.uncomplete')[index].style.backgroundColor ="#006DF0";
-                    document.querySelectorAll('.uncomplete')[index].innerText="Processed"
+                    document.querySelectorAll('.uncomplete')[index].style.backgroundColor ="rgb(207, 207, 12)";
+                    document.querySelectorAll('.uncomplete')[index].innerText="On delivery"
                 }
             })
         })

@@ -28,6 +28,7 @@ app.engine('hbs', exphbs({extname:'hbs',
     helpers:{
         upperCase(item) { return item.charAt(0).toUpperCase() + item.slice(1);},
         increase(a,i){ return a+i},
+        multipAB(a,b){return a*b},
         quantityy(item){return item.reduce((total,i)=>{return total+i.quantity},0) },
         newLine(a){if(a) return a.replace(/\n/g, "<br />");},
         checkedBox(array,_this){ array.includes(_this)>=0?"true":"false" },
