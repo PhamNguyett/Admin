@@ -33,7 +33,7 @@ const block=async(req,res)=>{
 const unblock=async(req,res)=>{
     try{
         const findUser=await User.updateOne({_id:req.params.id},{isAuth:true})
-        const allUser = await userServic.allUser(false)
+        const allUser = await userServic.allUser([true])
         res.render('userManagement',{allUser})
     }
     catch(e){
