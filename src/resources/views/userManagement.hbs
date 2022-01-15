@@ -1,46 +1,172 @@
 <div class="breadcome-area">
-     <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="breadcome-list">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                             <ul class="breadcome-menu">
-                                <li><a href="/">Home</a> <span class="bread-slash">/</span>
+                        <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                            <div class="breadcome-heading" style="display: flex;">
+                                <li class="nav-item" style="list-style-type: none; padding: 2px;font-size: 20px;margin-left: 15px;"><a href="/user" class="nav-link">All user</a>
                                 </li>
-                                <li><span class="bread-blod">User management</span>
+                                <li class="nav-item" style="list-style-type: none; padding: 2px;font-size: 20px;margin-left: 12px;"><a href="/user/user-block" class="nav-link">User bkock</a>
+                                </li>
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li><a href="/product" style="color: rgb(59, 33, 231);">Product</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li><span class="bread-blod">View</span>
                                 </li>
                             </ul>
-                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-   </div>
- </div>
+    </div>
+</div>
 
 
 <div class="contacts-area mg-b-15">
-            <div class="container-fluid">
-                <div class="row">
-                    {{#each allUser}}
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="flex-wrap: wrap;">
-                        <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
-                            <div class="panel-body custom-panel-jw">
-                                <img alt="logo" class="img-circle m-b" style="width: 70%; text-align:30px;" src="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}">
-                                <h3>{{this.name}}</h3>
-                                <br>
-                                <p>
-                                    <i class="bi bi-envelope-fill"></i> Email: <a href="mailto:mail@mail.com">{{this.gmail}}</a><br>
-                                    <i class="bi bi-house-fill"></i>Address: {{this.address}}
-                                </p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="contacts-area mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                        {{#each allUser}}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 10px;position: relative;">
+                            
+                            <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30" style="position: relative;">
+                                {{#if isAuth}}
+                                {{else}}
+                                <div class="block-line" style="position: absolute;top: 0;left: 0;width: 120%;transform: rotate(33deg);height: 2px;background-color: #777;transform-origin:0 0;z-index: 11;"></div>
+                                <div class="block-line" style="position: absolute;bottom: 0;left: 0;width: 120%;transform: rotate(-33deg);height: 2px;background-color: #777;transform-origin:0 0;z-index: 11;"></div>
+                                {{/if}}
+                                <div class="panel-body custom-panel-jw">
+                                    {{#if isAuth}}
+                                    <div class="social-media-in">
+                                        <a data-id="{{_id}}" data-username="{{username}}" data-name="{{name}}" data-img="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}" class="block-user" >
+                                        <i class="bi bi-person-x" data-username="{{username}}" data-name="{{name}}" data-id="{{_id}}" data-img="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}"></i></a>
+                                    </div>
+                                    {{else}}
+                                    <div class="social-media-in">
+                                        <a href="/user/unblock/{{_id}}" style="background-color: rgb(204, 80, 22);" data-id="{{_id}}" data-img="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}" >
+                                        <i class="bi bi-unlock" data-id="{{_id}}" data-img="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}"></i></a>
+                                    </div>
+                                    {{/if}}
+                                    <img alt="logo" class="img-circle m-b" src="https://the-1-beauty-fashion.herokuapp.com/{{this.avatarUrl}}" style="width:50px">
+                                    <h3><a style="margin-bottom: 10px;">Name: {{name}}</a></h3>
+                                    <p class="all-pro-ad">Username: <span style="color: #555;font-weight:600">{{username}}</span></p>
+                                    <p class="all-pro-ad">Address: <span style="color: #555;font-weight:600">{{address}}</span></p>
+                                </div>
+                                <div class="panel-footer contact-footer">
+                                    <div class="professor-stds-int" style="display: flex;justify-content: space-around;">
+                                        <div class="professor-stds">
+                                            <div class="contact-stat"><span>Total order: </span> <strong>{{order.length}} bill, </strong></div>
+                                        </div>
+                                        <div class="professor-stds">
+                                            <div class="contact-stat"><span> Comments: </span> <strong>{{comments}}</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
-                    {{/each}}
-
                 </div>
             </div>
+        </div>
+    </div>
 </div>
+
+{{!-- <div class="modal-custom">
+    <i class="bi bi-x" style="position: absolute;top: 5px;right: 5px;cursor: pointer;font-size: 16px;"></i>
+    <div class="header-modal-custom">
+        <h2 style="text-align: center;border-bottom: 1px solid #777;">Block user</h2>
+    </div>
+    <div class="body-modal-custom" style="padding: 20px;">
+        After block, user don't user their accout
+    </div>
+    <div class="footer-modal-custom" style="float: right;">
+        <button class="btn-custom-modal" style="background-color: rgb(189, 185, 185);">Close</button>
+        <button class="btn-custom-modal" style="background-color: #d44950;">Block</button>
+    </div>
+</div> --}}
+<div id="bg-black-over" class="ds-none"></div>
+<div class="modal-dialog ds-none" style="top: 150px;left: 55%;">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title" id="staticBackdropLabel" style="color: red;text-align: center;">Block user</h3>
+        <i class="bi bi-x-lg btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 16px;cursor: pointer;"></i>
+    </div>
+    <div class="modal-body" style="display: flex;">
+        <div style="display: none;" id="_id"></div>
+        <img src="" alt="" width="200px" style="margin-right: 10px;">
+        <div>
+            <p style="color: rgb(196, 196, 196);text-align: center;">After block, user don't use their accout</p>
+            <p class="name-modal"></p>
+            <p class="username-modal"></p>
+        </div>
+    </div>
+    <div class="modal-footer" style="position: relative;">
+        <div class="spinner ds-none">
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+        <button type="button" class="btn btn-danger" style="margin-right: 20px;margin-left: 10px;position: relative;">
+            Delete
+        </button>
+    </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        const btnBlockUser=document.querySelectorAll('.block-user')
+        const modal=document.querySelector('.modal-dialog')
+        const bgBlack=document.querySelector('#bg-black-over')
+        const dangerBtn=document.querySelector('.btn-danger')
+        const secondDaryBtn=document.querySelector('.btn-secondary')
+        const blockLine=document.querySelectorAll('.block-line')
+
+
+
+        btnBlockUser.forEach(item=>{
+            item.addEventListener('click',(e)=>{
+                e.preventDefault()
+                modal.classList.remove('ds-none')
+                bgBlack.classList.remove('ds-none')
+                modal.querySelector('img').src=e.target.dataset.img
+                modal.querySelector('.username-modal').innerText='Name:'+e.target.dataset.name
+                modal.querySelector('.name-modal').innerText='Username:'+e.target.dataset.username
+                dangerBtn.dataset.id=e.target.dataset.id
+            })
+        })
+
+        document.querySelector('.btn-close').addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        secondDaryBtn.addEventListener('click',()=>{
+            modal.classList.add('ds-none')
+            bgBlack.classList.add('ds-none')
+        })
+        dangerBtn.addEventListener('click',(e)=>{
+            document.querySelector('.spinner').classList.remove('ds-none')
+            dangerBtn.style.opacity='0.4'
+            dangerBtn.style.pointerEvents='none'
+            fetch(`${window.location.origin}/user/block/${dangerBtn.dataset.id}`)
+            .then(res=>res.json())
+            .then(res=>{
+                if(res.success){
+                    window.location.href=window.location.origin+'/user/user-block';
+                }
+                else{
+                    dangerBtn.style.opacity='1'
+                    dangerBtn.style.pointerEvents='auto'
+                }
+            })
+        })
+    })
+</script>

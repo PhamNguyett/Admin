@@ -25,8 +25,8 @@ const findOrder=async(page,status)=>{
             }
         },
         {
-            $sort:{
-                createAt:-1,
+            '$sort' :{
+                createdAt:-1,
             },
         },
 

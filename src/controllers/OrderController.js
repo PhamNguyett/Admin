@@ -52,10 +52,28 @@ const accept=async(req,res)=>{
         res.status(404).json({success:false})
     }
 }
+const transport=async(req,res)=>{
+    try{
+        const accOrder = await Order.findOne({_id:req.params.id,status:0})
+        if(accOrder)
+        {
+            accOrder.status = 1
+            await accOrder.save()
+            res.status(200).json({success:true})
+        }
+        else{
+            res.status(404).json({success:false,message:"Invalid order"})
+        }
+    }
+    catch(e){
+        res.status(404).json({success:false})
+    }
+}
 
 module.exports={
     index,
     waiting,
     delivery,
-    accept
+    accept,
+    transport
 }

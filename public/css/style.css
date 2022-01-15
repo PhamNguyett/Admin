@@ -1269,7 +1269,7 @@ ul.breadcome-menu li a:hover{
 .social-media-in a{
 	height: 25px;
     width: 25px;
-    background: #006DF0;
+    background: #999;
     font-size: 13px;
     border-radius: 50%;
     display: block;
@@ -1279,6 +1279,9 @@ ul.breadcome-menu li a:hover{
     margin-top: 0px;
     margin-bottom: 5px;
 	transition: all .4s ease 0s;
+}
+.social-media-in a:active{
+    background-color: #006DF0;
 }
 .social-media-in a:hover{
     background: #006DF0;

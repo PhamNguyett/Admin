@@ -28,6 +28,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="lol-lg-4">
+                <div class="calendar">
+
+            </div>
+            </div>
+            
+        </div>
     </div>
 </div>
 <div class="product-status mg-b-15">
@@ -48,7 +56,7 @@
                     <div class="add-product" >
                     </div>
                     <div class="asset-inner">
-                        <table>
+                        <table style="width: 100%;">
                             <tr>
                                 <th>No</th>
                                 <th>Code order</th>
@@ -66,27 +74,28 @@
                                 <td style="font-weight:540;">{{increase @index 1}}</td>
                                 <td style="color:blue; cursor: pointer;" id="print-detail" >{{_id }}<i style="color:red; font-size:20px; margin: 5px;" class="bi bi-caret-down"></i></td>
                                 {{#if (compareValue status 1)}}
-                                <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Processed </button></td>
+                                <td><button class="pd-setting " id="taolao" style="cursor: not-allowed;">Successfull</button></td>
                                 {{else if (compareValue status 0)}}
-                                <td><button class="pd-setting" id="taolao" style="cursor: not-allowed;background:rgb(207, 207, 12);">On delivery </button></td>
+                                <td><button class="pd-setting untransport" id="taolao" style="cursor: not-allowed;background:rgb(207, 207, 12);">On delivery </button></td>
                                 {{else}}
-                                <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waiting for progressing</button></td>
+                                <td><button class="pd-setting uncomplete" id="taolao" style="cursor: not-allowed;background-color:red">Waitting...</button></td>
                                 {{/if}}
                                 {{!-- <td>{{discount}}</td> --}}
                                 <td style="color:red;font-weight:600">${{sum}}</td>
                                 <td  style="font-weight: 600;">{{timeCalendar createdAt}}</td>
                                 <td style="font-weight: 600;">{{name}}</td>
                                 <td style="font-weight: 600;">{{tel}}</td>
-                                <td>{{address}}</td>
+                                <td style="display: block;width: 100ps;word-wrap: break-word;">{{address}}</td>
                                 {{#if (compareValue status -1)}}
                                 <td><button class="pd-setting btnAccept" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:red">Accept</button></td>
+                                {{else if (compareValue status 0)}}
+                                <td><button class="pd-setting btnTransport" data-id="{{_id}}" id="taolao" style="cursor: pointer; background-color:rgb(207, 207, 12)">Transport</button></td>
                                 {{else}}
                                 <td></td>
                                 {{/if}}
                                 <p>{{products.name}}</p>
                                 
                             </tr>
-                           
                             <td colspan="8">
                                 <div class ="detail-order menu-detail " style=" padding-left:5%;">
                                     <p style="color:red;font-weight:600;">DETAILED ORDER:   <i class="bi bi-x-square close-detail" style="margin-left:100px; color:red;"></i></p>
@@ -124,7 +133,7 @@
                             </td>
                             {{/each}}
                             
-                           </table>
+                        </table>
 
                     </div>
                     <div class="custom-pagination">
@@ -142,53 +151,75 @@
 <div style="display: none;" id="currentPage-hb">{{currentPage}}</div>
 
 </div>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
 <script> 
-    
-    let btnAccept=document.querySelectorAll('.btnAccept')
-    let printDetail=document.querySelectorAll('#print-detail')
-    let detailOrder=document.querySelectorAll('.detail-order')
-    let closeDetail=document.querySelectorAll('.close-detail')
-    
-    printDetail.forEach((item,index)=>{
-        item.addEventListener('click',(e)=>{
-            detailOrder[index].classList.toggle('menu-detail')
+    document.addEventListener('DOMContentLoaded',()=>{
+        let btnAccept=document.querySelectorAll('.btnAccept')
+        let btnTransport=document.querySelectorAll('.btnTransport')
+        let printDetail=document.querySelectorAll('#print-detail')
+        let detailOrder=document.querySelectorAll('.detail-order')
+        let closeDetail=document.querySelectorAll('.close-detail')
+        let calendarEl=document.querySelector('.calendar')
 
-        })
-    })
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+        });
+        calendar.render();
 
-    closeDetail.forEach((item,index)=>{
-        item.addEventListener('click',(e)=>{
-            detailOrder[index].classList.toggle('menu-detail')
-        })
-    })
+        printDetail.forEach((item,index)=>{
+            item.addEventListener('click',(e)=>{
+                detailOrder[index].classList.toggle('menu-detail')
 
-    
-    btnAccept.forEach((item,index)=>{
-        item.addEventListener('click',(e)=>{
-            console.log(index)
-            fetch(`${window.location.origin}/order/accept/${item.dataset.id}`)
-            .then(res=>res.json())
-            .then(res=>{
-                console.log(res)
-                if(res.success)
-                {
-                    e.target.remove()
-                    document.querySelectorAll('.uncomplete')[index].style.backgroundColor ="rgb(207, 207, 12)";
-                    document.querySelectorAll('.uncomplete')[index].innerText="On delivery"
-                }
             })
         })
-    })
 
-    const paginaEl=document.querySelector('.pagination')
-    const currentPage=parseInt(document.querySelector('#currentPage-hb').innerText)
-    const quantityy=parseInt(document.querySelector('#quantityy').innerText)
-    console.log(quantityy)
-    let htmlPagi=`<li class="page-item"><a class="page-link" href="?page=${currentPage===1?1:currentPage-1}"> <i class="bi bi-caret-left-fill"></i> </a></li>`
-    
-    for(let i=1;i<=quantityy;i++){
-        htmlPagi+=`<li class="page-item"><a class="page-link ${i==currentPage?'active-page-item':''}" href="?page=${i}">${i}</a></li>`
-    }
-    htmlPagi+=`<li class="page-item"><a class="page-link" href="?page=${currentPage===quantityy?quantityy:currentPage+1}"> <i class="bi bi-caret-right-fill"></i> </a></li>`
-    paginaEl.innerHTML=htmlPagi
+        closeDetail.forEach((item,index)=>{
+            item.addEventListener('click',(e)=>{
+                detailOrder[index].classList.toggle('menu-detail')
+            })
+        })
+
+        
+        btnAccept.forEach((item,index)=>{
+            item.addEventListener('click',(e)=>{
+                fetch(`${window.location.origin}/order/accept/${item.dataset.id}`)
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res)
+                    if(res.success)
+                    {
+                        e.target.remove()
+                        document.querySelectorAll('.uncomplete')[index].style.backgroundColor ="rgb(207, 207, 12)";
+                        document.querySelectorAll('.uncomplete')[index].innerText="On delivery"
+                    }
+                })
+            })
+        })
+
+        btnTransport.forEach((item,index)=>{
+            item.addEventListener('click',(e)=>{
+                fetch(`${window.location.origin}/order/transport/${e.target.dataset.id}`)
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res)
+                    if(res.success)
+                    {
+                        e.target.remove()
+                        document.querySelectorAll('.untransport')[index].style.backgroundColor ="blue";
+                        document.querySelectorAll('.untransport')[index].innerText="Successful"
+                    }
+                })
+            })
+        })
+
+        const paginaEl=document.querySelector('.pagination')
+        const currentPage=parseInt(document.querySelector('#currentPage-hb').innerText)
+        const quantityy=parseInt(document.querySelector('#quantityy').innerText)
+        let htmlPagi=`<li class="page-item"><a class="page-link" href="?page=${currentPage===1?1:currentPage-1}"> <i class="bi bi-caret-left-fill"></i> </a></li>`
+        for(let i=1;i<=quantityy;i++){
+            htmlPagi+=`<li class="page-item"><a class="page-link ${i==currentPage?'active-page-item':''}" href="?page=${i}">${i}</a></li>`
+        }
+        htmlPagi+=`<li class="page-item"><a class="page-link" href="?page=${currentPage===quantityy?quantityy:currentPage+1}"> <i class="bi bi-caret-right-fill"></i> </a></li>`
+        paginaEl.innerHTML=htmlPagi
+        })
 </script>
