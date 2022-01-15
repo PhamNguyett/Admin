@@ -52,14 +52,49 @@ const save=async(req, res)=>{
         newAdmin['avatarUrl']=avatarUrl
     }
     await newAdmin.save()
-    const admins=await Admin.find({})
+    const admins=await Admin .find({})
 
     res.render('admin',{admins:MultipleMongooseToObject(admins)})
     
+}
+
+const edit= async(req,res)=>{
+    const editAdmin= await Admin.findById(req.params.id)
+    if(editAdmin){
+        res.render('editProfile',MongooseToObject(editAdmin))
+    }
+    else{
+        res.render('404')
+    }
+
+}
+
+const saveEdit = async(req,res)=>{
+
+    try{
+        const admin=await Admin.findById(req.params.id)
+        console.log(admin)
+        if(req.file){
+            admin.avatarUrl='/uploads/'+req.file.filename
+        }
+        admin.gmail=req.body.gmail,
+        admin.phone=req.body.phone,
+        admin.name=req.body.name,
+        console.log(admin)
+        await admin.save()
+        res.render('detailAdmin',{
+            admin:MongooseToObject(admin)
+        })
+        
+    }catch(e){
+        res.render('404')
+    }
 }
 module.exports={
     show,
     detail,
     add,
-    save
+    save,
+    edit,
+    saveEdit
 }
