@@ -75,25 +75,20 @@
                         </div>
                         {{/each}}
                     </div>
-                </div>
+    <div class="custom-pagination">
+                                <span style="display: none;" id="quantityy">{{quantityPage}}</span>
+                                <ul class="pagination" style="margin-top:15px; margin-left:auto; margin-right:auto;">
+                                <li class="page-item"><a class="page-link" href="?page=2">1</a></li>
+                                 </ul>
+                                </div>
             </div>
+                </div>
         </div>
     </div>
 </div>
+<div style="display: none;" id="currentPage-hb">{{curPage}}</div>
 
-{{!-- <div class="modal-custom">
-    <i class="bi bi-x" style="position: absolute;top: 5px;right: 5px;cursor: pointer;font-size: 16px;"></i>
-    <div class="header-modal-custom">
-        <h2 style="text-align: center;border-bottom: 1px solid #777;">Block user</h2>
-    </div>
-    <div class="body-modal-custom" style="padding: 20px;">
-        After block, user don't user their accout
-    </div>
-    <div class="footer-modal-custom" style="float: right;">
-        <button class="btn-custom-modal" style="background-color: rgb(189, 185, 185);">Close</button>
-        <button class="btn-custom-modal" style="background-color: #d44950;">Block</button>
-    </div>
-</div> --}}
+
 <div id="bg-black-over" class="ds-none"></div>
 <div class="modal-dialog ds-none" style="top: 150px;left: 55%;">
     <div class="modal-content">
@@ -168,5 +163,14 @@
                 }
             })
         })
+        const paginaEl=document.querySelector('.pagination')
+        const currentPage=parseInt(document.querySelector('#currentPage-hb').innerText)
+        const quantityy=parseInt(document.querySelector('#quantityy').innerText)
+        let htmlPagi=`<li class="page-item"><a class="page-link" href="?page=${currentPage===1?1:currentPage-1}"> <i class="bi bi-caret-left-fill"></i> </a></li>`
+        for(let i=1;i<=quantityy;i++){
+            htmlPagi+=`<li class="page-item"><a class="page-link ${i==currentPage?'active-page-item':''}" href="?page=${i}">${i}</a></li>`
+        }
+        htmlPagi+=`<li class="page-item"><a class="page-link" href="?page=${currentPage===quantityy?quantityy:currentPage+1}"> <i class="bi bi-caret-right-fill"></i> </a></li>`
+        paginaEl.innerHTML=htmlPagi
     })
 </script>
