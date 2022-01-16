@@ -1,5 +1,5 @@
 
-const {Category, Product}=require('../database')
+const {Category, Product, Comment}=require('../database')
 const {MultipleMongooseToObject, MongooseToObject}=require('../ultil/mongoose')
 const {findProductList,createInfoProduct}=require('./services/product')
 
@@ -142,16 +142,28 @@ const restore=async(req,res)=>{
 const detail=async(req,res)=>{
     try{
         const product= await Product.findOneWithDeleted({slug:req.params.slug})
+        const allComment=await Comment.find({product:product._id}).populate('user')
         if(product){
             return res.render('detailProduct',{
-                product:MongooseToObject(product)
+                product:MongooseToObject(product),
+                allComment:MultipleMongooseToObject(allComment)
             })
         }           
     }
     catch(e){
         res.render('404')
-        console.log(e)
     }
+}
+
+const deleteComment=async(req,res)=>{
+    try{
+        let deleteComment=await Comment.deleteOne({_id:req.params.id})
+        res.status(200).json({success:true})
+    }
+    catch(e){
+        res.status(400).json({success:false,message:"Don't find comment"})
+    }
+    
 }
 
 module.exports={
@@ -163,6 +175,7 @@ module.exports={
     viewProduct,
     deleteProduct,
     restore,
-    detail
+    detail,
+    deleteComment
 
 }

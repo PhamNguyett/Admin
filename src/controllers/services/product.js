@@ -1,6 +1,5 @@
 const Category = require('../../database/models/Category')
 const Product=require('../../database/models/Product')
-const {MultipleMongooseToObject, MongooseToObject}=require('../../ultil/mongoose')
 
 
 const findProductList=async(page,key,cateId)=>{
