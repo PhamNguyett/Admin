@@ -70,7 +70,6 @@ const edit= async(req,res)=>{
 }
 
 const saveEdit = async(req,res)=>{
-
     try{
         const admin=await Admin.findById(req.params.id)
         if(req.file){
@@ -91,7 +90,6 @@ const saveEdit = async(req,res)=>{
 
 const changePassword=async(req,res)=>{
     const editAdmin= await Admin.findById(req.params.id)
-    console.log()
     if(editAdmin){
         res.render('changePassword',MongooseToObject(editAdmin))
     }
@@ -103,15 +101,11 @@ const changePassword=async(req,res)=>{
 
 const saveChangePassword=async(req,res)=>{
     const{oldPassword, newPassword}=req.body
-    console.log(oldPassword)
-    console.log(newPassword)
     try{
         const admin=await Admin.findById(req.params.id)
-        console.log(admin)
         let isValidPassword=await argon2.verify(req.user.password,oldPassword)
         if(isValidPassword){
             admin.password=await argon2.hash(newPassword)
-            
             await admin.save()
             return res.render('detailAdmin',{
                 message:'Change password successfully',
@@ -123,7 +117,6 @@ const saveChangePassword=async(req,res)=>{
         }
     }
     catch(e){
-        console.log(e)
         res.render('404')
     }
 }

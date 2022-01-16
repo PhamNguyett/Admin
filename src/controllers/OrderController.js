@@ -1,4 +1,4 @@
-const {Order,Order_Detail,Product}=require('../database')
+const {Order}=require('../database')
 const {orderServic}=require('./services')
 
 const index=async(req,res)=>{

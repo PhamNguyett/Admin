@@ -6,6 +6,7 @@ const OrderController=require("./OrderController")
 const ProductController=require("./ProductController")
 const UserController=require("./UserController")
 const CategoryController=require("./CategoryController")
+
 module.exports ={
     AdminController,
     AnalysisController,

@@ -142,19 +142,18 @@ const restore=async(req,res)=>{
 const detail=async(req,res)=>{
     try{
         const product= await Product.findOneWithDeleted({slug:req.params.slug})
-        console.log(product)
         if(product){
             return res.render('detailProduct',{
                 product:MongooseToObject(product)
             })
         }           
+    }
+    catch(e){
         res.render('404')
-    }catch(e){
         console.log(e)
-        
     }
 }
-   
+
 module.exports={
     addProduct,
     category,
