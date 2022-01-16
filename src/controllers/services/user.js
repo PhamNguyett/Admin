@@ -38,7 +38,6 @@ const allUser=async(isAuth=[true,false],req)=>{
         result.filterUser.push(allUser[i])
     }
 
-    console.log(result.filterUser)
     return result
 }
 

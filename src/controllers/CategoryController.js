@@ -9,7 +9,6 @@ const index=async(req,res)=>{
     for(let i=0; i<allCategory.length ; i++){
         num[i]=0;
     }
-
     for(let i=0; i<allCategory.length; i++){
         for (let j=0; j<allProduct.length ; j++){
             for(let k=0; k<(allProduct[j].categoryId).length; k++){

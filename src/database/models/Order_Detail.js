@@ -6,7 +6,8 @@ const Order_Detail=new Schema({
     orderId:{type:Schema.Types.ObjectId,ref:'Order',required:'true'},
     infor:{
         quantity:{type:Number},
-        size:{type:String}
+        size:{type:String},
+        salePrice:{type:Number},
     }
 })
 module.exports=mongoose.model('Order_Detail',Order_Detail)
