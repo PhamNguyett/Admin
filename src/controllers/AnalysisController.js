@@ -14,18 +14,7 @@ const index=async(req,res)=>{
         totalBill: totalBill
     })
 }
-const analysisProduct=async(req,res)=>{
-    const allDetail=await Product.find({}).sort({quantitySold:-1}).limit(10)
-    let data=allDetail.map(item=>{
-        return {
-            name:item.name,
-            quantitySold:item.quantitySold
-        }
-    })
-    res.render('analysicProduct',{
-        allDetail:JSON.stringify(data)
-    })
-}
+
 const analysisSale=async(req,res)=>{
     let data=[]
     var now = new Date();
@@ -71,7 +60,6 @@ const analysisSaleMonth=async(req,res)=>{
 
 module.exports={
     index,
-    analysisProduct,
     analysisSale,
     analysisSaleMonth
 }
