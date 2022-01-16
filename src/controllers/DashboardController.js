@@ -1,5 +1,5 @@
 const {Order,User, Product, Comment}=require('../database')
-
+const {orderServic}=require('./services')
 
 const analysisProduct=async(req,res)=>{
     const allDetail=await Product.find({}).sort({quantitySold:-1}).limit(10)
@@ -28,5 +28,6 @@ const analysisProduct=async(req,res)=>{
         totalComment:totalComment
     })
 }
-module.exports={analysisProduct
+module.exports={
+    analysisProduct
 }
