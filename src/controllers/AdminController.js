@@ -73,14 +73,12 @@ const saveEdit = async(req,res)=>{
 
     try{
         const admin=await Admin.findById(req.params.id)
-        console.log(admin)
         if(req.file){
             admin.avatarUrl='/uploads/'+req.file.filename
         }
         admin.gmail=req.body.gmail,
         admin.phone=req.body.phone,
         admin.name=req.body.name,
-        console.log(admin)
         await admin.save()
         res.render('detailAdmin',{
             admin:MongooseToObject(admin)
@@ -90,11 +88,53 @@ const saveEdit = async(req,res)=>{
         res.render('404')
     }
 }
+
+const changePassword=async(req,res)=>{
+    const editAdmin= await Admin.findById(req.params.id)
+    console.log()
+    if(editAdmin){
+        res.render('changePassword',MongooseToObject(editAdmin))
+    }
+    else{
+        res.render('404')
+    }
+
+}
+
+const saveChangePassword=async(req,res)=>{
+    const{oldPassword, newPassword}=req.body
+    console.log(oldPassword)
+    console.log(newPassword)
+    try{
+        const admin=await Admin.findById(req.params.id)
+        console.log(admin)
+        let isValidPassword=await argon2.verify(req.user.password,oldPassword)
+        if(isValidPassword){
+            admin.password=await argon2.hash(newPassword)
+            
+            await admin.save()
+            return res.render('detailAdmin',{
+                message:'Change password successfully',
+                admin:MongooseToObject(admin)
+            })
+        }
+        else{
+            res.render('404',{message:'Current password is wrong !! '})
+        }
+    }
+    catch(e){
+        console.log(e)
+        res.render('404')
+    }
+}
+
 module.exports={
     show,
     detail,
     add,
     save,
     edit,
-    saveEdit
+    saveEdit,
+    changePassword,
+    saveChangePassword
 }
