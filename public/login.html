@@ -83,6 +83,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="password">Password</label>
                                 <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
+                                <span class="err-pass" style="color:red;"></span>
                             </div>
                             <div class="checkbox login-checkbox">
                                 <label style="margin-left:20px;">
@@ -148,5 +149,13 @@
 		============================================ -->
     <script src="js/tawk-chat.js"></script>
 </body>
-
-</html>
+<script>
+  let errPass=document.querySelector('.err-pass')
+    document.addEventListener("DOMContentLoaded",()=>{
+      console.log(window.location.search)
+      if(window.location.search=='?wrong'){
+        errPass.innerText='Password was incorrect!'
+      }
+    })
+</script>
+</html>1
