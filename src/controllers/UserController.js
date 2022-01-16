@@ -1,9 +1,17 @@
 const {User}=require('../database')
+const {MultipleMongooseToObject,MongooseToObject}=require('../ultil/mongoose')
 const {userServic}=require('./services')
 const index=async (req,res)=>{
     try{
-        const allUser = await userServic.allUser()
-        res.render('userManagement',{allUser})
+        
+        const allUser = await userServic.allUser([false,true],req)
+        console.log('122')
+        console.log(allUser)
+        res.render('userManagement',{
+            allUser:allUser.filterUser,
+            quantityPage:allUser.quantity,
+            curPage:allUser.currentPage
+        })
     }
     catch(e){
         console.log(e)
@@ -12,8 +20,13 @@ const index=async (req,res)=>{
 }
 const userBlock=async (req,res)=>{
     try{
-        const allUser = await userServic.allUser([false])
-        res.render('userManagement',{allUser})
+        
+        const allUser = await userServic.allUser([false],req)
+        res.render('userManagement',{
+            allUser:allUser.filterUser,
+            quantityPage:allUser.quantity,
+            curPage:allUser.currentPage
+        })
     }
     catch(e){
         console.log(e)
@@ -32,9 +45,14 @@ const block=async(req,res)=>{
 }
 const unblock=async(req,res)=>{
     try{
+        
         const findUser=await User.updateOne({_id:req.params.id},{isAuth:true})
-        const allUser = await userServic.allUser([true])
-        res.render('userManagement',{allUser})
+        const allUser = await userServic.allUser([true],req)
+        res.render('userManagement',{
+            allUser:allUser.filterUser,
+            quantityPage:allUser.quantity,
+            curPage:allUser.currentPage
+        })
     }
     catch(e){
         console.log(e)
