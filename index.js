@@ -39,7 +39,7 @@ app.use(express.json())
 
 db.connect().then(()=>{
     const store = new MongoDBStore({
-        uri: 'mongodb+srv://phat_trien_ud_web:thangvanguyet@cluster0.znme0.mongodb.net/localbrand_db_dev',
+        uri: process.env.DB_URL,
         collection: 'mySessions'
     });
     app.use(session({
