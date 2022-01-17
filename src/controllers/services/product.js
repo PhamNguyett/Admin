@@ -12,10 +12,10 @@ const findProductList=async(page,key,cateId)=>{
     }
     if(cateId){
         const categoryItem=await Category.findOne({tittle:cateId})
-        allProduct=await Product.findWithDeleted({categoryId:categoryItem._id})
+        allProduct=await Product.findWithDeleted({categoryId:categoryItem._id}).sort({createdAt:-1})
     }
     else{
-        allProduct=await Product.findWithDeleted({})
+        allProduct=await Product.findWithDeleted({}).sort({createdAt:-1})
     }
     allProduct.forEach(item=>{
         if(item.name.toLowerCase().indexOf(key.toLowerCase())>=0|| 
