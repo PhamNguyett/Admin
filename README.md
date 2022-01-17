@@ -14,9 +14,13 @@ https://the-1-beauty-fashion-admin.herokuapp.com/
 account admin:
 
 acc1:
+
 adminname: nguyetchuot
+
 password: 123456
 
 acc2:
+
 adminname: 19120654
+
 password: 123456
