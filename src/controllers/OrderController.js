@@ -1,4 +1,4 @@
-const {Order}=require('../database')
+const {Order, Order_Detail, Product}=require('../database')
 const {orderServic}=require('./services')
 
 const index=async(req,res)=>{
@@ -42,6 +42,16 @@ const accept=async(req,res)=>{
         {
             accOrder.status = 0
             await accOrder.save()
+            let allDetail=await Order_Detail.find({orderId:accOrder._id})
+            allDetail.forEach(async(item)=>{
+                let updateProduct=await Product.findOne({_id:item.productId})
+                for(let i=0;i<updateProduct.info.length;i++){
+                    if(updateProduct.info[i].size===item.infor.size){
+                        updateProduct.info[i].quantity-=item.infor.quantity
+                    }
+                }
+                await updateProduct.save()
+            })
             res.status(200).json({success:true})
         }
         else{
